@@ -43,11 +43,11 @@ const Hero = () => {
         </div>
       </Section>
       <Section>
-        <h2 className="leading-snug font-medium text-2xl md:text-3xl text-zinc-200">
+        <h2 className="text-2xl font-extrabold leading-snug md:text-3xl">
           Developing at Github; Designing at Dribble; open to working with new
           people on cool projects!
         </h2>
-        <p className="leading-6 text-xs md:text-sm font-normal text-zinc-300 mt-4">
+        <p className="mt-4 text-xs font-normal leading-6 text-foreground md:text-sm">
           I am a Full Stack Developer + Designer who builds Well-Responsive,
           Pixel-Perfect, functional, and beautiful websites. With my strong
           skills in user interface and experience design, I excel at creating
@@ -56,13 +56,13 @@ const Hero = () => {
           me to develop clean, maintainable code that meets the highest
           standards of quality.
         </p>
-        <div className="rounded-lg mt-4 border-zinc-100 border text-zinc-200 text-xs md:text-sm font-normal p-4 leading-6">
+        <div className="mt-4 rounded-lg border border-secondary-foreground p-4 text-xs font-normal leading-6 text-foreground md:text-sm">
           <p>
             Currently, I am actively seeking part-time engineering roles that
             allow me to leverage my skills in designing and frontend engineering
             to deliver exceptional results.
           </p>
-          <p className="mt-2 mb-4">
+          <p className="mb-4 mt-2">
             A collaborative team of engineers and designers, who are building
             great products. Interested in working together? Feel free to
             schedule a meet!

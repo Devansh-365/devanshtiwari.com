@@ -11,8 +11,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full bg-background">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <nav className="flex items-center space-x-1">
+        <div className="flex flex-1 items-center md:justify-end md:space-x-4">
+          <nav className="flex w-full items-center justify-between md:justify-end">
+            <Link className="block md:hidden" href="/">
+              <p className="text-2xl font-extrabold leading-snug">DT</p>
+            </Link>
             {/* <Link
               href={siteConfig.links.github}
               target="_blank"
@@ -46,6 +49,29 @@ export function SiteHeader() {
             <ThemeToggle />
           </nav>
         </div>
+      </div>
+      <div className="fixed bottom-0 left-0 z-50 h-16 w-full border-t border-foreground bg-background md:hidden">
+        <nav className="flex h-full items-center justify-around">
+          <Link href="/" className="flex flex-col items-center space-y-1">
+            <Icons.home className="h-5 w-5" />
+            <p className="text-sm">Home</p>
+          </Link>
+          <Link href="/about" className="flex flex-col items-center space-y-1">
+            <Icons.about className="h-5 w-5" />
+            <p className="text-sm">About</p>
+          </Link>
+          <Link href="/blog" className="flex flex-col items-center space-y-1">
+            <Icons.blog className="h-5 w-5" />
+            <p className="text-sm">Blog</p>
+          </Link>
+          <Link
+            href="/projects"
+            className="flex flex-col items-center space-y-1"
+          >
+            <Icons.project className="h-5 w-5" />
+            <p className="text-sm">Projects</p>
+          </Link>
+        </nav>
       </div>
     </header>
   )

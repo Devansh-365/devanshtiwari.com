@@ -31,7 +31,7 @@ export function MainNav({ items }: MainNavProps) {
                   key={index}
                   href={item.href}
                   className={cn(
-                    "flex items-center text-base text-gray-300 sm:text-sm",
+                    "flex items-center text-base text-foreground sm:text-sm",
                     checkCurrentRoute(item.href) && "underline"
                   )}
                 >
