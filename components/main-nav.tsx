@@ -1,5 +1,8 @@
+"use client"
+
 import * as React from "react"
 import Link from "next/link"
+import { usePathname, useSelectedLayoutSegment } from "next/navigation"
 
 import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
@@ -11,14 +14,14 @@ interface MainNavProps {
 }
 
 export function MainNav({ items }: MainNavProps) {
+  const pathname = usePathname()
+
+  const checkCurrentRoute = (route: string) => {
+    return pathname === route || pathname.split("/")[1] === route
+  }
+
   return (
     <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="hidden items-center space-x-2 md:flex">
-        <Icons.logo className="h-6 w-6" />
-        <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
-        </span>
-      </Link>
       {items?.length ? (
         <nav className="hidden gap-6 md:flex">
           {items?.map(
@@ -28,8 +31,8 @@ export function MainNav({ items }: MainNavProps) {
                   key={index}
                   href={item.href}
                   className={cn(
-                    "flex items-center text-lg font-semibold text-muted-foreground sm:text-sm",
-                    item.disabled && "cursor-not-allowed opacity-80"
+                    "flex items-center text-base text-gray-300 sm:text-sm",
+                    checkCurrentRoute(item.href) && "underline"
                   )}
                 >
                   {item.title}
