@@ -3,6 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname, useSelectedLayoutSegment } from "next/navigation"
+import { motion } from "framer-motion"
 
 import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
@@ -27,16 +28,18 @@ export function MainNav({ items }: MainNavProps) {
           {items?.map(
             (item, index) =>
               item.href && (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className={cn(
-                    "flex items-center text-base text-foreground sm:text-sm",
-                    checkCurrentRoute(item.href) && "underline"
-                  )}
-                >
-                  {item.title}
-                </Link>
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center text-base text-foreground sm:text-sm",
+                      checkCurrentRoute(item.href) && "underline"
+                    )}
+                  >
+                    {item.title}
+                  </Link>
+                </motion.div>
               )
           )}
         </nav>
