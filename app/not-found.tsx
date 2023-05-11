@@ -14,7 +14,7 @@ const NotFound = () => {
         className="bg-transparent dark:bg-transparent"
       >
         <Image
-          src="https://media.giphy.com/media/UHAYP0FxJOmFBuOiC2/giphy.gif"
+          src="https://media.giphy.com/media/26FPGt0CsPqPAmXg4/giphy.gif"
           alt="Photo by Alvaro Pinot"
           fill
           className="rounded-2xl object-cover"

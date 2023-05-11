@@ -7,7 +7,7 @@ import Section from "@/components/section"
 
 const Projects = () => {
   return (
-    <Section className="container grid grid-cols-2 items-center gap-6 pb-8 pt-6 md:py-10">
+    <Section className="container grid grid-cols-1 items-center gap-6 pb-8 pt-6 md:grid-cols-2 md:py-10">
       <div className="mt-4 rounded-lg border border-zinc-100 p-4 text-xs font-normal leading-6 text-zinc-200 md:text-sm">
         <AspectRatio
           ratio={16 / 9}
@@ -26,7 +26,7 @@ const Projects = () => {
             className={buttonVariants({
               size: "sm",
               className:
-                "bg-zinc-300 w-full hover:bg-yellow-500 text-yellow-800",
+                "bg-zinc-300 w-full",
             })}
           >
             Learn more
@@ -52,7 +52,7 @@ const Projects = () => {
               className: "bg-zinc-300 w-full hover:bg-zinc-500 text-black",
             })}
           >
-            Schedule a meet
+            Learn more
           </Button>
         </div>
       </div>
