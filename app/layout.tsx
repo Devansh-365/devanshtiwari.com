@@ -8,6 +8,7 @@ import { PageWrapper } from "@/components/page-wrapper"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+import SiteFooter from "@/components/site-footer"
 
 export const metadata: Metadata = {
   title: {
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <PageWrapper>
                 <main className="flex-1">{children}</main>
               </PageWrapper>
+              <SiteFooter />
             </div>
             <TailwindIndicator />
           </ThemeProvider>

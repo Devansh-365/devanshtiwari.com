@@ -9,6 +9,8 @@ import {
   User,
   FolderClosed,
   FileText,
+  Mail,
+  Linkedin,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -21,6 +23,7 @@ export const Icons = {
   project: FolderClosed,
   blog: FileText,
   twitter: Twitter,
+  linkedin: Linkedin,
   logo: (props: LucideProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
       <path
@@ -29,6 +32,7 @@ export const Icons = {
       />
     </svg>
   ),
+  mail: Mail,
   gitHub: (props: LucideProps) => (
     <svg viewBox="0 0 438.549 438.549" {...props}>
       <path
