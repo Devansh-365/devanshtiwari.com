@@ -11,7 +11,7 @@ import { ArrowRight } from "lucide-react";
 const Hero = () => {
   return (
     <>
-      <Section className="flex flex-row items-center justify-start gap-6 max-md:items-start max-sm:items-start md:gap-8">
+      <Section className="container flex flex-row items-center justify-start gap-6 pt-6 max-md:items-start max-sm:items-start md:gap-8 md:py-6">
         <motion.div
           className="relative h-fit w-fit"
           whileHover={{ scale: 1.1 }}
@@ -39,45 +39,6 @@ const Hero = () => {
           </h1>
           <div className="text-sm font-normal leading-snug text-foreground md:text-base">
             <p>Developer + Designer</p>
-          </div>
-        </div>
-      </Section>
-      <Section>
-        <h2 className="text-2xl font-extrabold leading-snug md:text-3xl">
-          Developing at Github; Designing at Dribble; open to working with new
-          people on cool projects!
-        </h2>
-        <p className="mt-4 text-xs font-normal leading-6 text-foreground md:text-sm">
-          I am a Full Stack Developer + Designer who builds Well-Responsive,
-          Pixel-Perfect, functional, and beautiful websites. With my strong
-          skills in user interface and experience design, I excel at creating
-          engaging and intuitive interfaces that enhance the user experience.
-          Additionally, I have a passion for frontend engineering, which allows
-          me to develop clean, maintainable code that meets the highest
-          standards of quality.
-        </p>
-        <div className="mt-4 rounded-lg border border-secondary-foreground p-4 text-xs font-normal leading-6 text-foreground md:text-sm">
-          <p>
-            Currently, I am actively seeking part-time engineering roles that
-            allow me to leverage my skills in designing and frontend engineering
-            to deliver exceptional results.
-          </p>
-          <p className="mb-4 mt-2">
-            A collaborative team of engineers and designers, who are building
-            great products. Interested in working together? Feel free to
-            schedule a meet!
-          </p>
-          <div className="flex flex-row items-center justify-start gap-4">
-            <Button>Schedule a meet</Button>
-            <Button
-              className={buttonVariants({
-                variant: "link",
-                className: "underline bg-transparent",
-              })}
-            >
-              Resume
-              <ArrowRight className="mx-1" />
-            </Button>
           </div>
         </div>
       </Section>

@@ -28,9 +28,8 @@ export function MainNav({ items }: MainNavProps) {
           {items?.map(
             (item, index) =>
               item.href && (
-                <motion.div whileHover={{ scale: 1.1 }}>
+                <motion.div key={index} whileHover={{ scale: 1.1 }}>
                   <Link
-                    key={index}
                     href={item.href}
                     className={cn(
                       "flex items-center text-base text-foreground sm:text-sm",
