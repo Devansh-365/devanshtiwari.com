@@ -3,9 +3,9 @@
 import React from "react"
 import Image from "next/image"
 import Link, { type LinkProps } from "next/link"
-import { ExternalLinkIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Icons } from "@/components/icons"
 
 const hostsThatNeedInvertedFavicons = ["github.com"]
 
@@ -66,7 +66,7 @@ export const RichLink = React.forwardRef<HTMLAnchorElement, RichLinkProps>(
 
         {children}
         {faviconUrl && (
-          <ExternalLinkIcon
+          <Icons.externalLinkIcon
             width="0.95em"
             height="0.95em"
             className="inline-block translate-y-0.5"
