@@ -9,8 +9,6 @@ import { Icons } from "@/components/icons"
 import Section from "@/components/section"
 import StackList from "@/components/skills"
 
-import { Posts } from "./blog/components/posts"
-
 export default function IndexPage() {
   return (
     <Section className="container grid items-center py-4 pb-8 md:py-6">

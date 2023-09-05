@@ -1,10 +1,8 @@
-import React from "react"
 import { Metadata } from "next"
 
 import { Hr } from "@/components/ui/Hr"
 
-import { PostCard } from "./components/post-card"
-import { Posts } from "./components/posts"
+import Posts from "./components/posts"
 
 export const metadata: Metadata = {
   title: "Blog",
