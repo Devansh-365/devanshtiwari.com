@@ -1,10 +1,15 @@
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, PencilIcon } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
+import { WorkStack } from "@/config/skills"
 import { Button, buttonVariants } from "@/components/ui/button"
 import Hero from "@/components/hero"
+import { Icons } from "@/components/icons"
 import Section from "@/components/section"
+import StackList from "@/components/skills"
+
+import { Posts } from "./blog/components/posts"
 
 export default function IndexPage() {
   return (
@@ -42,6 +47,36 @@ export default function IndexPage() {
             Resume
             <ArrowUpRight className="mx-1" />
           </Button>
+        </div>
+      </div>
+      <div className="mt-24 md:mt-28">
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+          <div className="flex flex-col gap-6 pt-6">
+            <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+              {/* <PencilIcon className="h-5 w-5 flex-none" /> */}
+              <span className="ml-2">Blogs</span>
+            </h2>
+            {/* <Posts /> */}
+            {/* <BlogPosts /> */}
+          </div>
+          <aside className="sm:max-w-auto space-y-10 lg:sticky lg:top-8 lg:h-fit lg:max-w-[380px] lg:pl-16 xl:pl-20">
+            <div className="relative rounded-2xl border border-zinc-100 p-6 transition-opacity dark:border-zinc-700/40">
+              <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                <Icons.layers className="h-5 w-5 flex-none" />
+                <span className="ml-2">Skills</span>
+              </h2>
+              <StackList stack={WorkStack} />
+            </div>
+            <div className="relative rounded-2xl border border-zinc-100 p-6 transition-opacity dark:border-zinc-700/40">
+              <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                <Icons.briefcase className="h-5 w-5 flex-none" />
+                <span className="ml-2">Resume</span>
+              </h2>
+              {/* <StackList stack={WorkStack} /> */}
+            </div>
+            {/* <Newsletter />
+            <Resume /> */}
+          </aside>
         </div>
       </div>
     </Section>

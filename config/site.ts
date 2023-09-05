@@ -10,10 +10,6 @@ export const siteConfig = {
       href: "/",
     },
     {
-      title: "About",
-      href: "/about",
-    },
-    {
       title: "Blog",
       href: "/blog",
     },
@@ -23,8 +19,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    twitter: "https://twitter.com/devansh_0718",
+    github: "https://github.com/Devansh-365/portfolio-v2",
   },
 }

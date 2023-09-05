@@ -11,11 +11,11 @@ const SiteFooter = () => {
   const year: number = new Date().getFullYear()
 
   return (
-    <footer className="mb-24 mt-4 flex flex-col items-center font-light text-foreground md:mb-0">
+    <footer className="mb-24 mt-4 flex flex-col items-center font-light text-foreground md:mb-4">
       <div className="mt-2 flex">
         {React.Children.toArray(Object.entries(contact.links).map(resolveIcon))}
       </div>
-      <div className="mt-4 text-xs font-light lg:mt-8">
+      <div className="lg:mt-6c¸¸ mt-3 text-xs font-light">
         &copy; {year} Devansh Tiwari. Website is open source{" "}
         <PeekabooLink href="https://github.com/Devansh-365">
           GitHub
