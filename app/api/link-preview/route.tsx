@@ -1,4 +1,5 @@
-import { ImageResponse, NextResponse, type NextRequest } from "next/server"
+import { ImageResponse } from "next/og"
+import { NextResponse, type NextRequest } from "next/server"
 
 import { ratelimit } from "@/lib/redis"
 
@@ -18,7 +19,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.error()
   }
 
-  const { success } = await ratelimit.limit("link-preview_", req)
+  // Get IP address for rate limiting
+  const ip = req.headers.get("x-forwarded-for") ?? req.headers.get("x-real-ip") ?? "anonymous"
+  const { success } = await ratelimit.limit(`link-preview_${ip}`)
   if (!success) {
     return NextResponse.error()
   }
