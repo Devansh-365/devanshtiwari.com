@@ -21,7 +21,7 @@ export function Card({
   children,
   ...props
 }: {
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   className?: string
   children: React.ReactNode
   onMouseMove?: React.MouseEventHandler
@@ -59,7 +59,7 @@ Card.Title = function CardTitle({
   href,
   children,
 }: {
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   href?: string
   children: React.ReactNode
 }) {
@@ -108,7 +108,7 @@ Card.Eyebrow = function CardEyebrow({
   children,
   ...props
 }: {
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   decorate?: boolean
   className?: string
   children: React.ReactNode
