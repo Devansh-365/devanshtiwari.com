@@ -1,6 +1,8 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import Script from "next/script"
 
+import { siteConfig } from "@/config/site"
 import { getAllFilesFrontMatter, getFileBySlug } from "@/lib/mdx"
 import { PostFrontMatter } from "@/types/PostFrontMatter"
 import Draft from "@/components/mdx/Draft"
@@ -32,18 +34,44 @@ export async function generateMetadata(
   try {
     const params = await props.params
     const slug = params.slug
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const post = (await getFileBySlug<PostFrontMatter>("blog", slug)) as any
-    const frontMatter = post.frontMatter
+    const post = await getFileBySlug<PostFrontMatter>("blog", slug)
+    const frontMatter = post.frontMatter as PostFrontMatter
+    const images = frontMatter?.images || [siteConfig.socialBanner]
+    const ogImage = images[0]?.startsWith("http")
+      ? images[0]
+      : `${siteConfig.siteUrl}${images[0]}`
 
     return {
       title: frontMatter?.title || "Blog Post",
       description: frontMatter?.summary || "",
+      authors: [{ name: siteConfig.author }],
       openGraph: {
         title: frontMatter?.title || "Blog Post",
         description: frontMatter?.summary || "",
         type: "article",
         publishedTime: frontMatter?.date || undefined,
+        modifiedTime: frontMatter?.lastmod || frontMatter?.date || undefined,
+        url: `${siteConfig.siteUrl}/blog/${slug}`,
+        siteName: siteConfig.name,
+        images: [
+          {
+            url: ogImage,
+            width: 1200,
+            height: 630,
+            alt: frontMatter?.title || "Blog Post",
+          },
+        ],
+        authors: [siteConfig.author],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: frontMatter?.title || "Blog Post",
+        description: frontMatter?.summary || "",
+        images: [ogImage],
+        creator: siteConfig.twitterHandle,
+      },
+      alternates: {
+        canonical: frontMatter?.canonicalUrl || `${siteConfig.siteUrl}/blog/${slug}`,
       },
     }
   } catch {
@@ -53,26 +81,26 @@ export async function generateMetadata(
   }
 }
 
+interface BlogPost {
+  mdxSource: string
+  toc: { value: string; url: string; depth: number }[]
+  frontMatter: PostFrontMatter
+}
+
 const BlogPostPage = async (props: BlogPostPageProps) => {
   const params = await props.params
   const slug = params.slug
 
   // Get the current post
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let post: any
+  let post: BlogPost
   try {
-    post = await getFileBySlug<PostFrontMatter>("blog", slug)
+    post = (await getFileBySlug<PostFrontMatter>("blog", slug)) as BlogPost
   } catch (error) {
     console.error("Error loading blog post:", error)
     notFound()
   }
 
-  if (!post) {
-    notFound()
-  }
-
-  const { mdxSource, toc } = post
-  const frontMatter = post.frontMatter as PostFrontMatter
+  const { mdxSource, toc, frontMatter } = post
 
   // Check if post is a draft
   if (frontMatter?.draft === true) {
@@ -101,10 +129,57 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
     // Navigation posts not critical, continue without them
   }
 
+  // Generate JSON-LD structured data for SEO
+  const images = frontMatter?.images || [siteConfig.socialBanner]
+  const featuredImages = images.map((img: string) => ({
+    "@type": "ImageObject",
+    url: img.startsWith("http") ? img : `${siteConfig.siteUrl}${img}`,
+  }))
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteConfig.siteUrl}/blog/${slug}`,
+    },
+    headline: frontMatter.title,
+    description: frontMatter.summary,
+    image: featuredImages,
+    datePublished: frontMatter.date
+      ? new Date(frontMatter.date).toISOString()
+      : undefined,
+    dateModified: frontMatter.lastmod
+      ? new Date(frontMatter.lastmod).toISOString()
+      : frontMatter.date
+      ? new Date(frontMatter.date).toISOString()
+      : undefined,
+    author: {
+      "@type": "Person",
+      name: siteConfig.author,
+      url: siteConfig.siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.author,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.siteUrl}${siteConfig.siteLogo}`,
+      },
+    },
+  }
+
   return (
-    <PostLayout frontMatter={frontMatter} toc={toc} prev={prev} next={next}>
-      <MDXLayoutRenderer mdxSource={mdxSource} />
-    </PostLayout>
+    <>
+      <Script
+        id="blog-post-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PostLayout frontMatter={frontMatter} toc={toc} prev={prev} next={next}>
+        <MDXLayoutRenderer mdxSource={mdxSource} />
+      </PostLayout>
+    </>
   )
 }
 

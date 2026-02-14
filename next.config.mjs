@@ -1,11 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    appDir: true,
-  },
   images: {
-    domains: ["images.unsplash.com", "media.giphy.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "media.giphy.com",
+      },
+    ],
   },
 }
 
