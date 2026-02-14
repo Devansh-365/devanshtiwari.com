@@ -1,9 +1,11 @@
-export type SiteConfig = typeof siteConfig
-
 export const siteConfig = {
+  siteUrl: "https://devanshtiwari.me",
+  author: "Devansh Tiwari",
+  email: "devanshtiwari365@gmail.com",
+  language: "en-US",
+  title: "Devansh Tiwari",
+  description: "Devansh Tiwari's portfolio",
   name: "Devansh Tiwari",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
   mainNav: [
     {
       title: "Home",

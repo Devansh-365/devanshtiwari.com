@@ -10,52 +10,41 @@
 // import { Hr } from "@/components/ui/Hr"
 // import Posts from "./blog/components/posts"
 
+import { getAllFilesFrontMatter } from "@/lib/mdx"
 import Section from "@/components/section"
-import ListLayout, { type PostFrontMatter } from "@/components/blog/list-layout"
+import ListLayout from "@/components/blog/list-layout"
 
-// Sample blog posts data - Replace with your actual data source
-const samplePosts: PostFrontMatter[] = [
-  {
-    slug: "building-scalable-react-apps",
-    title: "Building Scalable React Applications",
-    date: "2024-02-10",
-    summary:
-      "Learn the best practices for building scalable React applications with proper architecture, state management, and performance optimization techniques.",
-    tags: ["React", "Architecture", "Performance"],
-  },
-  {
-    slug: "nextjs-app-router-guide",
-    title: "Complete Guide to Next.js App Router",
-    date: "2024-01-25",
-    summary:
-      "A comprehensive guide to understanding and using the Next.js App Router, including server components, layouts, and data fetching patterns.",
-    tags: ["Next.js", "React", "Tutorial"],
-  },
-  {
-    slug: "typescript-best-practices",
-    title: "TypeScript Best Practices in 2024",
-    date: "2024-01-15",
-    summary:
-      "Explore the latest TypeScript best practices, including type inference, utility types, and patterns for writing maintainable code.",
-    tags: ["TypeScript", "JavaScript", "Best Practices"],
-  },
-  {
-    slug: "tailwind-css-tips",
-    title: "Advanced Tailwind CSS Tips and Tricks",
-    date: "2024-01-05",
-    summary:
-      "Discover advanced Tailwind CSS techniques to build beautiful, responsive interfaces faster with custom configurations and plugins.",
-    tags: ["CSS", "Tailwind", "Design"],
-  },
-]
+export default async function IndexPage() {
+  // Fetch blog posts from MDX files
+  let posts: Array<{
+    slug: string
+    title: string
+    date: string
+    summary: string
+    tags: string[]
+  }> = []
 
-export default function IndexPage() {
+  try {
+    const allPosts = await getAllFilesFrontMatter("blog")
+    posts = allPosts.map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      date: post.date,
+      summary: post.summary || "",
+      tags: post.tags || [],
+    }))
+  } catch (error) {
+    console.error("Error fetching blog posts:", error)
+    // Fallback to empty array if no posts found
+    posts = []
+  }
+
   return (
     <Section className="container py-4 pb-8 md:py-6">
       {/* ============================================
           BLOG LIST LAYOUT - Currently Active
           ============================================ */}
-      <ListLayout posts={samplePosts} title="Blog" />
+      <ListLayout posts={posts} title="Blog" />
 
       {/* ============================================
           ORIGINAL HOME PAGE UI - Commented Out
