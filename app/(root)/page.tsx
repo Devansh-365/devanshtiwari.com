@@ -1,17 +1,66 @@
-import Link from "next/link"
-import { ArrowUpRight, PencilIcon } from "lucide-react"
+// COMMENTED OUT - Original imports
+// import Link from "next/link"
+// import { ArrowUpRight, PencilIcon } from "lucide-react"
+// import { siteConfig } from "@/config/site"
+// import { WorkStack } from "@/config/skills"
+// import { Button, buttonVariants } from "@/components/ui/button"
+// import Hero from "@/components/hero"
+// import { Icons } from "@/components/icons"
+// import StackList from "@/components/skills"
+// import { Hr } from "@/components/ui/Hr"
+// import Posts from "./blog/components/posts"
 
-import { siteConfig } from "@/config/site"
-import { WorkStack } from "@/config/skills"
-import { Button, buttonVariants } from "@/components/ui/button"
-import Hero from "@/components/hero"
-import { Icons } from "@/components/icons"
 import Section from "@/components/section"
-import StackList from "@/components/skills"
+import ListLayout, { type PostFrontMatter } from "@/components/blog/list-layout"
+
+// Sample blog posts data - Replace with your actual data source
+const samplePosts: PostFrontMatter[] = [
+  {
+    slug: "building-scalable-react-apps",
+    title: "Building Scalable React Applications",
+    date: "2024-02-10",
+    summary:
+      "Learn the best practices for building scalable React applications with proper architecture, state management, and performance optimization techniques.",
+    tags: ["React", "Architecture", "Performance"],
+  },
+  {
+    slug: "nextjs-app-router-guide",
+    title: "Complete Guide to Next.js App Router",
+    date: "2024-01-25",
+    summary:
+      "A comprehensive guide to understanding and using the Next.js App Router, including server components, layouts, and data fetching patterns.",
+    tags: ["Next.js", "React", "Tutorial"],
+  },
+  {
+    slug: "typescript-best-practices",
+    title: "TypeScript Best Practices in 2024",
+    date: "2024-01-15",
+    summary:
+      "Explore the latest TypeScript best practices, including type inference, utility types, and patterns for writing maintainable code.",
+    tags: ["TypeScript", "JavaScript", "Best Practices"],
+  },
+  {
+    slug: "tailwind-css-tips",
+    title: "Advanced Tailwind CSS Tips and Tricks",
+    date: "2024-01-05",
+    summary:
+      "Discover advanced Tailwind CSS techniques to build beautiful, responsive interfaces faster with custom configurations and plugins.",
+    tags: ["CSS", "Tailwind", "Design"],
+  },
+]
 
 export default function IndexPage() {
   return (
-    <Section className="container grid items-center py-4 pb-8 md:py-6">
+    <Section className="container py-4 pb-8 md:py-6">
+      {/* ============================================
+          BLOG LIST LAYOUT - Currently Active
+          ============================================ */}
+      <ListLayout posts={samplePosts} title="Blog" />
+
+      {/* ============================================
+          ORIGINAL HOME PAGE UI - Commented Out
+          ============================================ */}
+      {/*
       <h2 className="text-2xl font-extrabold leading-snug text-shadow-[0_4px_8px_#6366f1] md:text-3xl">
         Developer; Designer; open to working with new people on cool projects!
       </h2>
@@ -51,11 +100,8 @@ export default function IndexPage() {
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-6 pt-6">
             <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-              {/* <PencilIcon className="h-5 w-5 flex-none" /> */}
               <span className="ml-2">Blogs</span>
             </h2>
-            {/* <Posts /> */}
-            {/* <BlogPosts /> */}
           </div>
           <aside className="sm:max-w-auto space-y-10 lg:sticky lg:top-8 lg:h-fit lg:max-w-[380px] lg:pl-16 xl:pl-20">
             <div className="relative rounded-2xl border border-zinc-100 p-6 transition-opacity dark:border-zinc-700/40">
@@ -70,13 +116,11 @@ export default function IndexPage() {
                 <Icons.briefcase className="h-5 w-5 flex-none" />
                 <span className="ml-2">Resume</span>
               </h2>
-              {/* <StackList stack={WorkStack} /> */}
             </div>
-            {/* <Newsletter />
-            <Resume /> */}
           </aside>
         </div>
       </div>
+      */}
     </Section>
   )
 }
