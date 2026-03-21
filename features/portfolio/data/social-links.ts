@@ -2,13 +2,15 @@ import type { SocialLink } from "../types/social-links"
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    icon: "https://cdn.simpleicons.org/x/ffffff",
+    icon: "https://cdn.simpleicons.org/x/000000",
+    iconDark: "https://cdn.simpleicons.org/x/ffffff",
     title: "X",
     subtitle: "@devansh_0718",
     href: "https://twitter.com/devansh_0718",
   },
   {
-    icon: "https://cdn.simpleicons.org/github/ffffff",
+    icon: "https://cdn.simpleicons.org/github/181717",
+    iconDark: "https://cdn.simpleicons.org/github/ffffff",
     title: "GitHub",
     subtitle: "Devansh-365",
     href: "https://github.com/Devansh-365",
@@ -20,7 +22,8 @@ export const SOCIAL_LINKS: SocialLink[] = [
     href: "https://www.linkedin.com/in/devansh-tiwari-3342611a6/",
   },
   {
-    icon: "https://cdn.simpleicons.org/medium/ffffff",
+    icon: "https://cdn.simpleicons.org/medium/000000",
+    iconDark: "https://cdn.simpleicons.org/medium/ffffff",
     title: "Medium",
     subtitle: "@devanshtiwari365",
     href: "https://medium.com/@devanshtiwari365",

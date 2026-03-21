@@ -27,14 +27,35 @@ export function SocialLinks() {
               rel="noopener noreferrer"
             >
               <div className="relative h-8 w-8 shrink-0">
-                <Image
-                  className="rounded-lg select-none"
-                  src={link.icon}
-                  alt={link.title}
-                  width={32}
-                  height={32}
-                  unoptimized
-                />
+                {link.iconDark ? (
+                  <>
+                    <Image
+                      className="block rounded-lg select-none dark:hidden"
+                      src={link.icon}
+                      alt={link.title}
+                      width={32}
+                      height={32}
+                      unoptimized
+                    />
+                    <Image
+                      className="hidden rounded-lg select-none dark:block"
+                      src={link.iconDark}
+                      alt={link.title}
+                      width={32}
+                      height={32}
+                      unoptimized
+                    />
+                  </>
+                ) : (
+                  <Image
+                    className="rounded-lg select-none"
+                    src={link.icon}
+                    alt={link.title}
+                    width={32}
+                    height={32}
+                    unoptimized
+                  />
+                )}
                 <div className="pointer-events-none absolute inset-0 rounded-lg ring-1 ring-black/10 ring-inset dark:ring-white/15" />
               </div>
               <h3 className="flex-1 font-medium">{link.title}</h3>

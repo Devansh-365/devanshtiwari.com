@@ -4,4 +4,5 @@ export type TechStack = {
   href: string
   categories: string[]
   theme?: boolean
+  icon?: string
 }

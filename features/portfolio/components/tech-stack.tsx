@@ -9,6 +9,11 @@ import {
 import { TECH_STACK } from "../data/tech-stack"
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "./panel"
 
+function getIconUrl(tech: { key: string; icon?: string }) {
+  if (tech.icon) return tech.icon
+  return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.key}/${tech.key}-original.svg`
+}
+
 export function TechStack() {
   return (
     <Panel id="stack">
@@ -31,7 +36,7 @@ export function TechStack() {
                       className="flex items-center"
                     >
                       <Image
-                        src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.key}/${tech.key}-original.svg`}
+                        src={getIconUrl(tech)}
                         alt={tech.title}
                         width={32}
                         height={32}

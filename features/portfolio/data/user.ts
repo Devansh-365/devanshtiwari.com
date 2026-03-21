@@ -42,9 +42,9 @@ export const USER = {
     { title: "Email", href: "mailto:devanshtiwari365@gmail.com", icon: "mail" },
   ],
   techStack: [
-    "TypeScript", "JavaScript", "React", "Next.js", "Node.js",
-    "Tailwind CSS", "PostgreSQL", "MongoDB", "Redis",
-    "Docker", "Git", "Figma", "Linear",
+    "TypeScript", "JavaScript", "Python", "React", "Next.js", "Node.js",
+    "Tailwind CSS", "OpenAI", "PostgreSQL", "MongoDB", "Redis",
+    "Prisma", "Drizzle", "Docker", "Vercel", "Git", "Figma", "PostHog",
   ],
   avatar: "/profile.png",
   timeZone: "Asia/Kolkata",
