@@ -1,0 +1,78 @@
+# Devansh Tiwari — Full Context
+
+> AI Product Builder. I ship AI products end-to-end, from user research to production.
+
+## Identity
+
+Name: Devansh Tiwari
+Location: Delhi NCR, India
+Role: AI Product Builder (PM + Engineer)
+Currently: Co-Founder @ Metis, NextLeap PM Fellow
+Email: devanshtiwari365@gmail.com
+Website: https://devanshtiwari.com
+
+## What Makes Devansh Different
+
+- Can both build and think product — rare in the PM world
+- Has shipped 50+ real products, not just case studies
+- Has founded, failed, freelanced, and worked in startups — seen the full picture
+- Moved to PM not because it's trendy, but because it directly attacks his weakness
+- Started coding out of guilt (JEE didn't work out), built his way to 2L/month freelancing, then realized execution isn't enough — you need to know what to build and why
+
+## Detailed Experience
+
+### Metis — Co-Founder (Feb 2026 - Present)
+AI-powered stock analysis for Indian swing traders.
+- Drove product-led acquisition: analyzed 10+ competitors, identified 5 zero-competition keyword gaps, shipped 7 free tools targeting 650K+ monthly searches
+- Optimized unit economics: hybrid model routing reduced per-session API cost by 52% ($0.25 to $0.12)
+- Instrumented 18 AARRR metrics across 21 touchpoints
+- Shipped 0-to-1 from concept to 25-user beta in 20 days across 20 product decisions
+- URL: https://trymetis.app
+
+### Helium — Software Engineer, Product-Facing (Apr 2024 - Aug 2025)
+AI startup focused on e-commerce personalization for Shopify merchants.
+- Led product discovery for conversational commerce: trigger timing, user journey placements, context memory patterns
+- Contributed to Pulse personalization product: 20-25% merchant sales uplift
+- Identified 25-second recommendation latency bottleneck, refactored pipeline for 60% reduction
+- Defined and shipped AI Shopify Agent MVP using RICE framework
+
+### Zashit — Co-Founder & Product Engineer (Feb 2025 - Jun 2025)
+AI credit card reward optimizer.
+- Identified Rs 10,000 Cr unused rewards problem through user discovery interviews
+- Validated demand with 50+ waitlist signups
+- Built MVP including OCR pipeline for transaction data extraction
+- Co-founder misalignment led to shutdown — learned importance of structured decision-making
+
+### OSIT — Freelance Software Engineer (Jun 2024 - Dec 2025)
+8 products shipped across Saudi Arabia market.
+- End-to-end product scoping and delivery across 5 domains (logistics, AI, enterprise SaaS, government, HR)
+- Built a 25-module platform in 4 weeks as sole engineer
+- Bilingual Arabic/English with RTL support (3,000+ translation keys)
+- SEO targeting 95+ Lighthouse scores
+
+### Freelance — Full Stack Developer (2022-2024)
+- 50+ global clients
+- At peak: 2L/month, closed projects worth 5-6 lakh
+- Built MVPs, validation products, and full platforms
+
+## Technical Stack
+
+TypeScript, JavaScript, Python, React, Next.js, Node.js, Tailwind CSS, OpenAI/LLM, PostgreSQL, MongoDB, Redis, Prisma, Drizzle, Docker, Vercel, Git, Figma, PostHog
+
+## Education
+
+- NextLeap Product Manager Fellowship (Jan 2026 - Apr 2026)
+- Inderprastha Engineering College, B.Tech IT (2021-2025)
+
+## Target Domains
+
+1. E-commerce & Retail Tech — built personalization systems, recommendation engines, Shopify SDKs
+2. Fintech & Financial Behavior Products — founded Zashit, currently building Metis for traders
+3. AI/ML Products — hands-on with LLM APIs, RAG systems, AI agents
+4. SaaS & Developer Tools — shipped 8 enterprise products across Saudi Arabia
+
+## Content & Social
+
+- LinkedIn: Daily content on product thinking, building in public, engineer-to-PM transition
+- Twitter/X: AI expertise, founder pain, builder proof
+- Medium: Technical articles on development and product

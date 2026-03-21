@@ -81,7 +81,34 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <head>
+          <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context" />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Devansh Tiwari",
+                url: "https://devanshtiwari.com",
+                image: "https://devanshtiwari.com/profile.png",
+                jobTitle: "AI Product Builder",
+                description: "AI Product Builder. I ship AI products end-to-end, from user research to production.",
+                email: "mailto:devanshtiwari365@gmail.com",
+                sameAs: [
+                  "https://github.com/Devansh-365",
+                  "https://www.linkedin.com/in/devansh-tiwari-3342611a6/",
+                  "https://twitter.com/devansh_0718",
+                  "https://medium.com/@devanshtiwari365",
+                ],
+                knowsAbout: [
+                  "Product Management", "AI/LLM Systems", "React", "Next.js",
+                  "TypeScript", "E-commerce Personalization", "Startup Building",
+                ],
+              }),
+            }}
+          />
+        </head>
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",

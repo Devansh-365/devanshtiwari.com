@@ -1,0 +1,38 @@
+# Devansh Tiwari
+
+> AI Product Builder. I ship AI products end-to-end, from user research to production.
+
+## About
+
+Devansh Tiwari is an AI Product Builder who sits at the intersection of product management and engineering. He has shipped 50+ products, founded 2 companies, and worked across e-commerce personalization, fintech, and AI.
+
+Currently co-founding Metis (trymetis.app), an AI-powered stock analysis tool for Indian swing traders. Previously co-founded Zashit, an AI credit card reward optimizer. Completing NextLeap Product Manager Fellowship (Jan-Apr 2026).
+
+## Experience
+
+- Co-Founder @ Metis (Feb 2026 - Present): AI-powered stock analysis for Indian swing traders. Shipped 0-to-1 in 20 days. 7 free tools targeting 650K+ monthly searches. Reduced API cost by 52%.
+- Software Engineer (Product-Facing) @ Helium (Apr 2024 - Aug 2025): E-commerce personalization. 20-30% merchant sales uplift. 60% latency reduction. Led product discovery for conversational commerce.
+- Co-Founder & Product Engineer @ Zashit (Feb 2025 - Jun 2025): AI credit card reward optimizer. 50+ waitlist signups. Built OCR pipeline for transaction extraction.
+- Freelance Software Engineer @ OSIT (Jun 2024 - Dec 2025): 8 products across 5 domains for Saudi Arabia. 25-module platform in 4 weeks.
+- Freelance Full Stack Developer (2022-2024): 50+ global clients. 2L/month at peak.
+
+## Skills
+
+Product: Product Discovery, User Research, PRDs, RICE Prioritization, Competitive Analysis, Go-to-Market, MVP Scoping
+Technical: TypeScript, React, Next.js, Node.js, Python, PostgreSQL, MongoDB, Redis, Docker, OpenAI/LLM
+Analytics: SQL, PostHog, Funnel Analytics (AARRR), OKRs/KPIs
+
+## Links
+
+- Website: https://devanshtiwari.com
+- GitHub: https://github.com/Devansh-365
+- LinkedIn: https://www.linkedin.com/in/devansh-tiwari-3342611a6/
+- Twitter/X: https://twitter.com/devansh_0718
+- Medium: https://medium.com/@devanshtiwari365
+- Email: devanshtiwari365@gmail.com
+
+## Pages
+
+- Home: https://devanshtiwari.com/
+- Blog: https://devanshtiwari.com/blog
+- Resume: https://devanshtiwari.com/resume
