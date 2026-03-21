@@ -3,7 +3,8 @@ export const siteConfig = {
   siteUrl: "https://devanshtiwari.me",
   name: "Devansh Tiwari",
   title: "Devansh Tiwari",
-  description: "Product-Minded Engineer building beautiful, functional web experiences.",
+  description:
+    "AI Product Builder. I ship AI products end-to-end, from user research to production.",
   language: "en-US",
   locale: "en_US",
 
@@ -26,10 +27,6 @@ export const siteConfig = {
       title: "Blog",
       href: "/blog",
     },
-    {
-      title: "Projects",
-      href: "/projects",
-    },
   ],
 
   // Social Links
@@ -40,3 +37,18 @@ export const siteConfig = {
 }
 
 export type SiteConfig = typeof siteConfig
+
+// Named exports for component compatibility
+export const MAIN_NAV = siteConfig.mainNav
+
+export const SITE_INFO = {
+  name: siteConfig.name,
+  url: siteConfig.siteUrl,
+  description: siteConfig.description,
+}
+
+export const SOURCE_CODE_GITHUB_URL = siteConfig.links.github
+
+export const UTM_PARAMS = {
+  utm_source: "devanshtiwari.me",
+}

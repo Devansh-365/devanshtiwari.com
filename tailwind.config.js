@@ -4,7 +4,7 @@ const plugin = require("tailwindcss/plugin")
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
+  content: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}", "features/**/*.{ts,tsx}"],
   theme: {
     container: {
       center: true,
@@ -87,6 +87,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        line: "hsl(var(--line))",
       },
       borderRadius: {
         lg: `var(--radius)`,
@@ -95,6 +96,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        mono: ["var(--font-mono)", ...fontFamily.mono],
       },
       keyframes: {
         "accordion-down": {

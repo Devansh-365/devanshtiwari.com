@@ -1,111 +1,73 @@
-"use client"
-
-import Image from "next/image"
+import dynamic from "next/dynamic"
 import Link from "next/link"
-// import { usePathname } from "next/navigation"
 
-import { siteConfig } from "@/config/site"
-// import { cn } from "@/lib/utils"
-// import { buttonVariants } from "@/components/ui/button"
-// import { Icons } from "@/components/icons"
-// import { MainNav } from "@/components/main-nav"
+import { MAIN_NAV } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { Separator } from "@/components/ui/separator"
+import { DesktopNav } from "@/components/desktop-nav"
+import { NavItemGitHub } from "@/components/nav-item-github"
+import { SiteHeaderMark } from "@/components/site-header-mark"
 import { ThemeToggle } from "@/components/theme-toggle"
 
+const BrandContextMenu = dynamic(() =>
+  import("@/components/brand-context-menu").then((mod) => mod.BrandContextMenu)
+)
+
+const CommandMenu = dynamic(() =>
+  import("@/components/command-menu").then((mod) => mod.CommandMenu)
+)
+
+const MobileNav = dynamic(() =>
+  import("@/components/mobile-nav").then((mod) => mod.MobileNav)
+)
+
 export function SiteHeader() {
-  // const pathname = usePathname()
-
-  // const checkCurrentRoute = (route: string) => {
-  //   return pathname === route || pathname.split("/")[1] === route
-  // }
-
   return (
-    <header className="sticky top-0 z-40 w-full bg-background">
-      <div className="container flex h-16 items-center justify-between">
-        {/* Profile Section - Name & Image */}
-        <Link
-          href="/"
-          className="flex items-center gap-3 transition-opacity hover:opacity-80"
-          aria-label={`${siteConfig.name} - Home`}
-          tabIndex={0}
-        >
-          <Image
-            src="/profile.png"
-            alt={`${siteConfig.name}'s profile picture`}
-            width={40}
-            height={40}
-            className="rounded-full object-cover"
-            priority
-          />
-          <div className="flex flex-col">
-            <span className="text-lg font-bold leading-tight tracking-tight">
-              {siteConfig.name}
-            </span>
-            <span className="text-xs text-muted-foreground">
-              Product-Minded Engineer
-            </span>
-          </div>
-        </Link>
-
-        {/* Theme Toggle */}
-        <ThemeToggle />
-
-        {/* COMMENTED OUT - Original MainNav */}
-        {/* <MainNav items={siteConfig.mainNav} /> */}
-        {/* <div className="flex flex-1 items-center md:justify-end md:space-x-4">
-          <nav className="flex w-full items-center justify-between md:justify-end">
-            <Link className="block md:hidden" href="/">
-              <p className="text-2xl font-extrabold leading-snug">DT</p>
+    <>
+      <header className="sticky top-0 z-50 w-full overflow-x-hidden bg-background px-2 pt-2">
+        <div className="screen-line-top screen-line-bottom mx-auto flex h-12 items-center justify-between gap-2 border-x border-line px-2 sm:gap-4 md:max-w-3xl">
+          <BrandContextMenu>
+            <Link
+              className="transition-transform ease-out active:scale-[0.98] [&_svg]:h-8"
+              href="/"
+              aria-label="Home"
+            >
+              <SiteHeaderMark />
             </Link>
-            <ThemeToggle />
-          </nav>
-        </div> */}
-      </div>
+          </BrandContextMenu>
 
-      {/* COMMENTED OUT - Bottom Mobile Navigation */}
-      {/* <div className="fixed bottom-0 left-0 z-50 h-16 w-full border-t border-foreground bg-background md:hidden">
-        <nav className="flex h-full items-center justify-around">
-          <Link
-            href="/"
-            className={cn(
-              "flex flex-col items-center space-y-1",
-              checkCurrentRoute("/") ? "" : "text-muted-foreground"
-            )}
-          >
-            <Icons.home className="h-5 w-5" />
-            <p className="text-sm">Home</p>
-          </Link>
-          <Link
-            href="/about"
-            className={cn(
-              "flex flex-col items-center space-y-1",
-              checkCurrentRoute("/about") ? "" : "text-muted-foreground"
-            )}
-          >
-            <Icons.about className="h-5 w-5" />
-            <p className="text-sm">About</p>
-          </Link>
-          <Link
-            href="/blog"
-            className={cn(
-              "flex flex-col items-center space-y-1",
-              checkCurrentRoute("/blog") ? "" : "text-muted-foreground"
-            )}
-          >
-            <Icons.blog className="h-5 w-5" />
-            <p className="text-sm">Blog</p>
-          </Link>
-          <Link
-            href="/projects"
-            className={cn(
-              "flex flex-col items-center space-y-1",
-              checkCurrentRoute("/projects") ? "" : "text-muted-foreground"
-            )}
-          >
-            <Icons.project className="h-5 w-5" />
-            <p className="text-sm">Projects</p>
-          </Link>
-        </nav>
-      </div> */}
-    </header>
+          <div className="flex-1" />
+
+          <DesktopNav items={MAIN_NAV} />
+
+          <div className="flex items-center">
+            <div className="mr-2 hidden sm:block">
+              <CommandMenu />
+            </div>
+            <NavItemGitHub />
+            <Separator
+              orientation="vertical"
+              className="mx-2 h-4 self-center"
+            />
+            <ThemeToggle />
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Nav - floating bottom bar */}
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 h-16 bg-gradient-to-t from-background to-transparent sm:hidden" />
+      <div
+        className={cn(
+          "fixed bottom-[calc(0.5rem+env(safe-area-inset-bottom,0px))] left-1/2 z-50 flex w-fit -translate-x-1/2 items-center rounded-xl bg-popover py-1 pr-1 pl-2.5 shadow-md ring-1 ring-foreground/10 sm:hidden dark:ring-foreground/20"
+        )}
+      >
+        <CommandMenu />
+        <Separator
+          orientation="vertical"
+          className="mx-2 h-6 self-center"
+        />
+        <MobileNav items={MAIN_NAV} />
+      </div>
+    </>
   )
 }

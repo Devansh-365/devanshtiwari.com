@@ -1,76 +1,110 @@
-import React from "react"
-import { Maybe, Tuple } from "@/types"
-import { LucideProps } from "lucide-react"
+import { Github, Linkedin, Mail, RssIcon, Twitter } from "lucide-react"
 
-import { Colors } from "@/config/colors"
-import { ContactType, contact } from "@/config/contact"
-import { Icons } from "@/components/icons"
-import { PeekabooLink } from "@/components/peekaboo-link"
+import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site"
+import { cn } from "@/lib/utils"
 
-const SiteFooter = () => {
-  const year: number = new Date().getFullYear()
-
+export function SiteFooter() {
   return (
-    <footer className="mb-24 mt-4 flex flex-col items-center font-light text-foreground md:mb-4">
-      <div className="mt-2 flex">
-        {React.Children.toArray(Object.entries(contact.links).map(resolveIcon))}
+    <footer className="w-full overflow-x-hidden px-2">
+      <div className="screen-line-top mx-auto border-x border-line pt-4 md:max-w-3xl">
+        <p className="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
+          Built by{" "}
+          <a
+            className="font-medium underline underline-offset-4 transition-colors hover:text-foreground"
+            href="https://twitter.com/devansh_0718"
+            target="_blank"
+            rel="noopener"
+          >
+            Devansh Tiwari
+          </a>
+          . The source code is available on{" "}
+          <a
+            className="font-medium underline underline-offset-4 transition-colors hover:text-foreground"
+            href={SOURCE_CODE_GITHUB_URL}
+            target="_blank"
+            rel="noopener"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+
+        <div className="screen-line-top screen-line-bottom flex w-full">
+          <div className="mx-auto flex items-center justify-center gap-3 border-x border-line bg-background px-4">
+            <SocialLink
+              href="https://twitter.com/devansh_0718"
+              label="X / Twitter"
+            >
+              <Twitter className="h-4 w-4" />
+            </SocialLink>
+
+            <Separator />
+
+            <SocialLink
+              href="https://github.com/Devansh-365"
+              label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </SocialLink>
+
+            <Separator />
+
+            <SocialLink
+              href="https://www.linkedin.com/in/devansh-tiwari-3342611a6/"
+              label="LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
+            </SocialLink>
+
+            <Separator />
+
+            <SocialLink
+              href="mailto:devanshtiwari365@gmail.com"
+              label="Email"
+            >
+              <Mail className="h-4 w-4" />
+            </SocialLink>
+
+            <Separator />
+
+            <SocialLink
+              href={`${SITE_INFO.url}/rss`}
+              label="RSS"
+            >
+              <RssIcon className="h-4 w-4" />
+            </SocialLink>
+          </div>
+        </div>
       </div>
-      <div className="lg:mt-6c¸¸ mt-3 text-xs font-light">
-        &copy; {year} Devansh Tiwari. Website is open source{" "}
-        <PeekabooLink href="https://github.com/Devansh-365">
-          GitHub
-        </PeekabooLink>
+      <div className="pb-[env(safe-area-inset-bottom,0px)]">
+        <div className="flex h-16 sm:h-2" />
       </div>
     </footer>
   )
 }
 
-function resolveIcon(entry: Tuple<string>): React.ReactNode {
-  const [type, url] = entry
-
-  const props: LucideProps = {
-    className: "icon cursor-pointer text-2xl mr-6",
-    color: Colors[type],
-  }
-
-  let icon: Maybe<React.ReactNode> = null
-
-  switch (type) {
-    case ContactType.linkedin:
-      icon = <Icons.linkedin {...props} />
-      break
-
-    case ContactType.twitter:
-      icon = <Icons.twitter {...props} />
-      break
-
-    case ContactType.github:
-      icon = <Icons.gitHub {...props} />
-      break
-
-    // case ContactType.youtube:
-    //   icon = <YoutubeIcon {...props} />
-    //   break
-
-    case ContactType.email:
-      icon = <Icons.mail {...props} />
-      break
-
-    default:
-      break
-  }
-
+function SocialLink({
+  href,
+  label,
+  children,
+}: {
+  href: string
+  label: string
+  children: React.ReactNode
+}) {
   return (
     <a
-      className="social-icons transform-gpu items-center transition-transform hover:scale-105"
-      href={url}
-      aria-label={type}
+      className="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
     >
-      {icon}
+      {children}
+      <span className="sr-only">{label}</span>
     </a>
   )
 }
 
-export default SiteFooter
+function Separator({ className, ...props }: React.ComponentProps<"div">) {
+  return <div className={cn("flex h-11 w-px bg-line", className)} {...props} />
+}

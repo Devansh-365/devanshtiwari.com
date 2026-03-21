@@ -1,24 +1,24 @@
 import { Metadata } from "next"
-
-import { Hr } from "@/components/ui/Hr"
-
-import Posts from "./components/posts"
+import { getAllFilesFrontMatter } from "@/lib/mdx"
+import { BlogPageClient } from "./blog-page-client"
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "...",
+  description: "A collection of articles on development, design, and ideas.",
 }
 
-const Blog = () => {
-  return (
-    <section className="container grid items-center py-4 pb-8 text-shadow-[0_4px_8px_#0064da] md:py-6">
-      <h1 className="mt-6 text-3xl font-extrabold ">Blog</h1>
-      <Hr />
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-        <Posts />
-      </div>
-    </section>
-  )
-}
+export default async function BlogPage() {
+  let posts: Array<{ slug: string; title: string; date: string; summary: string; tags: string[] }> = []
+  try {
+    const allPosts = await getAllFilesFrontMatter("blog")
+    posts = allPosts.map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      date: p.date,
+      summary: p.summary || "",
+      tags: p.tags || [],
+    }))
+  } catch { posts = [] }
 
-export default Blog
+  return <BlogPageClient posts={posts} />
+}

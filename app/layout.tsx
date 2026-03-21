@@ -1,11 +1,13 @@
 import "@/styles/globals.css"
+
 import { Metadata } from "next"
 
 import { siteConfig } from "@/config/site"
-import { fontSans } from "@/lib/fonts"
+import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/sonner"
 import { PageWrapper } from "@/components/page-wrapper"
-import SiteFooter from "@/components/site-footer"
+import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -83,7 +85,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
+            fontSans.variable,
+            fontMono.variable
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
@@ -97,6 +100,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </PageWrapper>
               <SiteFooter />
             </div>
+            <Toaster />
             <TailwindIndicator />
           </ThemeProvider>
         </body>
