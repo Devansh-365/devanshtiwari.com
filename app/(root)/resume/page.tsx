@@ -25,7 +25,7 @@ export default function ResumePage() {
 
       <div className="p-4">
         <p className="font-mono text-sm text-balance text-muted-foreground">
-          50+ products shipped. 2 companies founded. From freelancing at 2L/month to building AI products end-to-end.
+          50+ products shipped. 2 companies founded. Building AI products end-to-end.
         </p>
       </div>
 

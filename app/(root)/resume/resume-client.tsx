@@ -41,11 +41,11 @@ export function ResumeClient() {
         </div>
       </div>
 
-      {/* PDF embed */}
-      <div className="bg-muted/30">
+      {/* PDF embed — aspect-[1/1.414] matches A4 ratio exactly, overflow hidden clips the gray */}
+      <div className="relative aspect-[1/1.414] w-full overflow-hidden">
         <iframe
-          src={`${PDF_URL}#toolbar=0&navpanes=0`}
-          className="h-[80vh] w-full min-h-[600px]"
+          src={`${PDF_URL}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+          className="absolute inset-0 h-[calc(100%+4px)] w-full border-0"
           title="Resume PDF"
         />
       </div>

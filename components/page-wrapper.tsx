@@ -12,10 +12,14 @@ export const PageWrapper: React.FunctionComponent<
     <AnimatePresence>
       <motion.div
         className="flex flex-1 flex-col"
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={shouldReduceMotion ? undefined : { opacity: 0, y: 15 }}
-        transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.25 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 20, filter: "blur(4px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        exit={shouldReduceMotion ? undefined : { opacity: 0, y: -10 }}
+        transition={
+          shouldReduceMotion
+            ? { duration: 0 }
+            : { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }
+        }
       >
         {props?.children}
       </motion.div>

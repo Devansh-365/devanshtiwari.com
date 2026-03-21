@@ -37,7 +37,7 @@ export async function BlogPreview() {
         </div>
       </div>
       <div className="screen-line-top flex justify-center py-2">
-        <Link href="/blog" className="inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+        <Link href="/blog" className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-line bg-background px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
           All Posts <ArrowRightIcon className="h-4 w-4" />
         </Link>
       </div>

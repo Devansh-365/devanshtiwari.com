@@ -6,6 +6,7 @@ import { TechStack } from "@/features/portfolio/components/tech-stack"
 import { BlogPreview } from "@/features/portfolio/components/blog-preview"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
+import { ScrollReveal } from "@/components/scroll-reveal"
 import { cn } from "@/lib/utils"
 
 export default function HomePage() {
@@ -14,23 +15,35 @@ export default function HomePage() {
       <ProfileHeader />
       <Separator />
 
-      <Overview />
-      <SocialLinks />
+      <ScrollReveal>
+        <Overview />
+        <SocialLinks />
+      </ScrollReveal>
       <Separator />
 
-      <About />
+      <ScrollReveal delay={0.05}>
+        <About />
+      </ScrollReveal>
       <div className="flex h-2 w-full border-x border-line" />
 
-      <GitHubContributions />
+      <ScrollReveal delay={0.1}>
+        <GitHubContributions />
+      </ScrollReveal>
       <Separator />
 
-      <TechStack />
+      <ScrollReveal delay={0.05}>
+        <TechStack />
+      </ScrollReveal>
       <Separator />
 
-      <BlogPreview />
+      <ScrollReveal delay={0.05}>
+        <BlogPreview />
+      </ScrollReveal>
       <Separator />
 
-      <Experiences />
+      <ScrollReveal delay={0.05}>
+        <Experiences />
+      </ScrollReveal>
       <Separator />
     </div>
   )
