@@ -10,7 +10,7 @@ export function ExperienceItem({ experience }: { experience: Experience }) {
         </div>
         <h3 className="text-lg font-semibold leading-snug">
           {experience.companyWebsite ? (
-            <a className="underline-offset-4 hover:underline" href={experience.companyWebsite} target="_blank" rel="noopener">{experience.companyName}</a>
+            <a className="cursor-pointer underline-offset-4 hover:underline" href={experience.companyWebsite} target="_blank" rel="noopener">{experience.companyName}</a>
           ) : experience.companyName}
         </h3>
         {experience.isCurrentEmployer && (

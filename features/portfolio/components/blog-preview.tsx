@@ -27,7 +27,7 @@ export async function BlogPreview() {
         )}
         <div className={`grid grid-cols-1 gap-4 ${posts.length >= 2 ? "sm:grid-cols-2" : ""}`}>
           {posts.slice(0, 4).map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className="group block p-4 transition-colors hover:bg-accent/50 screen-line-top screen-line-bottom">
+            <Link key={post.slug} href={`/blog/${post.slug}`} className="group block cursor-pointer p-4 transition-colors hover:bg-accent/50 screen-line-top screen-line-bottom">
               <h3 className="font-medium group-hover:text-primary">{post.title}</h3>
               <time className="mt-1 font-mono text-xs text-muted-foreground">
                 {new Date(post.date).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}
@@ -37,7 +37,7 @@ export async function BlogPreview() {
         </div>
       </div>
       <div className="screen-line-top flex justify-center py-2">
-        <Link href="/blog" className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+        <Link href="/blog" className="inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
           All Posts <ArrowRightIcon className="h-4 w-4" />
         </Link>
       </div>

@@ -83,7 +83,7 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
               key={post.slug}
               href={`/blog/${post.slug}`}
               className={cn(
-                "group flex flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50",
+                "group flex cursor-pointer flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50",
                 "screen-line-top screen-line-bottom"
               )}
             >

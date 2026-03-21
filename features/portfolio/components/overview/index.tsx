@@ -25,7 +25,7 @@ function IntroItemContent({ className, ...props }: React.ComponentProps<"p">) {
 }
 
 function IntroItemLink({ className, ...props }: React.ComponentProps<"a">) {
-  return <a className={cn("underline-offset-4 hover:underline", className)} target="_blank" rel="noopener" {...props} />
+  return <a className={cn("cursor-pointer underline-offset-4 hover:underline", className)} target="_blank" rel="noopener" {...props} />
 }
 
 function getJobIcon(title: string) {

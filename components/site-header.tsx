@@ -44,7 +44,7 @@ export function SiteHeader() {
             <div className="mr-2 hidden sm:block">
               <CommandMenu />
             </div>
-            <NavItemGitHub />
+            {/*<NavItemGitHub />*/}
             <Separator
               orientation="vertical"
               className="mx-2 h-4 self-center"
@@ -62,10 +62,7 @@ export function SiteHeader() {
         )}
       >
         <CommandMenu />
-        <Separator
-          orientation="vertical"
-          className="mx-2 h-6 self-center"
-        />
+        <Separator orientation="vertical" className="mx-2 h-6 self-center" />
         <MobileNav items={MAIN_NAV} />
       </div>
     </>
