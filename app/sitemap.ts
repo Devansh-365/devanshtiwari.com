@@ -38,5 +38,22 @@ export default async function sitemap() {
     blogMap = []
   }
 
-  return [...staticMap, ...blogMap]
+  // Work projects
+  const { WORK_PROJECTS } = await import("@/features/work/data/projects")
+  const workMap: MetadataRoute.Sitemap = [
+    {
+      url: url("/work").href,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    ...WORK_PROJECTS.map((p) => ({
+      url: url(`/work/${p.slug}`).href,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ]
+
+  return [...staticMap, ...blogMap, ...workMap]
 }
