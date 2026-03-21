@@ -11,17 +11,17 @@ export const TECH_STACK: TechStack[] = [
   { key: "nodejs", title: "Node.js", href: "https://nodejs.org/", categories: ["Runtime"] },
   { key: "tailwindcss", title: "Tailwind CSS", href: "https://tailwindcss.com/", categories: ["Framework"] },
   // AI
-  { key: "openai", title: "OpenAI", href: "https://openai.com/", categories: ["AI"], icon: "https://cdn.simpleicons.org/openai/412991" },
+  { key: "openai", title: "OpenAI", href: "https://openai.com/", categories: ["AI"], icon: "https://img.icons8.com/ios-filled/50/000000/chatgpt.png", iconDark: "https://img.icons8.com/ios-filled/50/ffffff/chatgpt.png" },
   // Databases
   { key: "postgresql", title: "PostgreSQL", href: "https://www.postgresql.org/", categories: ["Database"] },
   { key: "mongodb", title: "MongoDB", href: "https://www.mongodb.com/", categories: ["Database"] },
   { key: "redis", title: "Redis", href: "https://redis.io/", categories: ["Database"] },
   // ORM
-  { key: "prisma", title: "Prisma", href: "https://www.prisma.io/", categories: ["ORM"], icon: "https://cdn.simpleicons.org/prisma/2D3748" },
+  { key: "prisma", title: "Prisma", href: "https://www.prisma.io/", categories: ["ORM"], icon: "https://cdn.simpleicons.org/prisma/2D3748", iconDark: "https://cdn.simpleicons.org/prisma/ffffff" },
   { key: "drizzle", title: "Drizzle", href: "https://orm.drizzle.team/", categories: ["ORM"], icon: "https://cdn.simpleicons.org/drizzle/C5F74F" },
   // DevOps & Infra
   { key: "docker", title: "Docker", href: "https://www.docker.com/", categories: ["DevOps"] },
-  { key: "vercel", title: "Vercel", href: "https://vercel.com/", categories: ["Platform"], icon: "https://cdn.simpleicons.org/vercel/ffffff" },
+  { key: "vercel", title: "Vercel", href: "https://vercel.com/", categories: ["Platform"], icon: "https://cdn.simpleicons.org/vercel/000000", iconDark: "https://cdn.simpleicons.org/vercel/ffffff" },
   // Tools
   { key: "git", title: "Git", href: "https://git-scm.com/", categories: ["Tools"] },
   { key: "figma", title: "Figma", href: "https://www.figma.com/", categories: ["Design"] },

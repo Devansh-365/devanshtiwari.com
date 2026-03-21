@@ -5,4 +5,5 @@ export type TechStack = {
   categories: string[]
   theme?: boolean
   icon?: string
+  iconDark?: string
 }
