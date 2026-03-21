@@ -23,7 +23,7 @@ export default function PostLayout({
   toc,
   children,
 }: Props) {
-  const { title, summary } = frontMatter
+  const { title, summary, date, readingTime } = frontMatter
 
   return (
     <>
@@ -71,6 +71,22 @@ export default function PostLayout({
         <h1 className="text-3xl font-semibold tracking-tight">
           {title}
         </h1>
+
+        {(date || readingTime?.text) && (
+          <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
+            {date && (
+              <time dateTime={date}>
+                {new Date(date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            )}
+            {date && readingTime?.text && <span>·</span>}
+            {readingTime?.text && <span>{readingTime.text}</span>}
+          </div>
+        )}
 
         {summary && (
           <p className="text-muted-foreground">{summary}</p>

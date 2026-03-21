@@ -4,10 +4,15 @@ import { getAllFilesFrontMatter } from "@/lib/mdx"
 import { Panel, PanelHeader, PanelTitle, PanelTitleSup } from "./panel"
 
 export async function BlogPreview() {
-  let posts: Array<{ slug: string; title: string; date: string }> = []
+  let posts: Array<{ slug: string; title: string; date: string; readingTime?: { text: string } }> = []
   try {
     const allPosts = await getAllFilesFrontMatter("blog")
-    posts = allPosts.map((p) => ({ slug: p.slug, title: p.title, date: p.date }))
+    posts = allPosts.map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      date: p.date,
+      readingTime: p.readingTime,
+    }))
   } catch { posts = [] }
 
   return (
@@ -29,9 +34,17 @@ export async function BlogPreview() {
           {posts.slice(0, 4).map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group block cursor-pointer p-4 transition-colors hover:bg-accent/50 screen-line-top screen-line-bottom">
               <h3 className="font-medium group-hover:text-primary">{post.title}</h3>
-              <time className="mt-1 font-mono text-xs text-muted-foreground">
-                {new Date(post.date).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}
-              </time>
+              <div className="mt-1 flex items-center gap-2 font-mono text-xs text-muted-foreground">
+                <time>
+                  {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                </time>
+                {post.readingTime?.text && (
+                  <>
+                    <span>·</span>
+                    <span>{post.readingTime.text}</span>
+                  </>
+                )}
+              </div>
             </Link>
           ))}
         </div>

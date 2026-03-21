@@ -11,6 +11,7 @@ type Post = {
   date: string
   summary: string
   tags: string[]
+  readingTime?: { text: string }
 }
 
 export function BlogPageClient({ posts }: { posts: Post[] }) {
@@ -91,20 +92,21 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
                 <h3 className="text-lg font-medium leading-snug text-balance">
                   {post.title}
                 </h3>
-                <dl>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-sm text-muted-foreground">
-                    <time dateTime={post.date}>
-                      {new Date(post.date)
-                        .toLocaleDateString("en-GB", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "numeric",
-                        })
-                        .replace(/\//g, ".")}
-                    </time>
-                  </dd>
-                </dl>
+                <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </time>
+                  {post.readingTime?.text && (
+                    <>
+                      <span>·</span>
+                      <span>{post.readingTime.text}</span>
+                    </>
+                  )}
+                </div>
               </div>
             </Link>
           ))}

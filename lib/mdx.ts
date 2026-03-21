@@ -138,6 +138,7 @@ export async function getAllFilesFrontMatter(folder: 'blog' | 'courses') {
         date: frontmatter.date
           ? new Date(frontmatter.date).toISOString()
           : null,
+        readingTime: readingTime(matterFile.content),
       });
     }
   });

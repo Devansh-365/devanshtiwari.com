@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogPage() {
-  let posts: Array<{ slug: string; title: string; date: string; summary: string; tags: string[] }> = []
+  let posts: Array<{ slug: string; title: string; date: string; summary: string; tags: string[]; readingTime?: { text: string } }> = []
   try {
     const allPosts = await getAllFilesFrontMatter("blog")
     posts = allPosts.map((p) => ({
@@ -17,6 +17,7 @@ export default async function BlogPage() {
       date: p.date,
       summary: p.summary || "",
       tags: p.tags || [],
+      readingTime: p.readingTime,
     }))
   } catch { posts = [] }
 
