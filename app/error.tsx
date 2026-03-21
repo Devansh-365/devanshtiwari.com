@@ -1,11 +1,22 @@
-import Link from "next/link"
-import { ArrowLeftIcon } from "lucide-react"
+"use client"
+
+import { useEffect } from "react"
+import { RefreshCwIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export default function NotFound() {
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    console.error(error)
+  }, [error])
+
   return (
     <div className="mx-auto border-x border-line md:max-w-3xl">
-      {/* Stripe separator */}
       <div
         className={cn(
           "screen-line-bottom relative h-8 overflow-hidden",
@@ -16,27 +27,26 @@ export default function NotFound() {
 
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
         <p className="font-mono text-8xl font-bold tracking-tighter text-muted-foreground/20">
-          404
+          500
         </p>
 
         <h1 className="mt-4 text-2xl font-semibold tracking-tight">
-          Page not found
+          Something went wrong
         </h1>
 
         <p className="mt-2 font-mono text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          An unexpected error occurred. Please try again.
         </p>
 
-        <Link
-          href="/"
-          className="mt-6 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+        <button
+          onClick={reset}
+          className="mt-6 inline-flex items-center gap-2 rounded-md bg-foreground px-4 py-2 font-mono text-sm font-medium text-background transition-opacity hover:opacity-90"
         >
-          <ArrowLeftIcon className="h-4 w-4" />
-          Back to home
-        </Link>
+          <RefreshCwIcon className="h-4 w-4" />
+          Try again
+        </button>
       </div>
 
-      {/* Footer stripe */}
       <div
         className={cn(
           "screen-line-top relative h-8 overflow-hidden",

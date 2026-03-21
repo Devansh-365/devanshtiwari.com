@@ -1,6 +1,6 @@
 export const siteConfig = {
   // Site Info
-  siteUrl: "https://devanshtiwari.me",
+  siteUrl: "https://devanshtiwari.com",
   name: "Devansh Tiwari",
   title: "Devansh Tiwari",
   description:
@@ -54,5 +54,5 @@ export const SITE_INFO = {
 export const SOURCE_CODE_GITHUB_URL = siteConfig.links.github
 
 export const UTM_PARAMS = {
-  utm_source: "devanshtiwari.me",
+  utm_source: "devanshtiwari.com",
 }

@@ -15,7 +15,7 @@ export const USER = {
   address: "Delhi NCR, India",
   phoneNumber: "",
   email: "devanshtiwari365@gmail.com",
-  website: "https://devanshtiwari.me",
+  website: "https://devanshtiwari.com",
   jobTitle: "AI Product Builder",
   jobs: [
     {
