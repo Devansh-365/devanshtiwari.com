@@ -16,7 +16,7 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="mx-auto border-x border-line md:max-w-3xl">
+    <div className="mx-auto flex min-h-[calc(100vh-10rem)] flex-col border-x border-line md:max-w-3xl">
       <div
         className={cn(
           "screen-line-bottom relative h-8 overflow-hidden",
@@ -25,7 +25,7 @@ export default function Error({
         )}
       />
 
-      <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
+      <div className="flex flex-1 flex-col items-center justify-center px-4 text-center">
         <p className="font-mono text-8xl font-bold tracking-tighter text-muted-foreground/20">
           500
         </p>

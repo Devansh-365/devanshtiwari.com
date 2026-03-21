@@ -83,6 +83,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
         <head>
           <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context" />
+          <link rel="alternate" type="application/rss+xml" href="/rss" title="Devansh Tiwari — RSS Feed" />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{

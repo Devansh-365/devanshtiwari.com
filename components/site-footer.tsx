@@ -31,6 +31,17 @@ export function SiteFooter() {
 
         <div className="screen-line-top screen-line-bottom flex w-full">
           <div className="mx-auto flex items-center justify-center gap-3 border-x border-line bg-background px-4">
+            <a
+              className="flex font-mono text-xs font-medium text-muted-foreground transition-colors hover:text-foreground max-sm:hidden"
+              href="/llms.txt"
+              target="_blank"
+              rel="noopener"
+            >
+              llms.txt
+            </a>
+
+            <Separator className="max-sm:hidden" />
+
             <SocialLink
               href="https://twitter.com/devansh_0718"
               label="X / Twitter"

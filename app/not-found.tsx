@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 
 export default function NotFound() {
   return (
-    <div className="mx-auto border-x border-line md:max-w-3xl">
+    <div className="mx-auto flex min-h-[calc(100vh-10rem)] flex-col border-x border-line md:max-w-3xl">
       {/* Stripe separator */}
       <div
         className={cn(
@@ -14,7 +14,7 @@ export default function NotFound() {
         )}
       />
 
-      <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
+      <div className="flex flex-1 flex-col items-center justify-center px-4 text-center">
         <p className="font-mono text-8xl font-bold tracking-tighter text-muted-foreground/20">
           404
         </p>
@@ -24,12 +24,12 @@ export default function NotFound() {
         </h1>
 
         <p className="mt-2 font-mono text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
 
         <Link
           href="/"
-          className="mt-6 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="mt-6 inline-flex cursor-pointer items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeftIcon className="h-4 w-4" />
           Back to home
