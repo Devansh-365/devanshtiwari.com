@@ -20,6 +20,20 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: project.title,
     description: project.oneLiner,
+    openGraph: {
+      title: project.title,
+      description: project.oneLiner,
+      type: "article",
+      url: `/work/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.oneLiner,
+    },
+    alternates: {
+      canonical: `/work/${slug}`,
+    },
   }
 }
 
@@ -29,5 +43,25 @@ export default async function WorkProjectPage(props: Props) {
 
   if (!project) notFound()
 
-  return <ProjectDetail project={project} />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: project.title,
+            description: project.oneLiner,
+            author: {
+              "@type": "Person",
+              name: "Devansh Tiwari",
+              url: "https://devanshtiwari.com",
+            },
+          }),
+        }}
+      />
+      <ProjectDetail project={project} />
+    </>
+  )
 }

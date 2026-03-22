@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Work",
   description:
     "Real products shipped for real clients. Not case studies. Actual systems running in production.",
+  alternates: { canonical: "/work" },
 }
 
 export default function WorkPage() {

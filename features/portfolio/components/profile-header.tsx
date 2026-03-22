@@ -11,7 +11,7 @@ export function ProfileHeader() {
           <div className="flex justify-start p-4 sm:mx-1 sm:my-1 sm:p-0">
             <Image
               className="h-[100px] w-[100px] rounded-full ring-1 ring-border ring-offset-2 ring-offset-background select-none grayscale transition-[filter] duration-500 hover:grayscale-0 sm:h-[160px] sm:w-[160px]"
-              alt="Avatar"
+              alt="Devansh Tiwari"
               src={USER.avatar}
               width={160}
               height={160}

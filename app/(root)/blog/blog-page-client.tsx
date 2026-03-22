@@ -52,6 +52,7 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
             onKeyDown={(e) => {
               if (e.key === "Escape") setQuery("")
             }}
+            aria-label="Search blog posts"
             className="flex h-9 w-full rounded-lg border border-input bg-background px-3 py-1 pl-9 pr-9 text-sm shadow-none transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring dark:bg-input/30"
           />
           {query && (
@@ -89,9 +90,9 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
               )}
             >
               <div className="flex flex-col gap-1 p-2">
-                <h3 className="text-lg font-medium leading-snug text-balance">
+                <h2 className="text-lg font-medium leading-snug text-balance">
                   {post.title}
-                </h3>
+                </h2>
                 <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
                   <time dateTime={post.date}>
                     {new Date(post.date).toLocaleDateString("en-US", {

@@ -13,7 +13,7 @@ export function SiteFooter() {
             className="font-medium underline underline-offset-4 transition-colors hover:text-foreground"
             href="https://twitter.com/devansh_0718"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             Devansh Tiwari
           </a>
@@ -22,7 +22,7 @@ export function SiteFooter() {
             className="font-medium underline underline-offset-4 transition-colors hover:text-foreground"
             href={SOURCE_CODE_GITHUB_URL}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             GitHub
           </a>

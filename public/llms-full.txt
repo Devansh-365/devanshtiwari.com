@@ -76,3 +76,10 @@ TypeScript, JavaScript, Python, React, Next.js, Node.js, Tailwind CSS, OpenAI/LL
 - LinkedIn: Daily content on product thinking, building in public, engineer-to-PM transition
 - Twitter/X: AI expertise, founder pain, builder proof
 - Medium: Technical articles on development and product
+
+## Pages
+
+- Home: https://devanshtiwari.com/
+- Work: https://devanshtiwari.com/work
+- Blog: https://devanshtiwari.com/blog
+- Resume: https://devanshtiwari.com/resume

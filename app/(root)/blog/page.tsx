@@ -5,6 +5,7 @@ import { BlogPageClient } from "./blog-page-client"
 export const metadata: Metadata = {
   title: "Blog",
   description: "A collection of articles on development, design, and ideas.",
+  alternates: { canonical: "/blog" },
 }
 
 export default async function BlogPage() {

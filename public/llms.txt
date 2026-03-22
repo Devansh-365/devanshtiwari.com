@@ -34,5 +34,6 @@ Analytics: SQL, PostHog, Funnel Analytics (AARRR), OKRs/KPIs
 ## Pages
 
 - Home: https://devanshtiwari.com/
+- Work: https://devanshtiwari.com/work
 - Blog: https://devanshtiwari.com/blog
 - Resume: https://devanshtiwari.com/resume
