@@ -1,6 +1,6 @@
 "use client"
 
-import { SearchIcon, XIcon } from "lucide-react"
+import { ExternalLinkIcon, SearchIcon, XIcon } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
@@ -12,6 +12,8 @@ type Post = {
   summary: string
   tags: string[]
   readingTime?: { text: string }
+  source?: "local" | "medium"
+  href?: string
 }
 
 export function BlogPageClient({ posts }: { posts: Post[] }) {
@@ -76,23 +78,26 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
           </div>
         )}
 
-        <div className={cn(
-          "grid grid-cols-1 gap-4",
-          filtered.length >= 2 && "sm:grid-cols-2"
-        )}>
-          {filtered.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className={cn(
-                "group flex cursor-pointer flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50",
-                "screen-line-top screen-line-bottom"
-              )}
-            >
+        <div
+          className={cn(
+            "grid grid-cols-1 gap-4",
+            filtered.length >= 2 && "sm:grid-cols-2"
+          )}
+        >
+          {filtered.map((post) => {
+            const isMedium = post.source === "medium"
+            const href = post.href || `/blog/${post.slug}`
+
+            const card = (
               <div className="flex flex-col gap-1 p-2">
-                <h2 className="text-lg font-medium leading-snug text-balance">
-                  {post.title}
-                </h2>
+                <div className="flex items-center gap-1.5">
+                  <h2 className="text-lg font-medium leading-snug text-balance">
+                    {post.title}
+                  </h2>
+                  {isMedium && (
+                    <ExternalLinkIcon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                  )}
+                </div>
                 <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
                   <time dateTime={post.date}>
                     {new Date(post.date).toLocaleDateString("en-US", {
@@ -107,10 +112,46 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
                       <span>{post.readingTime.text}</span>
                     </>
                   )}
+                  {isMedium && (
+                    <>
+                      <span>·</span>
+                      <span>Medium</span>
+                    </>
+                  )}
                 </div>
               </div>
-            </Link>
-          ))}
+            )
+
+            if (isMedium) {
+              return (
+                <a
+                  key={post.slug}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "group flex cursor-pointer flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50",
+                    "screen-line-top screen-line-bottom"
+                  )}
+                >
+                  {card}
+                </a>
+              )
+            }
+
+            return (
+              <Link
+                key={post.slug}
+                href={href}
+                className={cn(
+                  "group flex cursor-pointer flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50",
+                  "screen-line-top screen-line-bottom"
+                )}
+              >
+                {card}
+              </Link>
+            )
+          })}
 
           {filtered.length === 0 && (
             <div className="screen-line-top screen-line-bottom p-4">

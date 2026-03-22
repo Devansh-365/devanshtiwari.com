@@ -1,33 +1,50 @@
 import { SITE_INFO } from "@/config/site"
 import { getAllFilesFrontMatter } from "@/lib/mdx"
+import { getMediumPosts } from "@/lib/medium"
 
 export const revalidate = false
-export const dynamic = "force-static"
 
 export async function GET() {
-  let posts: Array<{ slug: string; title: string; date: string; summary?: string }> = []
+  let localPosts: Array<{ title: string; link: string; date: string; summary: string }> = []
 
   try {
     const allPosts = await getAllFilesFrontMatter("blog")
-    posts = allPosts.map((p) => ({
-      slug: p.slug,
+    localPosts = allPosts.map((p) => ({
       title: p.title,
+      link: `${SITE_INFO.url}/blog/${p.slug}`,
       date: p.date,
       summary: p.summary || "",
     }))
   } catch {
-    posts = []
+    localPosts = []
   }
 
-  const itemsXml = posts
+  let mediumPosts: Array<{ title: string; link: string; date: string; summary: string }> = []
+  try {
+    const posts = await getMediumPosts()
+    mediumPosts = posts.map((p) => ({
+      title: p.title,
+      link: p.link,
+      date: p.date,
+      summary: p.summary,
+    }))
+  } catch {
+    mediumPosts = []
+  }
+
+  const allPosts = [...localPosts, ...mediumPosts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+
+  const itemsXml = allPosts
     .map(
       (post) =>
         `<item>
           <title>${escapeXml(post.title)}</title>
-          <link>${SITE_INFO.url}/blog/${post.slug}</link>
-          <description>${escapeXml(post.summary || "")}</description>
+          <link>${post.link}</link>
+          <description>${escapeXml(post.summary)}</description>
           <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-          <guid>${SITE_INFO.url}/blog/${post.slug}</guid>
+          <guid>${post.link}</guid>
         </item>`
     )
     .join("\n")
