@@ -32,30 +32,30 @@ export default async function Image() {
           }}
         />
 
-        {/* DT Mark */}
+        {/* DT Pixel Mark */}
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: "24px",
             marginBottom: "40px",
           }}
         >
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "64px",
+              position: "relative",
+              width: "128px",
               height: "64px",
-              borderRadius: "12px",
-              background: "#e8e8e8",
-              color: "#0a0a0a",
-              fontSize: "28px",
-              fontWeight: 700,
             }}
           >
-            DT
+            {/* D letter */}
+            <div style={{ position: "absolute", left: 0, top: 0, width: "8px", height: "64px", background: "#e8e8e8" }} />
+            <div style={{ position: "absolute", left: "8px", top: 0, width: "32px", height: "8px", background: "#e8e8e8" }} />
+            <div style={{ position: "absolute", left: "8px", top: "56px", width: "32px", height: "8px", background: "#e8e8e8" }} />
+            <div style={{ position: "absolute", left: "40px", top: "8px", width: "8px", height: "16px", background: "#e8e8e8" }} />
+            <div style={{ position: "absolute", left: "48px", top: "16px", width: "8px", height: "32px", background: "#e8e8e8" }} />
+            <div style={{ position: "absolute", left: "40px", top: "40px", width: "8px", height: "16px", background: "#e8e8e8" }} />
+            {/* T letter */}
+            <div style={{ position: "absolute", left: "64px", top: 0, width: "64px", height: "16px", background: "#e8e8e8" }} />
+            <div style={{ position: "absolute", left: "88px", top: "16px", width: "16px", height: "48px", background: "#e8e8e8" }} />
           </div>
         </div>
 
