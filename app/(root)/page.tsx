@@ -8,6 +8,7 @@ import { WorkPreview } from "@/features/portfolio/components/work-preview"
 import { HowIWork } from "@/features/portfolio/components/how-i-work"
 import { BlogPreview } from "@/features/portfolio/components/blog-preview"
 import { Experiences } from "@/features/portfolio/components/experiences"
+import { CTA } from "@/features/portfolio/components/cta"
 import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { cn } from "@/lib/utils"
@@ -60,6 +61,11 @@ export default function HomePage() {
 
       <ScrollReveal delay={0.05}>
         <Experiences />
+      </ScrollReveal>
+      <Separator />
+
+      <ScrollReveal delay={0.05}>
+        <CTA />
       </ScrollReveal>
       <Separator />
     </div>

@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { siteConfig } from "@/config/site"
+import { ContactBar } from "@/components/contact-bar"
 import { ResumeClient } from "./resume-client"
 
 export const metadata: Metadata = {
@@ -33,6 +34,9 @@ export default function ResumePage() {
       <div className="screen-line-top">
         <ResumeClient />
       </div>
+
+      {/* Contact */}
+      <ContactBar />
 
       {/* Footer spacer */}
       <div className="screen-line-top h-4 w-full" />

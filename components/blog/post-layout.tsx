@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ReactNode } from "react"
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
+import { ContactBar } from "@/components/contact-bar"
 
 import { PostFrontMatter } from "@/types/PostFrontMatter"
 import { Toc } from "@/types/Toc"
@@ -98,6 +99,9 @@ export default function PostLayout({
 
         <div>{children}</div>
       </div>
+
+      {/* Contact */}
+      <ContactBar />
 
       {/* Footer spacer */}
       <div className="screen-line-top h-4 w-full" />

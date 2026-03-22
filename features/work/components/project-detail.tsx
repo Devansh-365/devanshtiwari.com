@@ -3,6 +3,7 @@ import Image from "next/image"
 import { ArrowLeftIcon, ExternalLinkIcon, GithubIcon, PlayIcon } from "lucide-react"
 import { Tag } from "@/components/ui/tag"
 import { Separator } from "@/components/ui/separator"
+import { ContactBar } from "@/components/contact-bar"
 import type { WorkProject } from "../types/project"
 
 export function ProjectDetail({ project }: { project: WorkProject }) {
@@ -174,6 +175,9 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
           ))}
         </ul>
       </div>
+
+      {/* Contact */}
+      <ContactBar />
 
       {/* Footer spacer */}
       <div className="screen-line-top h-4 w-full" />
