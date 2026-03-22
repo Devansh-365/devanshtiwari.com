@@ -104,10 +104,75 @@ export const WORK_PROJECTS: WorkProject[] = [
     architectureImage: "nateeq-ai-architecture.jpeg",
   },
   {
+    slug: "metis",
+    title: "Metis",
+    featured: true,
+    oneLiner:
+      "AI stock analysis for Indian swing traders. 70+ traders surveyed. 7 technical indicators built from scratch. Concept to beta in 27 days.",
+    role: "Co-Founder",
+    company: "Metis",
+    period: "Feb 2026 to Present",
+    liveUrl: "https://trymetis.app",
+    thumbnail:
+      "https://placehold.co/1200x630/0a0a0a/333333?text=Metis&font=mono",
+    problem:
+      "91% of Indian retail traders lose money (SEBI 2024 study). I surveyed 70+ traders to find out why. 68% said wrong entry/exit timing is their biggest pain. The tools that exist (Screener.in, TradingView) give raw data but not analysis. They show you RSI is 58. They don't tell you what that means for your trade, where to enter, where to place a stop loss, or how many shares to buy given your capital.",
+    whatIBuilt:
+      "AI chat that combines real-time NSE/BSE data with actual analysis. Not generic answers. The system fetches live stock data, computes 7 technical indicators (RSI, MACD, Bollinger Bands, ATR, SMA, EMA, pivot points) from raw OHLCV, and generates a verdict with specific entry zones, stop loss levels, targets, and position sizing based on your capital. Multi-model AI with provider fallback (if Claude goes down, Gemini picks up). Smart model routing cuts cost by 40-50% per session. 7 free SEO tools targeting 650K+ monthly searches to funnel organic traffic. Credit-based pricing with Redis-backed atomic billing.",
+    stats: [
+      { label: "Traders Surveyed", value: "70+" },
+      { label: "Technical Indicators", value: "7" },
+      { label: "SEO Tools", value: "7" },
+      { label: "Built In", value: "27 days" },
+    ],
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Vercel AI SDK",
+      "Claude",
+      "Gemini",
+      "Drizzle ORM",
+      "Neon Postgres",
+      "Upstash Redis",
+    ],
+  },
+  {
+    slug: "buzzwav",
+    title: "BuzzWav",
+    oneLiner:
+      "AI-powered Reddit analytics that turns subreddit discussions into content ideas. Real-time dashboard, vector search, trend detection.",
+    role: "Frontend Lead",
+    company: "BuzzWav",
+    period: "2025",
+    liveUrl: "https://buzzwav.com",
+    // thumbnail:
+    //   "https://placehold.co/1200x630/0a0a0a/333333?text=BuzzWav&font=mono",
+    problem:
+      "Content creators spend hours scrolling Reddit looking for one good video topic. BuzzSumo costs Rs 16,000+/month and barely touches Reddit. No affordable tool existed that could monitor subreddits in real time, detect trending discussions before they peak, and generate actual content ideas from what real people were saying.",
+    whatIBuilt:
+      "Built the entire dashboard experience, marketing site, and subscription system. Subreddit tracking with configurable frequency. AI-powered insight generation with opportunity scoring, viral potential, and content angles via Claude Sonnet. Vector embeddings (Google text-embedding-004) for semantic search across posts. Trend detection with momentum scoring. Content ideas Kanban board with AI brief generation. 4-tier subscription with Razorpay and Cashfree. The product worked. Finding users didn't. Three builders, zero marketers. That gap taught me more about product than any feature ever could.",
+    stats: [
+      { label: "DB Tables", value: "21" },
+      { label: "AI Modules", value: "10" },
+      { label: "Sub Tiers", value: "4" },
+      { label: "Team Size", value: "3" },
+    ],
+    tech: [
+      "Next.js",
+      "React",
+      "Convex",
+      "Claude Sonnet",
+      "OpenRouter",
+      "Google Embeddings",
+      "Clerk",
+      "Razorpay",
+    ],
+  },
+  {
     slug: "masari-portal",
     title: "Masari Employee Portal",
-    thumbnail:
-      "https://placehold.co/1200x630/0a0a0a/333333?text=Masari+Portal&font=mono",
+    // thumbnail:
+    //   "https://placehold.co/1200x630/0a0a0a/333333?text=Masari+Portal&font=mono",
     oneLiner:
       "Bilingual intranet for a Saudi government entity. 33 pages, 1,800+ translation keys, sole frontend dev.",
     role: "Sole Frontend Developer",
@@ -139,8 +204,8 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "deliverist-mobile",
     title: "Deliverist Mobile App",
-    thumbnail:
-      "https://placehold.co/1200x630/0a0a0a/333333?text=Deliverist+App&font=mono",
+    // thumbnail:
+    //   "https://placehold.co/1200x630/0a0a0a/333333?text=Deliverist+App&font=mono",
     oneLiner:
       "Customer-facing logistics app for Saudi Arabia. React Native, real-time tracking, ZATCA-compliant invoicing.",
     role: "Sole Developer",
