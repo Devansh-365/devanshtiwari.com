@@ -5,9 +5,15 @@ export function CTA() {
   return (
     <Panel id="contact" className="before:content-none">
       <div className="p-6 text-center sm:p-8">
-        <p className="font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          Available for opportunities
-        </p>
+        <div className="flex items-center justify-center gap-2">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-50" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+          </span>
+          <p className="font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Available for opportunities
+          </p>
+        </div>
 
         <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
           Let's build something together
