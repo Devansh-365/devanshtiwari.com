@@ -6,7 +6,7 @@ import { EXPERIENCES } from "../../data/experiences"
 import { Panel, PanelHeader, PanelTitle } from "../panel"
 import { ExperienceItem } from "./experience-item"
 
-const MAX_VISIBLE = 3
+const MAX_VISIBLE = 4
 
 export function Experiences() {
   const [showAll, setShowAll] = useState(false)

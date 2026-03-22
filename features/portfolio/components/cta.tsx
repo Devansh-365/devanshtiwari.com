@@ -16,12 +16,11 @@ export function CTA() {
         </div>
 
         <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
-          Let's build something together
+          I ship AI products from zero to production
         </h2>
 
         <p className="mx-auto mt-2 max-w-md font-mono text-sm text-muted-foreground">
-          Looking for product roles at growth-stage startups. Open to full-time,
-          contract, and co-founding conversations.
+          Open to product roles, contract work, and co-founding conversations.
         </p>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
