@@ -169,6 +169,64 @@ export const WORK_PROJECTS: WorkProject[] = [
     ],
   },
   {
+    slug: "competitorfinder",
+    title: "CompetitorFinder",
+    oneLiner:
+      "Find competitors for any business across JustDial, IndiaMART, and Google Maps. AI-generated search queries, parallel scraping, export to Excel.",
+    role: "Solo Builder",
+    company: "Side Project",
+    period: "2025",
+    githubUrl: "https://github.com/Devansh-365/competitorfinder",
+    problem:
+      "Sales teams and founders waste hours manually searching JustDial, IndiaMART, and Google Maps to find competitors. Copy-pasting business names, phone numbers, and addresses into spreadsheets. Three platforms, three different UIs, zero automation.",
+    whatIBuilt:
+      "Add a company, AI generates targeted search queries, and all 3 platforms get scraped in parallel. Business name, phone, email, address, GST number, products, ratings pulled automatically. Bulk import from Excel. Export results to Excel or Google Sheets. Puppeteer and Playwright handle the scraping with anti-detection measures.",
+    stats: [
+      { label: "Data Sources", value: "3" },
+      { label: "Fields Extracted", value: "10+" },
+      { label: "Scraping", value: "Parallel" },
+      { label: "Export", value: "Excel" },
+    ],
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "OpenAI",
+      "Puppeteer",
+      "Playwright",
+      "Vercel AI SDK",
+    ],
+  },
+  {
+    slug: "llmstext-generator",
+    title: "llms.txt Generator",
+    oneLiner:
+      "Generate structured llms.txt files from any website. Enter a URL, get LLM-ready content. Open source.",
+    role: "Solo Builder",
+    company: "Side Project",
+    period: "2025",
+    githubUrl: "https://github.com/Devansh-365/llmstext",
+    problem:
+      "The llms.txt standard helps AI models understand your site. But creating one manually means reading every page, writing summaries, and formatting it correctly. Nobody does it because it takes hours.",
+    whatIBuilt:
+      "Enter a URL. The tool crawls up to 20 pages via Firecrawl, extracts content, and produces two downloadable files: llms.txt (concise index with titles and descriptions) and llms-full.txt (complete text content in clean markdown). Real-time streaming progress via Server-Sent Events in a terminal-style UI. Bring your own Firecrawl API key. Nothing stored server-side.",
+    stats: [
+      { label: "Pages Crawled", value: "20" },
+      { label: "Output Files", value: "2" },
+      { label: "Streaming", value: "SSE" },
+      { label: "Storage", value: "Zero" },
+    ],
+    tech: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Hono",
+      "Firecrawl",
+      "Tailwind CSS",
+      "shadcn/ui",
+    ],
+  },
+  {
     slug: "masari-portal",
     title: "Masari Employee Portal",
     // thumbnail:

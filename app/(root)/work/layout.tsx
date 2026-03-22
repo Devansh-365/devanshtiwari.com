@@ -6,7 +6,7 @@ export default function WorkLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="mx-auto border-x border-line md:max-w-3xl">
+    <div className="mx-auto min-h-[calc(100vh-10rem)] border-x border-line md:max-w-3xl">
       <div
         className={cn(
           "screen-line-bottom relative h-8 overflow-hidden",

@@ -7,6 +7,7 @@ export type WorkProject = {
   period: string
   featured?: boolean
   liveUrl?: string
+  githubUrl?: string
   demoUrl?: string
   thumbnail?: string
   problem: string

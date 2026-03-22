@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeftIcon, ExternalLinkIcon, PlayIcon } from "lucide-react"
+import { ArrowLeftIcon, ExternalLinkIcon, GithubIcon, PlayIcon } from "lucide-react"
 import { Tag } from "@/components/ui/tag"
 import { Separator } from "@/components/ui/separator"
 import type { WorkProject } from "../types/project"
@@ -19,15 +19,15 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
         </Link>
 
         <div className="flex items-center gap-2">
-          {project.liveUrl && (
+          {project.githubUrl && (
             <a
-              href={project.liveUrl}
+              href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-7 items-center gap-1.5 rounded-md bg-foreground px-2.5 font-mono text-xs font-medium text-background transition-opacity hover:opacity-90"
+              className="inline-flex h-7 items-center gap-1.5 rounded-md border border-line px-2.5 font-mono text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              <ExternalLinkIcon className="h-3.5 w-3.5" />
-              Live
+              <GithubIcon className="h-3.5 w-3.5" />
+              Source
             </a>
           )}
           {project.demoUrl && (
@@ -39,6 +39,17 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
             >
               <PlayIcon className="h-3.5 w-3.5" />
               Demo
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-7 items-center gap-1.5 rounded-md bg-foreground px-2.5 font-mono text-xs font-medium text-background transition-opacity hover:opacity-90"
+            >
+              <ExternalLinkIcon className="h-3.5 w-3.5" />
+              Live
             </a>
           )}
         </div>
