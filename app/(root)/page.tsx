@@ -3,6 +3,7 @@ import { Overview } from "@/features/portfolio/components/overview"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
 import { About } from "@/features/portfolio/components/about"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
+import { WorkPreview } from "@/features/portfolio/components/work-preview"
 import { BlogPreview } from "@/features/portfolio/components/blog-preview"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
@@ -33,6 +34,11 @@ export default function HomePage() {
 
       <ScrollReveal delay={0.05}>
         <TechStack />
+      </ScrollReveal>
+      <Separator />
+
+      <ScrollReveal delay={0.05}>
+        <WorkPreview />
       </ScrollReveal>
       <Separator />
 
