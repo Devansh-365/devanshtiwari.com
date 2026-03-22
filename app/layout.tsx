@@ -66,8 +66,8 @@ export const metadata: Metadata = {
     creator: siteConfig.twitterHandle,
   },
   icons: {
-    icon: "/profile.png",
-    shortcut: "/profile.png",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
     apple: "/profile.png",
   },
   manifest: "/manifest.json",
