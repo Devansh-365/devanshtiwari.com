@@ -3,6 +3,7 @@ import { ProfileHeader } from "@/features/portfolio/components/profile-header"
 import { Overview } from "@/features/portfolio/components/overview"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
 import { About } from "@/features/portfolio/components/about"
+import { Testimonials } from "@/features/portfolio/components/testimonials"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
 import { WorkPreview } from "@/features/portfolio/components/work-preview"
 import { HowIWork } from "@/features/portfolio/components/how-i-work"
@@ -31,6 +32,11 @@ export default function HomePage() {
 
       <ScrollReveal delay={0.05}>
         <About />
+      </ScrollReveal>
+      <div className="flex h-2 w-full border-x border-line" />
+
+      <ScrollReveal delay={0.05}>
+        <Testimonials />
       </ScrollReveal>
       <div className="flex h-2 w-full border-x border-line" />
 
