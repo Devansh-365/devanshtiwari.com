@@ -5,6 +5,7 @@ export type WorkProject = {
   role: string
   company: string
   period: string
+  featured?: boolean
   liveUrl?: string
   demoUrl?: string
   thumbnail?: string

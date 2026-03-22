@@ -4,6 +4,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "unifyhq",
     title: "UnifyHQ",
+    featured: true,
     oneLiner:
       "Enterprise facility management platform. 471 API endpoints, 194 pages, 8 languages. Built in 26 days.",
     role: "Sole Engineer",
@@ -38,6 +39,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "deliverist-chatbot",
     title: "Deliverist AI Chatbot",
+    featured: true,
     thumbnail:
       "https://placehold.co/1200x630/0a0a0a/333333?text=Deliverist+AI&font=mono",
     oneLiner:
@@ -71,6 +73,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "nateeq-ai",
     title: "Nateeq AI",
+    featured: true,
     thumbnail:
       "https://placehold.co/1200x630/0a0a0a/333333?text=Nateeq+AI&font=mono",
     oneLiner:
