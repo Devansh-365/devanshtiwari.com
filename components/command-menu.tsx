@@ -4,8 +4,10 @@ import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import {
   BriefcaseIcon,
+  FileCodeIcon,
   FileTextIcon,
   FolderOpenIcon,
+  GitGraphIcon,
   HomeIcon,
   LayersIcon,
   MoonStarIcon,
@@ -98,17 +100,25 @@ export function CommandMenu() {
               <UserIcon className="mr-2 h-4 w-4" />
               About
             </CommandItem>
+            <CommandItem onSelect={() => handleNav("/#work")}>
+              <FileCodeIcon className="mr-2 h-4 w-4" />
+              Work
+            </CommandItem>
             <CommandItem onSelect={() => handleNav("/#stack")}>
               <LayersIcon className="mr-2 h-4 w-4" />
               Tech Stack
+            </CommandItem>
+            <CommandItem onSelect={() => handleNav("/#blog")}>
+              <FileTextIcon className="mr-2 h-4 w-4" />
+              Blog
             </CommandItem>
             <CommandItem onSelect={() => handleNav("/#experience")}>
               <BriefcaseIcon className="mr-2 h-4 w-4" />
               Experience
             </CommandItem>
-            <CommandItem onSelect={() => handleNav("/#projects")}>
+            <CommandItem onSelect={() => handleNav("/work")}>
               <FolderOpenIcon className="mr-2 h-4 w-4" />
-              Projects
+              All Work
             </CommandItem>
           </CommandGroup>
 
