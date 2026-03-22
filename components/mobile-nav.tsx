@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { haptic } from "@/registry/lib/haptic"
+import { haptic } from "@/lib/haptic"
 
 import type { NavItem } from "@/types/nav"
 import { cn } from "@/lib/utils"

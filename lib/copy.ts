@@ -2,7 +2,6 @@ export async function copyText(text: string) {
   try {
     await navigator.clipboard.writeText(text)
   } catch {
-    // Fallback for older browsers
     const textarea = document.createElement("textarea")
     textarea.value = text
     textarea.style.position = "fixed"

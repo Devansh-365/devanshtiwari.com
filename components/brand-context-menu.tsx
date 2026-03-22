@@ -4,7 +4,7 @@ import { DownloadIcon, TypeIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { toast } from "sonner"
 
-import { copyText } from "@/utils/copy"
+import { copyText } from "@/lib/copy"
 
 import { DTMark, getMarkSVG } from "./dt-mark"
 import {
