@@ -9,7 +9,7 @@ export const WORK_PROJECTS: WorkProject[] = [
       "Enterprise facility management platform. 471 API endpoints, 194 pages, 8 languages. Built in 26 days.",
     role: "Sole Engineer",
     company: "OSIT",
-    period: "Feb to Mar 2026",
+    period: "Feb 2026 to Present",
     thumbnail:
       "https://placehold.co/1200x630/0a0a0a/333333?text=UnifyHQ&font=mono",
     problem:
