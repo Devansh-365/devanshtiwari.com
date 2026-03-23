@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og"
 import { WORK_PROJECTS } from "@/features/work/data/projects"
 
-export const runtime = "edge"
 export const alt = "Project"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"

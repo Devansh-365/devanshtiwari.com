@@ -36,10 +36,12 @@ export async function generateMetadata(
     const slug = params.slug
     const post = await getFileBySlug<PostFrontMatter>("blog", slug)
     const frontMatter = post.frontMatter as PostFrontMatter
-    const images = frontMatter?.images || [siteConfig.socialBanner]
-    const ogImage = images[0]?.startsWith("http")
-      ? images[0]
-      : `${siteConfig.siteUrl}${images[0]}`
+    const customImages = frontMatter?.images || []
+    const ogImage = customImages.length > 0
+      ? customImages[0].startsWith("http")
+        ? customImages[0]
+        : `${siteConfig.siteUrl}${customImages[0]}`
+      : undefined
 
     return {
       title: frontMatter?.title || "Blog Post",
@@ -53,21 +55,16 @@ export async function generateMetadata(
         modifiedTime: frontMatter?.lastmod || frontMatter?.date || undefined,
         url: `${siteConfig.siteUrl}/blog/${slug}`,
         siteName: siteConfig.name,
-        images: [
-          {
-            url: ogImage,
-            width: 1200,
-            height: 630,
-            alt: frontMatter?.title || "Blog Post",
-          },
-        ],
+        ...(ogImage && {
+          images: [{ url: ogImage, width: 1200, height: 630, alt: frontMatter?.title || "Blog Post" }],
+        }),
         authors: [siteConfig.author],
       },
       twitter: {
         card: "summary_large_image",
         title: frontMatter?.title || "Blog Post",
         description: frontMatter?.summary || "",
-        images: [ogImage],
+        ...(ogImage && { images: [ogImage] }),
         creator: siteConfig.twitterHandle,
       },
       alternates: {
