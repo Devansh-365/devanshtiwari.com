@@ -1,12 +1,33 @@
 "use client"
 
 import { DownloadIcon, ExternalLinkIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
 const PDF_URL = "/resume.pdf"
 const FILENAME = "Devansh_PM_Resume.pdf"
+const SITE_URL = "https://devanshtiwari.com"
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+    setIsMobile(check)
+  }, [])
+  return isMobile
+}
 
 export function ResumeClient() {
+  const isMobile = useIsMobile()
+
+  // Mobile: use Google Docs Viewer which renders PDFs reliably
+  // Desktop: use native iframe which is faster and cleaner
+  const embedSrc = isMobile
+    ? `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(`${SITE_URL}${PDF_URL}`)}`
+    : `${PDF_URL}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`
+
   return (
     <div className="flex flex-col">
       {/* Toolbar */}
@@ -41,12 +62,13 @@ export function ResumeClient() {
         </div>
       </div>
 
-      {/* PDF embed — aspect-[1/1.414] matches A4 ratio exactly, overflow hidden clips the gray */}
-      <div className="relative aspect-[1/1.414] w-full overflow-hidden">
+      {/* PDF embed */}
+      <div className="relative aspect-[1/1.414] w-full overflow-hidden bg-background">
         <iframe
-          src={`${PDF_URL}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-          className="absolute inset-0 h-[calc(100%+4px)] w-full border-0"
+          src={embedSrc}
+          className="absolute inset-0 h-full w-full border-0"
           title="Resume PDF"
+          allow="autoplay"
         />
       </div>
 
