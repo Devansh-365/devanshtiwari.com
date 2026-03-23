@@ -66,21 +66,15 @@ export default async function Image({
         {/* Header */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "48px",
-                height: "48px",
-                borderRadius: "10px",
-                background: "#e8e8e8",
-                color: "#0a0a0a",
-                fontSize: "20px",
-                fontWeight: 700,
-              }}
-            >
-              DT
+            <div style={{ position: "relative", width: "80px", height: "40px" }}>
+              <div style={{ position: "absolute", left: 0, top: 0, width: "5px", height: "40px", background: "#e8e8e8" }} />
+              <div style={{ position: "absolute", left: "5px", top: 0, width: "20px", height: "5px", background: "#e8e8e8" }} />
+              <div style={{ position: "absolute", left: "5px", top: "35px", width: "20px", height: "5px", background: "#e8e8e8" }} />
+              <div style={{ position: "absolute", left: "25px", top: "5px", width: "5px", height: "10px", background: "#e8e8e8" }} />
+              <div style={{ position: "absolute", left: "30px", top: "10px", width: "5px", height: "20px", background: "#e8e8e8" }} />
+              <div style={{ position: "absolute", left: "25px", top: "25px", width: "5px", height: "10px", background: "#e8e8e8" }} />
+              <div style={{ position: "absolute", left: "40px", top: 0, width: "40px", height: "10px", background: "#e8e8e8" }} />
+              <div style={{ position: "absolute", left: "55px", top: "10px", width: "10px", height: "30px", background: "#e8e8e8" }} />
             </div>
             <span
               style={{
