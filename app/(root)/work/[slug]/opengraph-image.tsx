@@ -50,36 +50,28 @@ export default async function Image({
           fontFamily: "system-ui, sans-serif",
         }}
       >
-        {/* Top line */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "1px",
-            background: "rgba(255,255,255,0.1)",
-          }}
-        />
-
-        {/* Header */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div style={{ position: "relative", width: "80px", height: "40px" }}>
-              <div style={{ position: "absolute", left: 0, top: 0, width: "5px", height: "40px", background: "#e8e8e8" }} />
-              <div style={{ position: "absolute", left: "5px", top: 0, width: "20px", height: "5px", background: "#e8e8e8" }} />
-              <div style={{ position: "absolute", left: "5px", top: "35px", width: "20px", height: "5px", background: "#e8e8e8" }} />
-              <div style={{ position: "absolute", left: "25px", top: "5px", width: "5px", height: "10px", background: "#e8e8e8" }} />
-              <div style={{ position: "absolute", left: "30px", top: "10px", width: "5px", height: "20px", background: "#e8e8e8" }} />
-              <div style={{ position: "absolute", left: "25px", top: "25px", width: "5px", height: "10px", background: "#e8e8e8" }} />
-              <div style={{ position: "absolute", left: "40px", top: 0, width: "40px", height: "10px", background: "#e8e8e8" }} />
-              <div style={{ position: "absolute", left: "55px", top: "10px", width: "10px", height: "30px", background: "#e8e8e8" }} />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "40px",
+                height: "40px",
+                borderRadius: "8px",
+                background: "#e8e8e8",
+                color: "#0a0a0a",
+                fontSize: "16px",
+                fontWeight: 700,
+              }}
+            >
+              DT
             </div>
             <span
               style={{
                 fontSize: "18px",
                 color: "rgba(232,232,232,0.4)",
-                fontFamily: "monospace",
               }}
             >
               {project.role} at {project.company}
@@ -88,7 +80,7 @@ export default async function Image({
 
           <div
             style={{
-              fontSize: "56px",
+              fontSize: "52px",
               fontWeight: 700,
               color: "#e8e8e8",
               letterSpacing: "-0.03em",
@@ -101,7 +93,7 @@ export default async function Image({
 
           <div
             style={{
-              fontSize: "24px",
+              fontSize: "22px",
               color: "rgba(232,232,232,0.5)",
               lineHeight: 1.4,
               marginTop: "16px",
@@ -112,7 +104,6 @@ export default async function Image({
           </div>
         </div>
 
-        {/* Bottom stats */}
         <div style={{ display: "flex", gap: "48px" }}>
           {(project.stats || []).map((stat) => (
             <div
@@ -121,19 +112,17 @@ export default async function Image({
             >
               <span
                 style={{
-                  fontSize: "36px",
+                  fontSize: "32px",
                   fontWeight: 700,
                   color: "#e8e8e8",
-                  fontFamily: "monospace",
                 }}
               >
                 {stat.value}
               </span>
               <span
                 style={{
-                  fontSize: "16px",
+                  fontSize: "14px",
                   color: "rgba(232,232,232,0.35)",
-                  fontFamily: "monospace",
                 }}
               >
                 {stat.label}
@@ -141,18 +130,6 @@ export default async function Image({
             </div>
           ))}
         </div>
-
-        {/* Bottom line */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "1px",
-            background: "rgba(255,255,255,0.1)",
-          }}
-        />
       </div>
     ),
     { ...size }
