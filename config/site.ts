@@ -1,6 +1,6 @@
 export const siteConfig = {
   // Site Info
-  siteUrl: "https://devanshtiwari.com",
+  siteUrl: "https://www.devanshtiwari.com",
   name: "Devansh Tiwari",
   title: "Devansh Tiwari",
   description:

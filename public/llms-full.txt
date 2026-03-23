@@ -9,7 +9,7 @@ Location: Delhi NCR, India
 Role: AI Product Builder (PM + Engineer)
 Currently: Co-Founder @ Metis, NextLeap PM Fellow
 Email: devanshtiwari365@gmail.com
-Website: https://devanshtiwari.com
+Website: https://www.devanshtiwari.com
 
 ## What Makes Devansh Different
 
@@ -79,7 +79,7 @@ TypeScript, JavaScript, Python, React, Next.js, Node.js, Tailwind CSS, OpenAI/LL
 
 ## Pages
 
-- Home: https://devanshtiwari.com/
-- Work: https://devanshtiwari.com/work
-- Blog: https://devanshtiwari.com/blog
-- Resume: https://devanshtiwari.com/resume
+- Home: https://www.devanshtiwari.com/
+- Work: https://www.devanshtiwari.com/work
+- Blog: https://www.devanshtiwari.com/blog
+- Resume: https://www.devanshtiwari.com/resume

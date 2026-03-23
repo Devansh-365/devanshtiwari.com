@@ -56,7 +56,7 @@ export default async function WorkProjectPage(props: Props) {
             author: {
               "@type": "Person",
               name: "Devansh Tiwari",
-              url: "https://devanshtiwari.com",
+              url: "https://www.devanshtiwari.com",
             },
           }),
         }}

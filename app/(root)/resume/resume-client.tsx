@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 
 const PDF_URL = "/resume.pdf"
 const FILENAME = "Devansh_PM_Resume.pdf"
-const SITE_URL = "https://devanshtiwari.com"
+const SITE_URL = "https://www.devanshtiwari.com"
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false)
