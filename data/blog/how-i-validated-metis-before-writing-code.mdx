@@ -1,0 +1,93 @@
+---
+title: '70 Traders Told Me Why They Lose Money. Then I Built a Product.'
+date: '2026-03-23'
+tags: ['Product', 'AI', 'Building in Public']
+draft: false
+summary: '91% of Indian retail traders lose money. I surveyed 70+ of them to find out why. One interview quote killed 4 features.'
+---
+
+91% of Indian retail traders lose money.
+
+That's not a blog stat. That's a 2024 SEBI study.
+
+I wanted to know why. Not the textbook answer. The real one. So I surveyed 70+ traders and did 3 deep interviews before writing any code.
+
+## The gap
+
+Every Indian trading tool solves discovery. Screener.in finds stocks. Chartink scans patterns. TradingView shows charts.
+
+None of them help you decide.
+
+A trader sees RSI is 72. What does that mean for their trade? Where's the stop loss? How many shares given their capital?
+
+- 68% said wrong entry/exit timing is their #1 pain
+- 60% wanted help on almost every trade
+- Average confidence in their own analysis: 3 out of 5
+
+Not information. Interpretation. That's the gap.
+
+## The Rs 10,000 crore grey market
+
+82% of Indian retail traders follow finfluencer advice. Only 2% of those finfluencers are SEBI-registered.
+
+There's a Rs 5,000 to 10,000 crore grey market on Telegram and WhatsApp. Tip channels with no reasoning, no data, no accountability.
+
+Traders pay for these because nobody else helps them go from "I see the chart" to "I know what to do."
+
+That's not a feature request. That's a market.
+
+## One quote that killed 4 features
+
+Pranjul. 27. Business owner. 1-3 years trading. Rs 1-2.5 lakh capital.
+
+He said:
+
+> "I just want to use AI as a companion, not a replacement."
+
+That rewrote my product spec.
+
+Stock scanner? Cut. He wants to validate stocks he already found.
+Automated trading? Cut. He wants to press the button himself.
+Five-filter analysis? Cut to two. He'd rather have 2 honest filters than 5 where three are made up.
+
+He also surfaced a pain I hadn't considered: "I know when to enter. I never know when to exit." That went from nice-to-have to must-have overnight.
+
+## The pricing trap
+
+50% said they'd pay Rs 199/month. Sounds like validation. It's a trap.
+
+One AI analysis costs Rs 1.70. At 15 per day, that's Rs 765/month per user. Rs 199 pricing means every user loses you money.
+
+Worse: Rs 199 attracts tip-seekers. "TATAMOTORS buy or sell?" Not people who want analysis.
+
+4% said Rs 999. Those 4% described the exact product I was building.
+
+I priced at Rs 999. Not because the survey said so. Because it told me who I was building for.
+
+## What I built in 27 days
+
+- AI chat with real NSE/BSE data (not hallucinated numbers)
+- 7 technical indicators computed from raw market data
+- Position sizing based on your capital
+- Smart model routing (40-50% cost reduction per session)
+- 7 SEO tools targeting 650K+ monthly searches
+
+What I cut:
+
+- FII/DII data. Every number was fabricated. NSE blocks cloud scraping. We removed it entirely. The AI says "I don't have that data" instead of making it up.
+- Stock scanner. Phase 3.
+- Automated trading. Users said no. SEBI risk too high.
+
+The FII/DII cut was the hardest. Every trader wants institutional flow data. But when I audited the pipeline, it was all fake.
+
+Trust over features.
+
+## What stuck with me
+
+Surveys lie about willingness to pay. They tell the truth about pain.
+
+I started with 31 features. 13 made it. 4 were killed by one interview quote.
+
+And here's the thing I keep coming back to: when every AI product hallucinates and every tip channel fabricates, "I don't have that data" is a competitive advantage. Nobody expects honesty. That's the bar.
+
+Metis is in invite-only beta at [trymetis.app](https://trymetis.app).

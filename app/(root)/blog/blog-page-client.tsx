@@ -16,6 +16,67 @@ type Post = {
   href?: string
 }
 
+function PostCard({ post }: { post: Post }) {
+  const isMedium = post.source === "medium"
+  const href = post.href || `/blog/${post.slug}`
+
+  const card = (
+    <div className="flex flex-col gap-1 p-2">
+      <div className="flex items-center gap-1.5">
+        <h2 className="text-lg font-medium leading-snug text-balance">
+          {post.title}
+        </h2>
+        {isMedium && (
+          <ExternalLinkIcon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+        )}
+      </div>
+      <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
+        <time dateTime={post.date}>
+          {new Date(post.date).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </time>
+        {post.readingTime?.text && (
+          <>
+            <span>·</span>
+            <span>{post.readingTime.text}</span>
+          </>
+        )}
+        {isMedium && (
+          <>
+            <span>·</span>
+            <span>Medium</span>
+          </>
+        )}
+      </div>
+    </div>
+  )
+
+  if (isMedium) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex cursor-pointer flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50 screen-line-top screen-line-bottom"
+      >
+        {card}
+      </a>
+    )
+  }
+
+  return (
+    <Link
+      href={href}
+      className="group flex cursor-pointer flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50 screen-line-top screen-line-bottom"
+    >
+      {card}
+    </Link>
+  )
+}
+
 export function BlogPageClient({ posts }: { posts: Post[] }) {
   const [query, setQuery] = useState("")
 
@@ -70,96 +131,47 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
       </div>
 
       {/* Post grid */}
-      <div className="relative pt-4">
-        {filtered.length >= 2 && (
-          <div className="pointer-events-none absolute inset-0 -z-[1] grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
-            <div className="border-r border-line" />
-            <div className="border-l border-line" />
-          </div>
-        )}
+      {(() => {
+        const isOdd = filtered.length % 2 !== 0 && filtered.length > 0
+        const gridPosts = isOdd ? filtered.slice(0, -1) : filtered
+        const lastOddPost = isOdd ? filtered[filtered.length - 1] : null
 
-        <div
-          className={cn(
-            "grid grid-cols-1 gap-4",
-            filtered.length >= 2 && "sm:grid-cols-2"
-          )}
-        >
-          {filtered.map((post) => {
-            const isMedium = post.source === "medium"
-            const href = post.href || `/blog/${post.slug}`
-
-            const card = (
-              <div className="flex flex-col gap-1 p-2">
-                <div className="flex items-center gap-1.5">
-                  <h2 className="text-lg font-medium leading-snug text-balance">
-                    {post.title}
-                  </h2>
-                  {isMedium && (
-                    <ExternalLinkIcon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                  )}
+        return (
+          <div className="pt-4">
+            {/* Paired grid */}
+            {gridPosts.length >= 2 && (
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-0 -z-[1] grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
+                  <div className="border-r border-line" />
+                  <div className="border-l border-line" />
                 </div>
-                <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
-                  <time dateTime={post.date}>
-                    {new Date(post.date).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </time>
-                  {post.readingTime?.text && (
-                    <>
-                      <span>·</span>
-                      <span>{post.readingTime.text}</span>
-                    </>
-                  )}
-                  {isMedium && (
-                    <>
-                      <span>·</span>
-                      <span>Medium</span>
-                    </>
-                  )}
+
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {gridPosts.map((post) => (
+                    <PostCard key={post.slug} post={post} />
+                  ))}
                 </div>
               </div>
-            )
+            )}
 
-            if (isMedium) {
-              return (
-                <a
-                  key={post.slug}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "group flex cursor-pointer flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50",
-                    "screen-line-top screen-line-bottom"
-                  )}
-                >
-                  {card}
-                </a>
-              )
-            }
+            {/* Single post outside the grid — no divider */}
+            {lastOddPost && (
+              <PostCard post={lastOddPost} />
+            )}
 
-            return (
-              <Link
-                key={post.slug}
-                href={href}
-                className={cn(
-                  "group flex cursor-pointer flex-col gap-2 p-2 transition-colors ease-out hover:bg-accent/50",
-                  "screen-line-top screen-line-bottom"
-                )}
-              >
-                {card}
-              </Link>
-            )
-          })}
+            {/* Single post (when only 1 result) */}
+            {gridPosts.length < 2 && !lastOddPost && filtered.length === 1 && (
+              <PostCard post={filtered[0]} />
+            )}
 
-          {filtered.length === 0 && (
-            <div className="screen-line-top screen-line-bottom p-4">
-              <p className="font-mono text-sm">No posts found.</p>
-            </div>
-          )}
-        </div>
-      </div>
+            {filtered.length === 0 && (
+              <div className="screen-line-top screen-line-bottom p-4">
+                <p className="font-mono text-sm">No posts found.</p>
+              </div>
+            )}
+          </div>
+        )
+      })()}
 
       <div className="h-4" />
     </div>
