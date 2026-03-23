@@ -1,23 +1,37 @@
-# next-template
+# devanshtiwari.com
 
-A Next.js 13 template for building apps with Radix UI and Tailwind CSS.
+Personal portfolio of [Devansh Tiwari](https://devanshtiwari.com) — AI Product Builder.
 
-## Usage
+## Live
 
-```bash
-npx create-next-app -e https://github.com/shadcn/next-template
-```
+**[devanshtiwari.com](https://devanshtiwari.com)**
+
+## Built With
+
+- [Next.js 15](https://nextjs.org/) — App Router, React 19
+- [Tailwind CSS](https://tailwindcss.com/) — Styling
+- [MDX](https://mdxjs.com/) — Blog posts via mdx-bundler
+- [Framer Motion](https://motion.dev/) — Scroll animations
+- [shadcn/ui](https://ui.shadcn.com/) — UI components
+- [Vercel](https://vercel.com/) — Deployment
 
 ## Features
 
-- Radix UI Primitives
-- Tailwind CSS
-- Fonts with `next/font`
-- Icons from [Lucide](https://lucide.dev)
-- Dark mode with `next-themes`
-- Automatic import sorting with `@ianvs/prettier-plugin-sort-imports`
-- Tailwind CSS class sorting, merging and linting.
+- 10 project case studies with stats, architecture, and tech stack
+- Medium RSS integration for blog posts
+- GitHub contribution graph
+- Dynamic OG images per project
+- Command menu (⌘K)
+- SEO optimized (robots, sitemap, JSON-LD, llms.txt)
+- Dark/light mode
+- Responsive with mobile floating nav
+- Resume PDF viewer
+- RSS feed
+
+## Author
+
+**Devansh Tiwari** — [devanshtiwari.com](https://devanshtiwari.com) · [GitHub](https://github.com/Devansh-365) · [LinkedIn](https://www.linkedin.com/in/devansh-tiwari-3342611a6/) · [Twitter](https://twitter.com/devansh_0718)
 
 ## License
 
-Licensed under the [MIT license](https://github.com/shadcn/ui/blob/main/LICENSE.md).
+MIT
