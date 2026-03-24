@@ -25,9 +25,9 @@
 
 <br />
 
-[![Stars](https://img.shields.io/github/stars/Devansh-365/portfolio-v2?style=flat-square&color=yellow)](https://github.com/Devansh-365/portfolio-v2/stargazers)
-[![Forks](https://img.shields.io/github/forks/Devansh-365/portfolio-v2?style=flat-square)](https://github.com/Devansh-365/portfolio-v2/network/members)
-[![License](https://img.shields.io/github/license/Devansh-365/portfolio-v2?style=flat-square)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/Devansh-365/devanshtiwari.com?style=flat-square&color=yellow)](https://github.com/Devansh-365/devanshtiwari.com/stargazers)
+[![Forks](https://img.shields.io/github/forks/Devansh-365/devanshtiwari.com?style=flat-square)](https://github.com/Devansh-365/devanshtiwari.com/network/members)
+[![License](https://img.shields.io/github/license/Devansh-365/devanshtiwari.com?style=flat-square)](LICENSE)
 
 </div>
 
@@ -66,8 +66,8 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/Devansh-365/portfolio-v2.git
-cd portfolio-v2
+git clone https://github.com/Devansh-365/devanshtiwari.com.git
+cd devanshtiwari.com
 
 # Install dependencies
 npm install
@@ -96,7 +96,7 @@ All personal data lives in a few files. Edit these and the entire site updates:
 
 ## Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDevansh-365%2Fportfolio-v2)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDevansh-365%2Fdevanshtiwari.com)
 
 Or deploy manually:
 

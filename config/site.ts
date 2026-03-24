@@ -40,7 +40,7 @@ export const siteConfig = {
   // Social Links
   links: {
     twitter: "https://twitter.com/devansh_0718",
-    github: "https://github.com/Devansh-365/portfolio-v2",
+    github: "https://github.com/Devansh-365/devanshtiwari.com",
   },
 }
 
