@@ -79,14 +79,20 @@ function PostCard({ post }: { post: Post }) {
 
 export function BlogPageClient({ posts }: { posts: Post[] }) {
   const [query, setQuery] = useState("")
+  const [activeTag, setActiveTag] = useState<string | null>(null)
 
-  const filtered = query
-    ? posts.filter(
-        (p) =>
-          p.title.toLowerCase().includes(query.toLowerCase()) ||
-          p.summary.toLowerCase().includes(query.toLowerCase())
-      )
-    : posts
+  // Collect all unique tags
+  const allTags = Array.from(
+    new Set(posts.flatMap((p) => p.tags || []))
+  ).sort()
+
+  const filtered = posts.filter((p) => {
+    const matchesQuery = !query ||
+      p.title.toLowerCase().includes(query.toLowerCase()) ||
+      p.summary.toLowerCase().includes(query.toLowerCase())
+    const matchesTag = !activeTag || (p.tags || []).includes(activeTag)
+    return matchesQuery && matchesTag
+  })
 
   return (
     <div className="min-h-svh">
@@ -112,6 +118,7 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
             placeholder="Search Blog…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            autoFocus
             onKeyDown={(e) => {
               if (e.key === "Escape") setQuery("")
             }}
@@ -129,6 +136,37 @@ export function BlogPageClient({ posts }: { posts: Post[] }) {
           )}
         </div>
       </div>
+
+      {/* Tag filter */}
+      {allTags.length > 0 && (
+        <div className="flex flex-wrap items-center gap-1.5 px-4 py-2 screen-line-bottom">
+          <button
+            onClick={() => setActiveTag(null)}
+            className={cn(
+              "cursor-pointer rounded-md px-2.5 py-0.5 font-mono text-xs font-medium transition-colors",
+              !activeTag
+                ? "bg-foreground text-background"
+                : "border border-line text-muted-foreground hover:text-foreground"
+            )}
+          >
+            All
+          </button>
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+              className={cn(
+                "cursor-pointer rounded-md px-2.5 py-0.5 font-mono text-xs font-medium transition-colors",
+                activeTag === tag
+                  ? "bg-foreground text-background"
+                  : "border border-line text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Post grid */}
       {(() => {
