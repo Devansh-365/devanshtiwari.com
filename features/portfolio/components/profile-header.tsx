@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { USER } from "@/features/portfolio/data/user"
+import { TextFlip } from "@/components/text-flip"
 
 export function ProfileHeader() {
   return (
@@ -32,9 +33,11 @@ export function ProfileHeader() {
             </div>
 
             <div className="border-t border-line px-4 py-2 mt-2 sm:mt-0 sm:py-1 sm:h-9">
-              <p className="text-sm text-balance text-muted-foreground">
-                {USER.bio}
-              </p>
+              <TextFlip
+                texts={USER.flipSentences}
+                interval={2.5}
+                className="text-sm text-muted-foreground"
+              />
             </div>
           </div>
         </div>
