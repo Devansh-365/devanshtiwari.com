@@ -1,0 +1,59 @@
+name: Feature Request
+description: Suggest a new feature, section, or improvement
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the pain point or missing capability. Focus on the problem, not the solution.
+      placeholder: The portfolio would benefit from...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How you'd like it to work. Include mockups or references if helpful.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any other approaches you've thought about and why they won't work as well.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the site does this affect?
+      multiple: true
+      options:
+        - Homepage section
+        - Work / Projects
+        - Blog
+        - Resume
+        - Navigation / Command menu
+        - SEO / Meta
+        - Animations
+        - Mobile experience
+        - Accessibility
+        - Other
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots, reference sites, examples, or anything else.
