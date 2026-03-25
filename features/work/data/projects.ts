@@ -257,8 +257,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "masari-portal",
     title: "Masari Employee Portal",
-    // thumbnail:
-    //   "https://placehold.co/1200x630/0a0a0a/333333?text=Masari+Portal&font=mono",
+    thumbnail: "/work/masari.png",
     oneLiner:
       "Bilingual intranet for a Saudi government entity. 33 pages, 1,800+ translation keys, sole frontend dev.",
     role: "Sole Frontend Developer",
