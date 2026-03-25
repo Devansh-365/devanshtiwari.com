@@ -11,6 +11,8 @@ export function Spotlight() {
 
   useEffect(() => {
     if (shouldReduceMotion || resolvedTheme !== "dark") return
+    // Skip on touch devices — no mouse to track
+    if (window.matchMedia("(pointer: coarse)").matches) return
 
     const el = ref.current
     if (!el) return
@@ -34,7 +36,8 @@ export function Spotlight() {
     }
   }, [shouldReduceMotion, resolvedTheme])
 
-  if (resolvedTheme !== "dark") return null
+  // Don't render on non-dark themes or during SSR (resolvedTheme undefined)
+  if (!resolvedTheme || resolvedTheme !== "dark") return null
 
   return (
     <div

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useCallback } from "react"
+import { useEffect, useRef, useCallback, useState } from "react"
 import { useReducedMotion } from "framer-motion"
 
 export function CustomCursor() {
@@ -101,7 +101,13 @@ export function CustomCursor() {
     }
   }, [shouldReduceMotion, updateDOM])
 
-  if (shouldReduceMotion) return null
+  // Don't render on reduced motion or touch devices
+  const [isTouch, setIsTouch] = useState(false)
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) setIsTouch(true)
+  }, [])
+
+  if (shouldReduceMotion || isTouch) return null
 
   return (
     <>
