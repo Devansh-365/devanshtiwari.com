@@ -15,7 +15,7 @@ export const getGitHubContributions = unstable_cache(
         `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
       )
       const data = (await res.json()) as GitHubContributionsResponse
-      return data.contributions
+      return data.contributions || []
     } catch {
       return []
     }

@@ -25,7 +25,9 @@ export function GitHubContributionGraph({
 }: {
   contributions: Promise<Activity[]>
 }) {
-  const data = use(contributions)
+  const data = use(contributions) || []
+
+  if (data.length === 0) return null
 
   return (
     <TooltipProvider>
