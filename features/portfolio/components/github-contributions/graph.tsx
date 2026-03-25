@@ -27,7 +27,24 @@ export function GitHubContributionGraph({
 }) {
   const data = use(contributions) || []
 
-  if (data.length === 0) return null
+  if (data.length === 0) {
+    return (
+      <div className="flex h-40 w-full items-center justify-center">
+        <p className="font-mono text-xs text-muted-foreground">
+          Unable to load contributions. Check{" "}
+          <a
+            className="underline underline-offset-4"
+            href="https://github.com/Devansh-365"
+            target="_blank"
+            rel="noopener"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+      </div>
+    )
+  }
 
   return (
     <TooltipProvider>

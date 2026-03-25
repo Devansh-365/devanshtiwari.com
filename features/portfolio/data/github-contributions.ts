@@ -12,7 +12,8 @@ export const getGitHubContributions = unstable_cache(
   async () => {
     try {
       const res = await fetch(
-        `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
+        `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`,
+        { signal: AbortSignal.timeout(5000) }
       )
       const data = (await res.json()) as GitHubContributionsResponse
       return data.contributions || []
