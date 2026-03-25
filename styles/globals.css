@@ -148,11 +148,9 @@
   }
 }
 
-/* Hide default cursor on non-touch devices (custom cursor replaces it) */
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
+/* Hide default cursor only when custom cursor JS is active */
+.custom-cursor-active * {
+  cursor: none !important;
 }
 
 /* Global focus-visible ring for keyboard navigation */

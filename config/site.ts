@@ -11,6 +11,7 @@ export const siteConfig = {
   // Author Info
   author: "Devansh Tiwari",
   email: "devanshtiwari365@gmail.com",
+  calUrl: "https://cal.com/devansh0718/15min",
 
   // SEO & Social
   socialBanner: "/profile.png",

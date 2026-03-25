@@ -18,9 +18,9 @@ export function TextReveal({ text, className, delay = 0 }: TextRevealProps) {
   }
 
   return (
-    <span className={className}>
+    <span className={className} aria-label={text}>
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden">
+        <span key={i} className="inline-block overflow-hidden" aria-hidden="true">
           <motion.span
             className="inline-block"
             initial={{ y: "100%", opacity: 0 }}

@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react"
+import { useRef, useEffect, useState } from "react"
+import type { ComponentProps } from "react"
 import Link from "next/link"
 
 import type { NavItem } from "@/types/nav"
@@ -45,6 +46,7 @@ export function Nav({
     >
       {/* Sliding indicator */}
       <div
+        aria-hidden="true"
         className="absolute -bottom-px h-px bg-foreground transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
         style={{
           left: indicator.left,
@@ -80,12 +82,13 @@ function NavLink({
   className,
   active,
   ...props
-}: React.ComponentProps<typeof Link> & {
+}: ComponentProps<typeof Link> & {
   active: boolean
 }) {
   return (
     <Link
       data-active={active}
+      aria-current={active ? "page" : undefined}
       className={cn(
         "pb-px font-mono text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground",
         active && "text-foreground",
