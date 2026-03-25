@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { WORK_PROJECTS } from "@/features/work/data/projects"
 import { ProjectCard } from "@/features/work/components/project-card"
 import { ProjectCardCompact } from "@/features/work/components/project-card-compact"
+import { ScrollReveal } from "@/components/scroll-reveal"
 
 export const metadata: Metadata = {
   title: "Work",
@@ -37,8 +38,10 @@ export default function WorkPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2">
-          {featured.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+          {featured.map((project, i) => (
+            <ScrollReveal key={project.slug} delay={i * 0.1}>
+              <ProjectCard project={project} />
+            </ScrollReveal>
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { CalendarIcon, MailIcon } from "lucide-react"
+import { MagneticButton } from "@/components/magnetic-button"
 import { Panel } from "./panel"
 
 export function CTA() {
@@ -24,23 +25,27 @@ export function CTA() {
         </p>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="https://cal.com/devansh0718/15min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-md bg-foreground px-4 font-mono text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            <CalendarIcon className="h-4 w-4" />
-            Book a 15-min call
-          </a>
+          <MagneticButton>
+            <a
+              href="https://cal.com/devansh0718/15min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-md bg-foreground px-4 font-mono text-sm font-medium text-background transition-opacity hover:opacity-90"
+            >
+              <CalendarIcon className="h-4 w-4" />
+              Book a 15-min call
+            </a>
+          </MagneticButton>
 
-          <a
-            href="mailto:devanshtiwari365@gmail.com"
-            className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-md border border-line px-4 font-mono text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <MailIcon className="h-4 w-4" />
-            devanshtiwari365@gmail.com
-          </a>
+          <MagneticButton>
+            <a
+              href="mailto:devanshtiwari365@gmail.com"
+              className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-md border border-line px-4 font-mono text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <MailIcon className="h-4 w-4" />
+              devanshtiwari365@gmail.com
+            </a>
+          </MagneticButton>
         </div>
       </div>
     </Panel>
