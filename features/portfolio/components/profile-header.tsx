@@ -1,6 +1,9 @@
+"use client"
+
 import Image from "next/image"
 import { USER } from "@/features/portfolio/data/user"
 import { TextFlip } from "@/components/text-flip"
+import { TextReveal } from "@/components/text-reveal"
 
 export function ProfileHeader() {
   return (
@@ -28,7 +31,7 @@ export function ProfileHeader() {
           <div className="sm:border-t sm:border-line">
             <div className="flex items-center gap-2 px-4 pt-3 sm:pt-0">
               <h1 className="text-2xl font-semibold tracking-tight sm:-translate-y-px sm:text-3xl">
-                {USER.displayName}
+                <TextReveal text={USER.displayName} delay={0.2} />
               </h1>
             </div>
 

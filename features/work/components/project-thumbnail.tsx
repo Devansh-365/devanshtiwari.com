@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { ParallaxImage } from "@/components/parallax-image"
 
 type ProjectThumbnailProps = {
   src: string
@@ -107,14 +108,14 @@ function BrowserThumbnail({
           {/* Divider */}
           <div className="h-px bg-black/[0.06] dark:bg-white/[0.04]" />
 
-          {/* Screenshot */}
-          <Image
+          {/* Screenshot with parallax */}
+          <ParallaxImage
             src={src}
             alt={alt}
             width={1200}
             height={750}
             className="w-full object-cover object-top"
-            unoptimized={src.startsWith("http")}
+            strength={10}
           />
         </div>
       </div>

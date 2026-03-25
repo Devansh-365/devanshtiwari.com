@@ -148,6 +148,13 @@
   }
 }
 
+/* Hide default cursor on non-touch devices (custom cursor replaces it) */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
 /* Global focus-visible ring for keyboard navigation */
 a:focus-visible,
 button:focus-visible,

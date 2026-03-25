@@ -2,11 +2,16 @@ import { Github, Linkedin, Mail, RssIcon, Twitter } from "lucide-react"
 
 import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { LiveClock } from "@/components/live-clock"
 
 export function SiteFooter() {
   return (
     <footer className="w-full overflow-x-hidden px-2">
       <div className="screen-line-top mx-auto border-x border-line pt-4 md:max-w-3xl">
+        <p className="mb-2 px-4 text-center font-mono text-[11px] text-muted-foreground/60">
+          <LiveClock />
+        </p>
+
         <p className="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
           Built by{" "}
           <a
