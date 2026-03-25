@@ -10,6 +10,7 @@ export type WorkProject = {
   githubUrl?: string
   demoUrl?: string
   thumbnail?: string
+  thumbnailType?: "browser" | "banner"
   problem: string
   whatIBuilt: string
   stats?: { label: string; value: string }[]

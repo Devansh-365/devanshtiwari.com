@@ -10,8 +10,7 @@ export const WORK_PROJECTS: WorkProject[] = [
     role: "Sole Engineer",
     company: "OSIT",
     period: "Feb 2026 to Present",
-    thumbnail:
-      "https://placehold.co/1200x630/0a0a0a/333333?text=UnifyHQ&font=mono",
+    thumbnail: "/work/unifyhq.png",
     problem:
       "Enterprise facility teams run on 4-5 separate tools for desk booking, parking, visitors, and maintenance. Data lives in silos. Every new office means re-stitching the same integrations. Managers spend more time switching dashboards than managing buildings.",
     whatIBuilt:
@@ -40,8 +39,8 @@ export const WORK_PROJECTS: WorkProject[] = [
     slug: "deliverist-chatbot",
     title: "Deliverist AI Chatbot",
     featured: true,
-    thumbnail:
-      "https://placehold.co/1200x630/0a0a0a/333333?text=Deliverist+AI&font=mono",
+    thumbnail: "/work/deliverist-ai.png",
+    thumbnailType: "banner",
     oneLiner:
       "Conversational commerce for Saudi logistics. RAG pricing, 5 AI tools, speech-to-text, bilingual.",
     role: "Sole Product Engineer",
@@ -74,8 +73,7 @@ export const WORK_PROJECTS: WorkProject[] = [
     slug: "nateeq-ai",
     title: "Nateeq AI",
     featured: true,
-    thumbnail:
-      "https://placehold.co/1200x630/0a0a0a/333333?text=Nateeq+AI&font=mono",
+    thumbnail: "/work/nateeqai.png",
     oneLiner:
       "White-label platform for deploying branded AI voice assistants. Multi-tenant SaaS with embeddable widgets.",
     role: "Lead Engineer",
@@ -107,14 +105,13 @@ export const WORK_PROJECTS: WorkProject[] = [
     slug: "metis",
     title: "Metis",
     featured: true,
+    thumbnail: "/work/metis.png",
     oneLiner:
       "AI stock analysis for Indian swing traders. 70+ traders surveyed. 7 technical indicators built from scratch. Concept to beta in 27 days.",
     role: "Co-Founder",
     company: "Metis",
     period: "Feb 2026 to Present",
     liveUrl: "https://trymetis.app",
-    thumbnail:
-      "https://placehold.co/1200x630/0a0a0a/333333?text=Metis&font=mono",
     problem:
       "91% of Indian retail traders lose money (SEBI 2024 study). I surveyed 70+ traders to find out why. 68% said wrong entry/exit timing is their biggest pain. The tools that exist (Screener.in, TradingView) give raw data but not analysis. They show you RSI is 58. They don't tell you what that means for your trade, where to enter, where to place a stop loss, or how many shares to buy given your capital.",
     whatIBuilt:
@@ -299,7 +296,7 @@ export const WORK_PROJECTS: WorkProject[] = [
       "Customer-facing logistics app for Saudi Arabia. React Native, real-time tracking, ZATCA-compliant invoicing.",
     role: "Sole Developer",
     company: "OSIT / Deliverist",
-    period: "Jun to Dec 2024",
+    period: "2025",
     problem:
       "Saudi logistics is crowded. Aramex, SMSA, J&T all compete. Most apps treat Arabic as an afterthought, and COD (60-70% of Saudi e-commerce) gets bolted on last. Deliverist needed a mobile app that worked Arabic-first, handled the full booking-to-delivery loop, and generated ZATCA-compliant invoices from day one.",
     whatIBuilt:

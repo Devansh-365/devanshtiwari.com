@@ -1,7 +1,7 @@
-import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 import { Tag } from "@/components/ui/tag"
+import { ProjectThumbnail } from "./project-thumbnail"
 import type { WorkProject } from "../types/project"
 
 export function ProjectCard({ project }: { project: WorkProject }) {
@@ -12,16 +12,16 @@ export function ProjectCard({ project }: { project: WorkProject }) {
     >
       {/* Thumbnail */}
       {project.thumbnail && (
-        <div className="relative select-none overflow-hidden">
-          <Image
-            src={project.thumbnail}
-            alt={project.title}
-            width={600}
-            height={315}
-            className="aspect-[1200/630] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            unoptimized
-          />
-          <div className="pointer-events-none absolute inset-0 ring-1 ring-black/10 ring-inset dark:ring-white/10" />
+        <div className="p-3 pb-0">
+          <div className="transition-transform duration-500 group-hover:scale-[1.01]">
+            <ProjectThumbnail
+              src={project.thumbnail}
+              alt={project.title}
+              url={project.liveUrl?.replace(/https?:\/\//, "")}
+              type={project.thumbnailType || "browser"}
+              variant="card"
+            />
+          </div>
         </div>
       )}
 

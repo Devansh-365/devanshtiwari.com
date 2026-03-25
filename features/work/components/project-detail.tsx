@@ -4,6 +4,7 @@ import { ArrowLeftIcon, ExternalLinkIcon, GithubIcon, PlayIcon } from "lucide-re
 import { Tag } from "@/components/ui/tag"
 import { Separator } from "@/components/ui/separator"
 import { ContactBar } from "@/components/contact-bar"
+import { ProjectThumbnail } from "./project-thumbnail"
 import type { WorkProject } from "../types/project"
 
 export function ProjectDetail({ project }: { project: WorkProject }) {
@@ -81,17 +82,13 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
       {/* Thumbnail */}
       {project.thumbnail && (
         <div className="screen-line-top px-4 py-4">
-          <div className="relative select-none overflow-hidden rounded-lg">
-            <Image
-              src={project.thumbnail}
-              alt={project.title}
-              width={1200}
-              height={630}
-              className="aspect-[1200/630] w-full object-cover"
-              unoptimized
-            />
-            <div className="pointer-events-none absolute inset-0 rounded-lg ring-1 ring-black/10 ring-inset dark:ring-white/10" />
-          </div>
+          <ProjectThumbnail
+            src={project.thumbnail}
+            alt={project.title}
+            url={project.liveUrl?.replace(/https?:\/\//, "")}
+            type={project.thumbnailType || "browser"}
+            variant="detail"
+          />
         </div>
       )}
 
