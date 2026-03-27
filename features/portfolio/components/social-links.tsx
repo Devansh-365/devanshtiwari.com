@@ -19,7 +19,7 @@ export function SocialLinks() {
             <a
               key={index}
               className={cn(
-                "group flex cursor-pointer items-center gap-4 p-4 pr-2 transition-colors ease-out hover:bg-accent/50",
+                "group flex cursor-pointer items-center gap-3 p-3 pr-2 transition-colors ease-out hover:bg-accent/50 sm:gap-4 sm:p-4",
                 "screen-line-top screen-line-bottom"
               )}
               href={link.href}

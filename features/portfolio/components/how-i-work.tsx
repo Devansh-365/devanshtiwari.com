@@ -41,7 +41,7 @@ export function HowIWork() {
           return (
             <div
               key={step.number}
-              className={`flex flex-col p-4 ${i < STEPS.length - 1 ? "screen-line-bottom sm:border-r sm:border-line" : ""}`}
+              className={`flex flex-col p-4 pb-5 sm:pb-4 ${i < STEPS.length - 1 ? "screen-line-bottom sm:border-r sm:border-line" : ""}`}
             >
               {/* Top row: Icon + Number + Metric (metric inline on mobile) */}
               <div className="mb-3 flex items-center justify-between">
@@ -69,7 +69,7 @@ export function HowIWork() {
               <h3 className="font-semibold leading-snug">{step.title}</h3>
 
               {/* Proof */}
-              <p className="mt-2 flex-1 font-mono text-xs leading-relaxed text-muted-foreground">
+              <p className="mt-2 flex-1 font-mono text-[13px] leading-relaxed text-muted-foreground sm:text-xs">
                 {step.proof}
               </p>
 

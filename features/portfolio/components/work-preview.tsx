@@ -52,13 +52,13 @@ export function WorkPreview() {
 
                 {/* Stats — the proof that backs the hook */}
                 {project.stats && (
-                  <div className="mt-3 flex gap-6">
+                  <div className="mt-3 flex gap-4 sm:gap-6">
                     {project.stats.slice(0, 3).map((stat) => (
                       <div key={stat.label}>
-                        <p className="font-mono text-xl font-semibold tracking-tight">
+                        <p className="font-mono text-lg font-semibold tracking-tight sm:text-xl">
                           {stat.value}
                         </p>
-                        <p className="font-mono text-[10px] text-muted-foreground">
+                        <p className="font-mono text-[11px] text-muted-foreground sm:text-[10px]">
                           {stat.label}
                         </p>
                       </div>

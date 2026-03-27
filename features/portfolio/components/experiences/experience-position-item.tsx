@@ -83,7 +83,7 @@ export function ExperiencePositionItem({
           )}
         </div>
 
-        <div className="flex items-center gap-2 pl-9 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2 pl-9 text-[13px] text-muted-foreground sm:text-sm">
           {position.employmentType && (
             <>
               <span>{position.employmentType}</span>
@@ -117,7 +117,7 @@ export function ExperiencePositionItem({
       </CollapsibleContent>
 
       {Array.isArray(position.skills) && position.skills.length > 0 && (
-        <ul className="flex flex-wrap gap-1.5 pt-3 pl-9">
+        <ul className="flex flex-wrap gap-2 pt-3 pl-9 sm:gap-1.5">
           {position.skills.map((skill, index) => (
             <li key={index} className="flex">
               <Tag>{skill}</Tag>

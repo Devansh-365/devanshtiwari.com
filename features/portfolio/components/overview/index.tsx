@@ -90,7 +90,7 @@ export function Overview() {
           </IntroItem>
         ))}
 
-        <div className="grid gap-x-4 gap-y-2.5 sm:grid-cols-2">
+        <div className="grid gap-x-4 gap-y-3 sm:grid-cols-2 sm:gap-y-2.5">
           <IntroItem>
             <IntroItemIcon><MapPinIcon /></IntroItemIcon>
             <IntroItemContent>

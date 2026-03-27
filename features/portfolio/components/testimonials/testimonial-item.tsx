@@ -29,11 +29,11 @@ export function TestimonialItem({
     <Wrapper
       {...linkProps}
       className={cn(
-        "flex h-[280px] flex-col rounded-xl border border-line p-4 transition-colors ease-out hover:bg-accent/50 sm:h-[240px]",
+        "flex h-auto min-h-[220px] flex-col rounded-xl border border-line p-5 transition-colors ease-out hover:bg-accent/50 sm:min-h-[240px] sm:p-4",
         className
       )}
     >
-      <p className="text-sm leading-relaxed text-foreground">
+      <p className="text-[13px] leading-relaxed text-foreground sm:text-sm">
         &ldquo;{quote}&rdquo;
       </p>
 

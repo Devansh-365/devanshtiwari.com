@@ -75,7 +75,7 @@ export function TechStack() {
 
       <PanelContent>
         <TooltipProvider>
-          <ul className="flex flex-wrap gap-4 select-none">
+          <ul className="flex flex-wrap gap-5 select-none sm:gap-4">
             {TECH_STACK.map((tech) => (
               <li key={tech.key} className="flex">
                 <Tooltip>

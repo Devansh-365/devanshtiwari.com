@@ -65,12 +65,12 @@ export async function BlogPreview() {
             const content = (
               <>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="font-medium group-hover:text-primary">{post.title}</h3>
+                  <h3 className="text-[15px] font-medium leading-snug group-hover:text-primary sm:text-base">{post.title}</h3>
                   {isMedium && (
                     <ExternalLinkIcon className="h-3 w-3 shrink-0 text-muted-foreground" />
                   )}
                 </div>
-                <div className="mt-1 flex items-center gap-2 font-mono text-xs text-muted-foreground">
+                <div className="mt-1.5 flex items-center gap-2 font-mono text-xs text-muted-foreground">
                   <time>
                     {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </time>

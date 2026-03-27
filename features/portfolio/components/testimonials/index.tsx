@@ -32,7 +32,7 @@ export function Testimonials() {
             {all.map((item, i) => (
               <MarqueeItem
                 key={`${item.authorName}-${i}`}
-                className="h-full w-[260px] min-w-[260px] sm:w-[340px] sm:min-w-[340px]"
+                className="h-full w-[300px] min-w-[300px] sm:w-[340px] sm:min-w-[340px]"
               >
                 <TestimonialItem {...item} />
               </MarqueeItem>
