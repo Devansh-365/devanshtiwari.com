@@ -47,7 +47,7 @@ export function TableHeader({ className, ...props }: React.ComponentProps<"th">)
 export function TableCell({ className, children, ...props }: React.ComponentProps<"td">) {
   return (
     <td
-      className={cn("px-4 py-3 font-sans text-sm text-foreground/90", className)}
+      className={cn("px-4 py-3 font-mono text-sm text-muted-foreground", className)}
       {...props}
     >
       {children}
