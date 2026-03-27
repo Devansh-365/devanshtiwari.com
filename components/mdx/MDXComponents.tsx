@@ -7,6 +7,7 @@ import { getMDXComponent } from "mdx-bundler/client"
 import CustomLink from "./CustomLink"
 import Pre from "./Pre"
 import TOCInline from "./TOCInline"
+import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from "./Table"
 
 // MDX Components mapping
 export const MDXComponents = {
@@ -14,6 +15,12 @@ export const MDXComponents = {
   TOCInline,
   a: CustomLink,
   pre: Pre,
+  table: Table,
+  thead: TableHead,
+  tbody: TableBody,
+  tr: TableRow,
+  th: TableHeader,
+  td: TableCell,
 }
 
 type MDXLayoutRendererProps = {

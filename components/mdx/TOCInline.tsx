@@ -1,112 +1,102 @@
 "use client"
 
-import { useState } from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
-import { Toc } from '@/types/Toc';
+import { useState } from "react"
+import { ChevronDownIcon, ListIcon } from "lucide-react"
+import { Toc } from "@/types/Toc"
+import { cn } from "@/lib/utils"
 
 interface TOCInlineProps {
-  toc: Toc;
-  indentDepth?: number;
-  fromHeading?: number;
-  toHeading?: number;
-  asDisclosure?: boolean;
-  exclude?: string | string[];
+  toc: Toc
+  indentDepth?: number
+  fromHeading?: number
+  toHeading?: number
+  asDisclosure?: boolean
+  exclude?: string | string[]
 }
 
-/**
- * Generates an inline table of contents
- * Exclude titles matching this string (new RegExp('^(' + string + ')$', 'i')).
- * If an array is passed the array gets joined with a pipe (new RegExp('^(' + array.join('|') + ')$', 'i')).
- */
 const TOCInline = ({
   toc,
   indentDepth = 3,
   fromHeading = 1,
   toHeading = 6,
   asDisclosure = false,
-  exclude = '',
+  exclude = "",
 }: TOCInlineProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(true)
 
   const re = Array.isArray(exclude)
-    ? new RegExp('^(' + exclude.join('|') + ')$', 'i')
-    : new RegExp('^(' + exclude + ')$', 'i');
+    ? new RegExp("^(" + exclude.join("|") + ")$", "i")
+    : new RegExp("^(" + exclude + ")$", "i")
 
   const filteredToc = toc.filter(
     (heading) =>
       heading.depth >= fromHeading &&
       heading.depth <= toHeading &&
       !re.test(heading.value)
-  );
+  )
 
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleToggle();
-    }
-  };
+  if (filteredToc.length === 0) return null
 
   const tocList = (
-    <ul className="space-y-2">
+    <ul className="not-prose space-y-1">
       {filteredToc.map((heading) => (
         <li
           key={heading.value}
-          className={heading.depth >= indentDepth ? 'ml-6' : ''}
+          className={cn(
+            heading.depth >= indentDepth && "ml-4"
+          )}
         >
           <a
-            className="text-gray-600 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+            className={cn(
+              "inline-flex items-center gap-2 rounded-md px-2 py-1.5 font-sans text-sm text-muted-foreground no-underline transition-colors hover:bg-accent/50 hover:text-foreground",
+              heading.depth === 2 && "font-medium",
+              heading.depth >= 3 && "text-xs"
+            )}
             href={heading.url}
-            tabIndex={0}
-            aria-label={`Jump to ${heading.value}`}
           >
+            {heading.depth >= 3 && (
+              <span className="h-px w-3 bg-muted-foreground/30" />
+            )}
             {heading.value}
           </a>
         </li>
       ))}
     </ul>
-  );
-
-  const renderTOC = toc.length >= 1;
-
-  if (!renderTOC) {
-    return null;
-  }
+  )
 
   if (asDisclosure) {
     return (
-      <div className="mb-6 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="not-prose my-6 rounded-lg border border-line bg-muted/20">
         <button
           type="button"
-          onClick={handleToggle}
-          onKeyDown={handleKeyDown}
-          className="flex w-full items-center justify-between p-4 text-left"
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex w-full cursor-pointer items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-accent/30"
           aria-expanded={isOpen}
           aria-controls="toc-content"
-          tabIndex={0}
         >
-          <span className="font-bold text-gray-900 dark:text-white">
+          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-muted-foreground/15 bg-muted text-muted-foreground">
+            <ListIcon className="h-3.5 w-3.5" />
+          </div>
+          <span className="flex-1 font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Table of Contents
           </span>
-          {isOpen ? (
-            <ChevronDown className="h-5 w-5 text-gray-500" />
-          ) : (
-            <ChevronRight className="h-5 w-5 text-gray-500" />
-          )}
+          <ChevronDownIcon
+            className={cn(
+              "h-4 w-4 text-muted-foreground transition-transform duration-200",
+              !isOpen && "-rotate-90"
+            )}
+          />
         </button>
         {isOpen && (
-          <div id="toc-content" className="px-4 pb-4">
+          <div id="toc-content" className="border-t border-line px-4 py-3">
             {tocList}
           </div>
         )}
       </div>
-    );
+    )
   }
 
-  return tocList;
-};
+  return tocList
+}
 
-export default TOCInline;
+export default TOCInline

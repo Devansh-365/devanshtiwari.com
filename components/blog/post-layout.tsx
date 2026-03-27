@@ -68,13 +68,35 @@ export default function PostLayout({
       </div>
 
       {/* Prose content area */}
-      <div className="prose prose-lg max-w-none px-4 dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:leading-7 prose-a:underline prose-a:underline-offset-4 prose-code:rounded prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:bg-zinc-900 prose-pre:text-zinc-100 prose-img:rounded-xl">
-        <h1 className="text-3xl font-semibold tracking-tight">
+      <div className={[
+        "prose prose-lg max-w-none px-4 font-sans dark:prose-invert",
+        // Headings — sans, tight
+        "prose-headings:font-sans prose-headings:font-semibold prose-headings:tracking-tight",
+        "prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl",
+        // Body — sans, relaxed
+        "prose-p:font-sans prose-p:leading-7",
+        "prose-li:font-sans",
+        // Blockquote — sans italic
+        "prose-blockquote:font-sans prose-blockquote:border-l-2 prose-blockquote:border-primary/40 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground",
+        // Links — sans, underline
+        "prose-a:font-sans prose-a:underline prose-a:underline-offset-4 prose-a:decoration-primary/40 hover:prose-a:decoration-primary",
+        // Strong — sans bold
+        "prose-strong:font-sans prose-strong:font-semibold",
+        // Code — mono inline
+        "prose-code:rounded prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none",
+        // Pre — mono block
+        "prose-pre:font-mono prose-pre:bg-zinc-900 prose-pre:text-zinc-100",
+        // Images
+        "prose-img:rounded-xl",
+        // Table — reset prose defaults, our Table components handle styling
+        "[&_table]:!my-0 [&_thead]:!border-none [&_tr]:!border-none [&_th]:!px-4 [&_th]:!py-3 [&_td]:!px-4 [&_td]:!py-3",
+      ].join(" ")}>
+        <h1 className="font-sans text-3xl font-semibold tracking-tight">
           {title}
         </h1>
 
         {(date || readingTime?.text) && (
-          <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
+          <div className="not-prose flex items-center gap-2 font-mono text-sm text-muted-foreground">
             {date && (
               <time dateTime={date}>
                 {new Date(date).toLocaleDateString("en-US", {
@@ -90,7 +112,7 @@ export default function PostLayout({
         )}
 
         {summary && (
-          <p className="text-muted-foreground">{summary}</p>
+          <p className="font-mono text-sm leading-relaxed text-muted-foreground">{summary}</p>
         )}
 
         {toc && toc.length > 0 && (

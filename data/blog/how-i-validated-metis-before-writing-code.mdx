@@ -1,18 +1,20 @@
 ---
-title: '70 Traders Told Me Why They Lose Money. Then I Built a Product.'
+title: 'How I Validated a SaaS Product Before Writing Code: 70 Traders, 3 Interviews, 27 Days'
 date: '2026-03-23'
-tags: ['Product', 'AI', 'Building in Public']
+tags: ['Product Validation', 'SaaS', 'AI', 'Building in Public', 'Fintech']
 draft: false
-summary: '91% of Indian retail traders lose money. I surveyed 70+ of them to find out why. One interview quote killed 4 features.'
+summary: '91% of Indian retail traders lose money. I surveyed 70+ traders and did deep interviews before writing a single line of code. Here is exactly how I validated Metis, what I cut, and the one interview quote that killed 4 features.'
 ---
 
 91% of Indian retail traders lose money.
 
-That's not a blog stat. That's a 2024 SEBI study.
+That's not a blog stat. That's a [2024 SEBI study](https://www.sebi.gov.in/).
 
 I wanted to know why. Not the textbook answer. The real one. So I surveyed 70+ traders and did 3 deep interviews before writing any code.
 
-## The gap
+This post breaks down the exact validation process I followed to build [Metis](https://trymetis.app), what the data revealed, what I cut, and what I wish I knew before starting.
+
+## Why do most Indian retail traders lose money?
 
 Every Indian trading tool solves discovery. Screener.in finds stocks. Chartink scans patterns. TradingView shows charts.
 
@@ -20,13 +22,15 @@ None of them help you decide.
 
 A trader sees RSI is 72. What does that mean for their trade? Where's the stop loss? How many shares given their capital?
 
+My survey of 70+ traders confirmed this:
+
 - 68% said wrong entry/exit timing is their #1 pain
 - 60% wanted help on almost every trade
 - Average confidence in their own analysis: 3 out of 5
 
-Not information. Interpretation. That's the gap.
+The gap is not information. It's interpretation. Traders have access to more data than ever, but no tool helps them turn that data into a decision they trust.
 
-## The Rs 10,000 crore grey market
+## How big is the unregulated trading advice market in India?
 
 82% of Indian retail traders follow finfluencer advice. Only 2% of those finfluencers are SEBI-registered.
 
@@ -34,25 +38,37 @@ There's a Rs 5,000 to 10,000 crore grey market on Telegram and WhatsApp. Tip cha
 
 Traders pay for these because nobody else helps them go from "I see the chart" to "I know what to do."
 
-That's not a feature request. That's a market.
+That's not a feature request. That's a market worth Rs 10,000 crore ($1.2B) that exists because the current tooling fails at the decision layer.
 
-## One quote that killed 4 features
+## What did user interviews reveal about building AI trading tools?
 
-Pranjul. 27. Business owner. 1-3 years trading. Rs 1-2.5 lakh capital.
+One quote rewrote my entire product spec.
+
+Pranjul. 27. Business owner. 1 to 3 years trading. Rs 1 to 2.5 lakh capital.
 
 He said:
 
 > "I just want to use AI as a companion, not a replacement."
 
-That rewrote my product spec.
+That single sentence killed 4 features:
 
-Stock scanner? Cut. He wants to validate stocks he already found.
-Automated trading? Cut. He wants to press the button himself.
-Five-filter analysis? Cut to two. He'd rather have 2 honest filters than 5 where three are made up.
+- **Stock scanner?** Cut. He wants to validate stocks he already found.
+- **Automated trading?** Cut. He wants to press the button himself.
+- **Five-filter analysis?** Cut to two. He'd rather have 2 honest filters than 5 where three are made up.
 
-He also surfaced a pain I hadn't considered: "I know when to enter. I never know when to exit." That went from nice-to-have to must-have overnight.
+He also surfaced a pain I hadn't considered: "I know when to enter. I never know when to exit." That feature went from nice-to-have to must-have overnight.
 
-## The pricing trap
+### How I structured the interviews
+
+I didn't just ask "what do you want?" That gets you a wishlist. Instead I focused on behavior:
+
+1. **What did you do last time you made a bad trade?** This reveals the real workflow, not the imagined one.
+2. **What did you try before finding your current process?** This maps the competitive landscape from the user's perspective.
+3. **Where do you go when you're unsure about a trade?** This identifies who you're actually competing with (spoiler: it's Telegram groups, not Bloomberg Terminal).
+
+If you're validating a SaaS product, start with behavior questions. The "what do you want" answers are useless compared to "what did you actually do."
+
+## How should you price a SaaS product based on survey data?
 
 50% said they'd pay Rs 199/month. Sounds like validation. It's a trap.
 
@@ -62,25 +78,51 @@ Worse: Rs 199 attracts tip-seekers. "TATAMOTORS buy or sell?" Not people who wan
 
 4% said Rs 999. Those 4% described the exact product I was building.
 
-I priced at Rs 999. Not because the survey said so. Because it told me who I was building for.
+I priced at Rs 999. Not because the survey said so. Because the survey told me *who* I was building for.
 
-## What I built in 27 days
+### The pricing lesson
+
+Survey data on willingness to pay is almost always wrong. People anchor low. What surveys actually tell you is market segmentation. The Rs 199 crowd and the Rs 999 crowd wanted fundamentally different products. Pricing was the filter that revealed that.
+
+## What I shipped in 27 days (and what I cut)
+
+What made it:
 
 - AI chat with real NSE/BSE data (not hallucinated numbers)
 - 7 technical indicators computed from raw market data
 - Position sizing based on your capital
-- Smart model routing (40-50% cost reduction per session)
+- Smart model routing (40 to 50% cost reduction per session)
 - 7 SEO tools targeting 650K+ monthly searches
 
 What I cut:
 
-- FII/DII data. Every number was fabricated. NSE blocks cloud scraping. We removed it entirely. The AI says "I don't have that data" instead of making it up.
-- Stock scanner. Phase 3.
-- Automated trading. Users said no. SEBI risk too high.
+- **FII/DII data.** Every number was fabricated. NSE blocks cloud scraping. We removed it entirely. The AI says "I don't have that data" instead of making it up.
+- **Stock scanner.** Phase 3.
+- **Automated trading.** Users said no. SEBI risk too high.
 
-The FII/DII cut was the hardest. Every trader wants institutional flow data. But when I audited the pipeline, it was all fake.
+The FII/DII cut was the hardest. Every trader wants institutional flow data. But when I audited the pipeline, every data point was fake.
 
-Trust over features.
+Trust over features. Always.
+
+## How does Metis compare to existing Indian trading tools?
+
+| Tool | What it does | What it misses |
+|------|-------------|---------------|
+| Screener.in | Fundamental stock screening | No trade-level decisions |
+| Chartink | Technical pattern scanning | No position sizing, no exit signals |
+| TradingView | Charting and community ideas | Overwhelming for retail traders |
+| Telegram tip channels | Buy/sell calls | No reasoning, no accountability, often fabricated |
+| **Metis** | AI-powered trade analysis with real data | Decision layer: entry, exit, position size, risk |
+
+Metis doesn't compete with screeners. It picks up where they stop. A trader finds a stock on Screener.in, then brings it to Metis to get an honest analysis of whether the trade makes sense given their capital and risk tolerance.
+
+## What would I do differently in my next SaaS validation?
+
+If I were starting this process again, I'd change three things:
+
+1. **Run a landing page test before surveys.** I validated demand through surveys, but a fake-door test with a Calendly link would have given me conversion data, not just stated intent.
+2. **Interview 5 users, not 3.** Three deep interviews was enough to reshape the product, but I almost missed the exit-timing pain point. More interviews surface more edge cases.
+3. **Track cost-per-analysis from day one.** I discovered the Rs 199 pricing trap late. If I had modeled unit economics before the survey, I'd have designed better pricing tiers from the start.
 
 ## What stuck with me
 
@@ -90,4 +132,6 @@ I started with 31 features. 13 made it. 4 were killed by one interview quote.
 
 And here's the thing I keep coming back to: when every AI product hallucinates and every tip channel fabricates, "I don't have that data" is a competitive advantage. Nobody expects honesty. That's the bar.
 
-Metis is in invite-only beta at [trymetis.app](https://trymetis.app).
+If you're building a SaaS product, validate before you code. Talk to users. Let them kill your features. The product you end up with will be smaller, sharper, and something people actually want.
+
+Metis is in invite-only beta at [trymetis.app](https://trymetis.app). You can also check out [my other projects](/work) or read more about [how I approach building products](/blog).
