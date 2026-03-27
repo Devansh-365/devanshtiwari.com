@@ -101,9 +101,38 @@ export function CommandMenu() {
       setOpen(false)
       if (openInNewTab) {
         window.open(href, "_blank", "noopener")
-      } else {
-        router.push(href)
+        return
       }
+
+      // Hash link on the current page (e.g. /#about, /#work)
+      const isHashLink = href.includes("#")
+      if (isHashLink) {
+        const [path, hash] = href.split("#")
+        const isCurrentPage =
+          !path || path === "/" ? window.location.pathname === "/" : window.location.pathname === path
+
+        if (isCurrentPage && hash) {
+          const el = document.getElementById(hash)
+          if (el) {
+            const prefersReducedMotion = window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches
+            const top = el.getBoundingClientRect().top + window.scrollY - 72
+            window.scrollTo({
+              top,
+              behavior: prefersReducedMotion ? "auto" : "smooth",
+            })
+            window.history.pushState(null, "", href)
+            return
+          }
+        }
+
+        // Different page with hash: navigate first, then scroll after load
+        router.push(href)
+        return
+      }
+
+      router.push(href)
     },
     [router]
   )
