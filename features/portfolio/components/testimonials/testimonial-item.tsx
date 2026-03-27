@@ -29,7 +29,7 @@ export function TestimonialItem({
     <Wrapper
       {...linkProps}
       className={cn(
-        "flex h-auto min-h-[220px] flex-col rounded-xl border border-line p-5 transition-colors ease-out hover:bg-accent/50 sm:min-h-[240px] sm:p-4",
+        "flex h-full flex-col rounded-xl border border-line p-5 transition-colors ease-out hover:bg-accent/50 sm:p-4",
         className
       )}
     >
