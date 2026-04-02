@@ -22,6 +22,12 @@ export default async function sitemap() {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: url("/about").href,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
   ]
 
   // Blog posts

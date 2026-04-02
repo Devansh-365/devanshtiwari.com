@@ -95,6 +95,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 givenName: "Devansh",
                 familyName: "Tiwari",
                 url: "https://www.devanshtiwari.com",
+                mainEntityOfPage: "https://www.devanshtiwari.com/about",
                 image: "https://www.devanshtiwari.com/profile.png",
                 jobTitle: "AI Product Builder",
                 description: "AI Product Builder and Product Engineer based in Delhi NCR, India. Ships AI products end-to-end, from user research to production. Co-Founder of Metis, an AI stock analysis platform for Indian traders.",
@@ -128,6 +129,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   "https://medium.com/@devanshtiwari365",
                   "https://dev.to/devansh365",
                   "https://hashnode.com/@devansh365",
+                  "https://www.indiehackers.com/devansh365",
                   "https://www.devanshtiwari.com",
                 ],
                 knowsAbout: [
