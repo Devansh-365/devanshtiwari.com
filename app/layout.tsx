@@ -127,6 +127,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   "https://twitter.com/devansh_0718",
                   "https://medium.com/@devanshtiwari365",
                   "https://dev.to/devansh365",
+                  "https://hashnode.com/@devansh365",
                   "https://www.devanshtiwari.com",
                 ],
                 knowsAbout: [
