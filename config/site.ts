@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Devansh Tiwari",
   title: "Devansh Tiwari",
   description:
-    "AI Product Builder. I ship AI products end-to-end, from user research to production.",
+    "Devansh Tiwari is an AI Product Builder and Product Engineer. Co-Founder of Metis. Ships AI products end-to-end. 50+ products shipped across SaaS, logistics, AI, and enterprise.",
   language: "en-US",
   locale: "en_US",
 

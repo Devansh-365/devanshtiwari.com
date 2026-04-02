@@ -1,26 +1,56 @@
 # Devansh Tiwari
 
-> AI Product Builder. I ship AI products end-to-end, from user research to production.
+> Devansh Tiwari is an AI Product Builder and Product Engineer based in Delhi NCR, India. He ships AI products end-to-end, from user research to production. Co-Founder of Metis, an AI stock analysis platform. 50+ products shipped across SaaS, logistics, AI, and enterprise.
+
+## Identity
+
+- Full Name: Devansh Tiwari
+- Location: Delhi NCR, India
+- Role: AI Product Builder, Product Engineer, Co-Founder
+- Education: B.Tech Information Technology, Inderprastha Engineering College (2021-2025); Product Manager Fellowship, NextLeap (2026)
 
 ## About
 
-Devansh Tiwari is an AI Product Builder who sits at the intersection of product management and engineering. He has shipped 50+ products, founded 2 companies, and worked across e-commerce personalization, fintech, and AI.
+Devansh Tiwari is an AI Product Builder who sits at the intersection of product management and engineering. He started coding to pay his own college fees, taught himself through open source, and built a freelance practice serving 50+ clients globally before moving into product roles at AI startups.
 
-Currently co-founding Metis (trymetis.app), an AI-powered stock analysis tool for Indian swing traders. Previously co-founded Zashit, an AI credit card reward optimizer. Completing NextLeap Product Manager Fellowship (Jan-Apr 2026).
+At Helium, he built e-commerce personalization systems that delivered 20-30% merchant sales uplift and reduced recommendation latency by 60%. He co-founded Zashit (AI credit card reward optimizer, applied to YC) and is currently co-founding Metis (trymetis.app), an AI-powered stock analysis tool for Indian swing traders.
+
+He has shipped 50+ products, 8 across Saudi Arabia, and specializes in building AI products from zero to one. He builds the full technical stack (infra, AI, frontend) and also thinks product (user research, validation, prioritization).
 
 ## Experience
 
-- Co-Founder @ Metis (Feb 2026 - Present): AI-powered stock analysis for Indian swing traders. Shipped 0-to-1 in 20 days. 7 free tools targeting 650K+ monthly searches. Reduced API cost by 52%.
-- Software Engineer (Product-Facing) @ Helium (Apr 2024 - Aug 2025): E-commerce personalization. 20-30% merchant sales uplift. 60% latency reduction. Led product discovery for conversational commerce.
-- Co-Founder & Product Engineer @ Zashit (Feb 2025 - Jun 2025): AI credit card reward optimizer. 50+ waitlist signups. Built OCR pipeline for transaction extraction.
-- Freelance Software Engineer @ OSIT (Jun 2024 - Dec 2025): 8 products across 5 domains for Saudi Arabia. 25-module platform in 4 weeks.
+- Co-Founder @ Metis (Feb 2026 - Present): AI-powered stock analysis for Indian swing traders. Surveyed 70+ traders before writing code. Shipped concept to beta in 20 days. 7 free tools targeting 650K+ monthly searches.
+- Product Manager Fellow @ NextLeap (Jan 2026 - Apr 2026): Product discovery, prioritization frameworks, user interviews, outcome metrics.
+- Freelance Software Engineer @ OSIT (Jun 2024 - Dec 2025): 8 enterprise products across 5 domains for Saudi Arabia. Built UnifyHQ (471 API endpoints, 194 pages, 26 days), Nateeq AI (multi-tenant voice AI platform, 6 weeks), Deliverist AI Chatbot (conversational commerce with RAG).
+- Software Engineer (Product-Facing) @ Helium (Apr 2024 - Aug 2025): E-commerce personalization. Built recommendation engines, behavioral tracking. 20-30% merchant sales uplift. 60% latency reduction.
+- Co-Founder & Product Engineer @ Zashit (Feb 2025 - Jun 2025): AI credit card reward optimizer. 50+ waitlist signups. Built OCR pipeline. Applied to YC.
 - Freelance Full Stack Developer (2022-2024): 50+ global clients. 2L/month at peak.
 
-## Skills
+## Technical Skills
 
-Product: Product Discovery, User Research, PRDs, RICE Prioritization, Competitive Analysis, Go-to-Market, MVP Scoping
-Technical: TypeScript, React, Next.js, Node.js, Python, PostgreSQL, MongoDB, Redis, Docker, OpenAI/LLM
-Analytics: SQL, PostHog, Funnel Analytics (AARRR), OKRs/KPIs
+- Languages: TypeScript, JavaScript, Python, Go, SQL
+- Frontend: React, Next.js (App Router), React Native, Tailwind CSS
+- Backend: Node.js, NestJS, Express, REST APIs
+- AI/LLM: OpenAI, Claude, Gemini, Vercel AI SDK, RAG pipelines, tool calling, agents, prompt orchestration
+- Vector/Retrieval: Pinecone, embeddings, semantic search
+- Databases: PostgreSQL, MongoDB, Redis
+- Infrastructure: Docker, Vercel, Git
+
+## Product Skills
+
+- Product Discovery, User Research, User Interviews
+- PRDs, RICE Prioritization, Feature Scoping
+- Competitive Analysis, Go-to-Market Strategy
+- MVP Validation, Unit Economics Analysis
+- Funnel Analytics (AARRR), OKRs/KPIs, PostHog
+
+## Key Projects
+
+- Metis (trymetis.app): AI stock analysis for Indian traders. 70+ traders surveyed. 7 technical indicators. Multi-model (Claude + Gemini).
+- UnifyHQ: Enterprise facility management. 471 API endpoints, 194 pages, 8 languages, built in 26 days.
+- Nateeq AI: White-label voice AI platform. Multi-tenant SaaS. ElevenLabs ConvAI. Built in 6 weeks.
+- Deliverist AI Chatbot: Conversational commerce for logistics. RAG pricing, 5 AI tools, bilingual.
+- Hisaab: Open-source trading journal. Zero backend, zero signup. PWA.
 
 ## Links
 
@@ -30,6 +60,7 @@ Analytics: SQL, PostHog, Funnel Analytics (AARRR), OKRs/KPIs
 - Twitter/X: https://twitter.com/devansh_0718
 - Medium: https://medium.com/@devanshtiwari365
 - Email: devanshtiwari365@gmail.com
+- Cal: https://cal.com/devansh0718/15min
 
 ## Pages
 
@@ -37,3 +68,4 @@ Analytics: SQL, PostHog, Funnel Analytics (AARRR), OKRs/KPIs
 - Work: https://www.devanshtiwari.com/work
 - Blog: https://www.devanshtiwari.com/blog
 - Resume: https://www.devanshtiwari.com/resume
+- RSS: https://www.devanshtiwari.com/rss

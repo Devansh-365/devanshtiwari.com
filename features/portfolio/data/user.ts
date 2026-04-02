@@ -30,11 +30,13 @@ export const USER = {
       website: "https://www.nextleap.app",
     },
   ],
-  about: `- **AI Product Builder** who sits at the intersection of product management and engineering. I don't just build features. I figure out which ones matter.
-- Currently co-founding **[Metis](https://trymetis.app)**, an AI-powered stock analysis tool for Indian swing traders. Shipped 0-to-1 from concept to 25-user beta in 20 days.
-- 50+ products shipped, 8 across Saudi Arabia, and a founding journey that includes a YC application.
-- Previously co-founded **Zashit**, an AI credit card reward optimizer. Validated demand with 50+ waitlist signups and built the MVP.
-- I moved to product not because it's trendy. But because I realized knowing how to build isn't enough. You need to know what to build and why.`,
+  about: `- I started coding to pay my own college fees. No passion story. Just guilt from spending my parents' money on JEE coaching that didn't work out, and a decision to figure it out myself.
+- Taught myself through YouTube tutorials and docs. Got into open source, landed my first freelance client, and slowly built up to **50+ clients globally**. At peak I was closing 5 to 6 lakh projects and earning close to 2 lakh/month.
+- But I only ever saw version one. Never scale. Never retention. I knew how to build. I didn't know how to think long term. That pushed me toward product.
+- Joined **[Helium](https://www.helium.sh)**, an AI startup doing e-commerce personalization. Built recommendation engines, behavioral tracking, and reduced recommendation latency by 60%. Merchants saw 20 to 30% sales uplift. First time my work directly moved business numbers.
+- Co-founded **Zashit**, an AI credit card reward optimizer. 50+ waitlist signups. Built the MVP including an OCR pipeline for transaction data. Applied to YC. Eventually shut it down over cofounder alignment issues. Learned more from that failure than any success.
+- Now co-founding **[Metis](https://trymetis.app)**, an AI stock analysis tool for Indian swing traders. Surveyed 70+ traders before writing code. Shipped concept to beta in 20 days.
+- I moved to product not because it's trendy. But because every time I felt stuck, it wasn't because I couldn't build. It was because I wasn't strong at selecting the right problems. Product thinking directly attacks that weakness.`,
   socialLinks: [
     { title: "GitHub", href: "https://github.com/Devansh-365", icon: "github" },
     { title: "LinkedIn", href: "https://www.linkedin.com/in/devansh-tiwari-3342611a6/", icon: "linkedin" },
@@ -49,8 +51,10 @@ export const USER = {
   avatar: "/profile.png",
   timeZone: "Asia/Kolkata",
   keywords: [
-    "devansh tiwari", "devansh", "product manager", "product engineer",
-    "full stack developer", "metis", "helium", "nextleap",
+    "devansh tiwari", "devansh tiwari portfolio", "devansh tiwari developer",
+    "AI product builder", "product engineer india", "founding engineer",
+    "full stack developer AI", "metis AI", "trymetis",
+    "SaaS product builder", "product engineer startup",
   ],
   dateCreated: "2024-01-01",
 }
