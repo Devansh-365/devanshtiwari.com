@@ -1,5 +1,29 @@
 import { siteConfig } from "@/config/site"
 import type { Toc } from "@/types/Toc"
+import type { WorkProject } from "@/features/work/types/project"
+
+// ── Shared helpers ──
+
+const PROGRAMMING_LANGUAGES = [
+  "TypeScript", "JavaScript", "Python", "Go", "SQL", "Rust", "Java", "C++",
+]
+
+/** Resolves a relative or absolute image path to a full URL */
+function resolveImageUrl(src: string): string {
+  return src.startsWith("http") ? src : `${siteConfig.siteUrl}${src}`
+}
+
+/** Shared author reference linking back to the Person entity in layout.tsx */
+function authorRef() {
+  return {
+    "@type": "Person" as const,
+    "@id": `${siteConfig.siteUrl}/#person`,
+    name: siteConfig.author,
+    url: siteConfig.siteUrl,
+  }
+}
+
+// ── Breadcrumbs ──
 
 /**
  * Generates BreadcrumbList JSON-LD schema.
@@ -11,7 +35,7 @@ import type { Toc } from "@/types/Toc"
  *     { name: "UnifyHQ" },
  *   ])
  *
- * The last item has no href (it's the current page).
+ * Last item has no href (current page).
  * Google displays these in search results as: Home > Work > UnifyHQ
  */
 export function generateBreadcrumbs(
@@ -24,36 +48,101 @@ export function generateBreadcrumbs(
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      ...(item.href && {
-        item: `${siteConfig.siteUrl}${item.href}`,
-      }),
+      ...(item.href && { item: `${siteConfig.siteUrl}${item.href}` }),
     })),
   }
 }
 
+// ── Work Projects ──
+
+/**
+ * Generates all JSON-LD schemas for a work project page.
+ * Returns an array of schema objects (breadcrumbs + project).
+ *
+ * Automatically picks the right @type:
+ *   - SoftwareApplication if the project has a liveUrl or githubUrl
+ *   - CreativeWork otherwise
+ *
+ * To add a new project: just add it to WORK_PROJECTS in projects.ts.
+ * This function handles the rest.
+ */
+export function generateWorkProjectSchemas(project: WorkProject) {
+  const slug = project.slug
+  const isSoftware = !!(project.liveUrl || project.githubUrl)
+
+  const breadcrumbs = generateBreadcrumbs([
+    { name: "Home", href: "/" },
+    { name: "Work", href: "/work" },
+    { name: project.title },
+  ])
+
+  const languages = project.tech
+    .filter((t) => PROGRAMMING_LANGUAGES.includes(t))
+
+  const projectSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": isSoftware ? "SoftwareApplication" : "CreativeWork",
+    name: project.title,
+    description: project.oneLiner,
+    url: project.liveUrl || `${siteConfig.siteUrl}/work/${slug}`,
+    author: authorRef(),
+  }
+
+  // Software-specific fields
+  if (isSoftware) {
+    projectSchema.applicationCategory = "WebApplication"
+    projectSchema.operatingSystem = "Web"
+    if (project.liveUrl) projectSchema.installUrl = project.liveUrl
+    projectSchema.offers = {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    }
+  }
+
+  if (project.githubUrl) {
+    projectSchema.codeRepository = project.githubUrl
+  }
+
+  if (project.thumbnail) {
+    projectSchema.image = resolveImageUrl(project.thumbnail)
+  }
+
+  if (project.tech.length > 0) {
+    projectSchema.keywords = project.tech.join(", ")
+  }
+
+  if (languages.length > 0) {
+    projectSchema.programmingLanguage = languages.join(", ")
+  }
+
+  if (project.stats && project.stats.length > 0) {
+    projectSchema.abstract = project.stats
+      .map((s) => `${s.value} ${s.label}`)
+      .join(". ") + "."
+  }
+
+  return [breadcrumbs, projectSchema]
+}
+
+// ── Blog Posts ──
+
 /**
  * Extracts FAQ schema from blog post TOC + raw MDX content.
  *
- * How it works:
- * 1. Scans TOC for question-style headings (ends with ?)
- * 2. Finds the first paragraph after each question heading in the MDX source
- * 3. Returns a valid FAQPage JSON-LD schema
- *
- * This is fully automatic — any blog post with question headings gets FAQ schema.
- * No manual frontmatter config needed.
+ * Fully automatic: any blog post with question headings (ending with ?)
+ * gets FAQPage schema. No manual frontmatter config needed.
  */
 export function generateFAQSchema(
   toc: Toc,
   mdxSource: string
 ): Record<string, unknown> | null {
-  // Find all question-based headings
   const questionHeadings = toc.filter(
     (h) => h.value.trim().endsWith("?") && h.depth <= 3
   )
 
   if (questionHeadings.length === 0) return null
 
-  // Split MDX into lines for paragraph extraction
   const lines = mdxSource.split("\n")
 
   const faqItems = questionHeadings
@@ -81,65 +170,13 @@ export function generateFAQSchema(
 }
 
 /**
- * Finds the first non-empty paragraph after a markdown heading.
- * Handles ## and ### headings. Strips markdown formatting from the answer.
+ * Generates all JSON-LD schemas for a blog post page.
+ * Returns an array: [breadcrumbs, article, faq?]
+ *
+ * FAQ schema is auto-detected from question-based headings.
+ * To get FAQ schema: just write headings that end with "?"
  */
-function extractFirstParagraph(
-  lines: string[],
-  headingText: string
-): string | null {
-  // Find the line that contains this heading
-  const headingIndex = lines.findIndex((line) => {
-    const stripped = line.replace(/^#{1,6}\s+/, "").trim()
-    return stripped === headingText
-  })
-
-  if (headingIndex === -1) return null
-
-  // Collect the first paragraph after the heading
-  // A paragraph is consecutive non-empty, non-heading, non-list-marker lines
-  const paragraphLines: string[] = []
-  let foundContent = false
-
-  for (let i = headingIndex + 1; i < lines.length; i++) {
-    const line = lines[i].trim()
-
-    // Stop at next heading
-    if (line.startsWith("#")) break
-
-    // Skip empty lines before content starts
-    if (!line && !foundContent) continue
-
-    // Empty line after content means paragraph ended
-    if (!line && foundContent) break
-
-    // Skip markdown images, code blocks, html
-    if (line.startsWith("![") || line.startsWith("```") || line.startsWith("<")) break
-
-    // Skip list items — take only prose paragraphs
-    if (line.startsWith("- ") || line.startsWith("* ") || line.match(/^\d+\./)) break
-
-    foundContent = true
-    paragraphLines.push(line)
-  }
-
-  if (paragraphLines.length === 0) return null
-
-  // Clean markdown formatting
-  return paragraphLines
-    .join(" ")
-    .replace(/\*\*(.*?)\*\*/g, "$1") // bold
-    .replace(/\*(.*?)\*/g, "$1") // italic
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // links
-    .replace(/`([^`]+)`/g, "$1") // inline code
-    .trim()
-}
-
-/**
- * Generates the full Article + FAQ combined schema for a blog post.
- * Call this from the blog post page component.
- */
-export function generateBlogPostSchema({
+export function generateBlogPostSchemas({
   title,
   summary,
   date,
@@ -159,18 +196,22 @@ export function generateBlogPostSchema({
   mdxSource: string
 }) {
   const postUrl = `${siteConfig.siteUrl}/blog/${slug}`
+
+  const breadcrumbs = generateBreadcrumbs([
+    { name: "Home", href: "/" },
+    { name: "Blog", href: "/blog" },
+    { name: title },
+  ])
+
   const postImages = (images || [siteConfig.socialBanner]).map((img) => ({
     "@type": "ImageObject",
-    url: img.startsWith("http") ? img : `${siteConfig.siteUrl}${img}`,
+    url: resolveImageUrl(img),
   }))
 
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": postUrl,
-    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
     headline: title,
     description: summary,
     image: postImages,
@@ -180,12 +221,7 @@ export function generateBlogPostSchema({
       : date
         ? new Date(date).toISOString()
         : undefined,
-    author: {
-      "@type": "Person",
-      "@id": `${siteConfig.siteUrl}/#person`,
-      name: siteConfig.author,
-      url: siteConfig.siteUrl,
-    },
+    author: authorRef(),
     publisher: {
       "@type": "Organization",
       name: siteConfig.author,
@@ -198,6 +234,47 @@ export function generateBlogPostSchema({
 
   const faqSchema = generateFAQSchema(toc, mdxSource)
 
-  // Return array of schemas — both get injected as separate script tags
-  return faqSchema ? [articleSchema, faqSchema] : [articleSchema]
+  return faqSchema
+    ? [breadcrumbs, articleSchema, faqSchema]
+    : [breadcrumbs, articleSchema]
+}
+
+// ── Internal helpers ──
+
+function extractFirstParagraph(
+  lines: string[],
+  headingText: string
+): string | null {
+  const headingIndex = lines.findIndex((line) => {
+    const stripped = line.replace(/^#{1,6}\s+/, "").trim()
+    return stripped === headingText
+  })
+
+  if (headingIndex === -1) return null
+
+  const paragraphLines: string[] = []
+  let foundContent = false
+
+  for (let i = headingIndex + 1; i < lines.length; i++) {
+    const line = lines[i].trim()
+
+    if (line.startsWith("#")) break
+    if (!line && !foundContent) continue
+    if (!line && foundContent) break
+    if (line.startsWith("![") || line.startsWith("```") || line.startsWith("<")) break
+    if (line.startsWith("- ") || line.startsWith("* ") || line.match(/^\d+\./)) break
+
+    foundContent = true
+    paragraphLines.push(line)
+  }
+
+  if (paragraphLines.length === 0) return null
+
+  return paragraphLines
+    .join(" ")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/\*(.*?)\*/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/`([^`]+)`/g, "$1")
+    .trim()
 }
