@@ -84,6 +84,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head>
           <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context" />
           <link rel="alternate" type="application/rss+xml" href="/rss" title="Devansh Tiwari — RSS Feed" />
+          {/* Plausible Analytics */}
+          <script async src="https://plausible.io/js/pa-O0dfp6Ujr5y3-Y7HnFkzv.js" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`,
+            }}
+          />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{

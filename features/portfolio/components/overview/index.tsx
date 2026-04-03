@@ -3,6 +3,7 @@
 import { MapPinIcon, MailIcon, PhoneIcon, CodeXmlIcon, BriefcaseBusinessIcon, LightbulbIcon, ClockIcon, CopyIcon, CheckIcon } from "lucide-react"
 import { useState } from "react"
 import { USER } from "@/features/portfolio/data/user"
+import { trackCopyContact } from "@/lib/analytics"
 import { cn } from "@/lib/utils"
 import { Panel, PanelContent } from "../panel"
 
@@ -39,6 +40,7 @@ function CopyableItem({ text, href, icon: Icon, label }: { text: string; href: s
     try {
       await navigator.clipboard.writeText(text)
       setCopied(true)
+      trackCopyContact(href.startsWith("mailto") ? "email" : "phone")
       setTimeout(() => setCopied(false), 2000)
     } catch {
       // Fallback: open the link

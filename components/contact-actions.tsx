@@ -1,5 +1,8 @@
+"use client"
+
 import { CalendarIcon, MailIcon } from "lucide-react"
 import { siteConfig } from "@/config/site"
+import { trackBookCall, trackEmailClick } from "@/lib/analytics"
 import { MagneticButton } from "@/components/magnetic-button"
 import { cn } from "@/lib/utils"
 
@@ -18,6 +21,7 @@ export function ContactActions({ size = "md", className }: ContactActionsProps) 
           href={siteConfig.calUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackBookCall(isSmall ? "contact-bar" : "cta")}
           className={cn(
             "inline-flex cursor-pointer items-center gap-1.5 rounded-md bg-foreground font-mono font-medium text-background transition-opacity hover:opacity-90",
             isSmall ? "h-7 px-2.5 text-xs" : "h-9 gap-2 px-4 text-sm"
@@ -31,6 +35,7 @@ export function ContactActions({ size = "md", className }: ContactActionsProps) 
       <MagneticButton>
         <a
           href={`mailto:${siteConfig.email}`}
+          onClick={() => trackEmailClick(isSmall ? "contact-bar" : "cta")}
           className={cn(
             "inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-line font-mono font-medium text-muted-foreground transition-colors hover:text-foreground",
             isSmall ? "h-7 px-2.5 text-xs" : "h-9 gap-2 px-4 text-sm"

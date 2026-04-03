@@ -21,6 +21,7 @@ import {
   UserIcon,
 } from "lucide-react"
 import { useTheme } from "next-themes"
+import { trackCommandMenuOpen } from "@/lib/analytics"
 
 import { siteConfig } from "@/config/site"
 import {
@@ -144,7 +145,7 @@ export function CommandMenu() {
         className="gap-1.5 rounded-full text-muted-foreground shadow-none select-none hover:text-muted-foreground"
         variant="outline"
         size="sm"
-        onClick={() => setOpen(true)}
+        onClick={() => { setOpen(true); trackCommandMenuOpen() }}
       >
         <SearchIcon className="h-4 w-4" />
         <span className="text-sm font-medium sm:hidden">Search…</span>
