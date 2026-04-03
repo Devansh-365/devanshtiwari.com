@@ -4,7 +4,7 @@ import Script from "next/script"
 
 import { siteConfig } from "@/config/site"
 import { getAllFilesFrontMatter, getFileBySlug } from "@/lib/mdx"
-import { generateBlogPostSchema } from "@/lib/schema"
+import { generateBlogPostSchema, generateBreadcrumbs } from "@/lib/schema"
 import { PostFrontMatter } from "@/types/PostFrontMatter"
 import Draft from "@/components/mdx/Draft"
 import { MDXLayoutRenderer } from "@/components/mdx/MDXComponents"
@@ -127,7 +127,13 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
     // Navigation posts not critical, continue without them
   }
 
-  // Generate JSON-LD structured data (Article + auto-detected FAQ)
+  // Generate breadcrumb + article + FAQ schemas
+  const breadcrumbs = generateBreadcrumbs([
+    { name: "Home", href: "/" },
+    { name: "Blog", href: "/blog" },
+    { name: frontMatter.title },
+  ])
+
   const schemas = generateBlogPostSchema({
     title: frontMatter.title,
     summary: frontMatter.summary,
@@ -141,6 +147,11 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
 
   return (
     <>
+      <Script
+        id="blog-breadcrumbs"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       {schemas.map((schema, i) => (
         <Script
           key={i}

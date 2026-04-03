@@ -2,6 +2,36 @@ import { siteConfig } from "@/config/site"
 import type { Toc } from "@/types/Toc"
 
 /**
+ * Generates BreadcrumbList JSON-LD schema.
+ *
+ * Usage:
+ *   generateBreadcrumbs([
+ *     { name: "Home", href: "/" },
+ *     { name: "Work", href: "/work" },
+ *     { name: "UnifyHQ" },
+ *   ])
+ *
+ * The last item has no href (it's the current page).
+ * Google displays these in search results as: Home > Work > UnifyHQ
+ */
+export function generateBreadcrumbs(
+  items: { name: string; href?: string }[]
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      ...(item.href && {
+        item: `${siteConfig.siteUrl}${item.href}`,
+      }),
+    })),
+  }
+}
+
+/**
  * Extracts FAQ schema from blog post TOC + raw MDX content.
  *
  * How it works:
