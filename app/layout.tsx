@@ -137,6 +137,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   "https://dev.to/devansh365",
                   "https://hashnode.com/@devansh365",
                   "https://www.indiehackers.com/devansh365",
+                  "https://www.producthunt.com/@devanshtiwari",
+                  "https://peerlist.io/devansh",
                   "https://www.devanshtiwari.com",
                 ],
                 knowsAbout: [
