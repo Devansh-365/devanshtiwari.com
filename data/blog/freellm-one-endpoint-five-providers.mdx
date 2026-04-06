@@ -1,0 +1,119 @@
+---
+title: 'I Built an OpenAI-Compatible Gateway That Routes Across 5 Free LLM Providers'
+date: '2026-04-07'
+tags: ['Open Source', 'AI', 'LLM', 'Developer Tools', 'Building in Public']
+draft: false
+summary: 'Every LLM provider has a free tier. Combined, they give you ~80 requests per minute. FreeLLM routes your requests across Groq, Gemini, Mistral, Cerebras, and Ollama with automatic failover. One endpoint. Zero cost.'
+images: ['/blog/freellm/cover.png']
+---
+
+Every LLM provider has a free tier.
+
+Groq gives you 30 requests per minute. Gemini gives you 15. Cerebras gives you 30. Mistral gives you 5.
+
+Combined, that's about 80 requests per minute. Enough for prototyping, internal tools, and side projects where you don't want to pay for API access yet.
+
+The problem: each provider has its own SDK, its own rate limits, its own auth, and its own downtime. You end up writing provider-switching logic, catching 429 errors, and managing API keys across five different dashboards.
+
+I got tired of this while building [Metis](https://trymetis.app), an AI stock analysis tool. Kept hitting Groq's limits while Gemini had capacity sitting idle. So I built FreeLLM.
+
+## What FreeLLM does
+
+One endpoint. Five providers. Twenty models. All free.
+
+```bash
+curl http://localhost:3000/v1/chat/completions \
+  -d '{"model": "free-fast", "messages": [{"role": "user", "content": "Hello!"}]}'
+```
+
+Your existing OpenAI SDK code works. Just change the base URL. That's the whole migration.
+
+## How the routing works
+
+When a request comes in, FreeLLM:
+
+1. Checks which providers are healthy (circuit breakers track this automatically)
+2. Picks the best available provider based on your model choice
+3. If that provider returns a 429 or fails, it tries the next one
+4. You get a response
+
+Three meta-models handle routing:
+
+- **free-fast** picks the lowest-latency provider (usually Groq or Cerebras)
+- **free-smart** picks the most capable model (usually Gemini 2.5)
+- **free** maximizes availability across all providers
+
+## Request lifecycle
+
+Here's the full journey of a request through the gateway:
+
+![FreeLLM Request Flow](/blog/freellm/request-flow.png)
+
+The request goes through CORS, per-client rate limiting, API key auth, and Zod validation before hitting the gateway router. The failover loop picks a provider, checks the circuit breaker and rate limit, sends the request, and retries on failure. If all providers are exhausted, you get a clean 429 with a clear message.
+
+## Providers and their free tiers
+
+| Provider | Models | Free Tier |
+|----------|--------|-----------|
+| Groq | Llama 3.3 70B, Llama 4 Scout, Qwen3 32B | ~30 req/min |
+| Gemini | 2.5 Flash, 2.5 Pro, 2.0 Flash | ~15 req/min |
+| Cerebras | Llama 3.1 8B, Qwen3 235B, GPT-OSS 120B | ~30 req/min |
+| Mistral | Small, Medium, Nemo | ~5 req/min |
+| Ollama | Any local model | Unlimited |
+
+## What's under the hood
+
+This isn't a simple round-robin proxy. The routing layer handles real production concerns:
+
+**Sliding-window rate limiter.** Each provider's limits are tracked independently. FreeLLM knows how many requests you've sent to Groq in the last 60 seconds and won't send another if you're near the cap.
+
+**Circuit breakers.** If Gemini starts returning 500s, FreeLLM pulls it from rotation. Every 30 seconds, it sends a test request. When the provider recovers, it goes back in. Three states: closed (healthy), open (broken, all requests blocked), half-open (testing with limited requests).
+
+**Per-client rate limiting.** If you expose this to a team, each client gets their own limit. Admin auth protects the config endpoints.
+
+**Zod validation.** Every request is validated before it hits any provider. Bad payloads fail fast with clear error messages.
+
+**Real-time dashboard.** React frontend showing provider health, request logs, and latency. You can see which providers are healthy at a glance.
+
+## Get it running in 30 seconds
+
+```bash
+git clone https://github.com/devansh-365/freellm.git
+cd freellm
+cp .env.example .env   # add your free API keys
+docker compose up
+```
+
+API on `localhost:3000`. Dashboard on `localhost:3000/dashboard`. Done.
+
+## Using it with the OpenAI SDK
+
+```typescript
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "http://localhost:3000/v1",
+  apiKey: "not-needed",
+});
+
+const response = await client.chat.completions.create({
+  model: "free-fast",
+  messages: [{ role: "user", content: "Explain circuit breakers in 2 sentences" }],
+});
+```
+
+No new SDK to learn. No migration effort.
+
+## Why I built this
+
+I was building Metis and kept running into the same pattern: burn through Groq's free tier in 20 minutes of testing, switch to Gemini manually, hit their limit, switch to Mistral. Repeat.
+
+Wrote a quick proxy to automate the switching. Added failover because providers go down randomly. Added circuit breakers because I didn't want to wait for timeouts. Added a dashboard because I wanted to see what was happening.
+
+It grew into a proper tool. Open-sourced it because every developer prototyping with LLMs has this exact problem.
+
+## Stack
+
+TypeScript, Express 5, React 19, Zod, Docker. MIT licensed.
+
+**GitHub:** [github.com/devansh-365/freellm](https://github.com/devansh-365/freellm)
