@@ -71,7 +71,7 @@ const Pre = ({ children }: Props) => {
         </svg>
       </button>
 
-      <pre className="overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm leading-relaxed text-gray-100">
+      <pre className="overflow-x-auto rounded-lg border border-gray-800 bg-[#0d1117] p-4 text-sm leading-relaxed text-gray-300 [&_*]:!bg-transparent [&_.token]:!bg-transparent">
         {children}
       </pre>
     </div>
