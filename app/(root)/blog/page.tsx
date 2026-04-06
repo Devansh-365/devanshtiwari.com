@@ -51,8 +51,14 @@ export default async function BlogPage() {
     href: p.link,
   }))
 
+  // Deduplicate: if a Medium post title matches a local post, keep only the local one
+  const localTitles = new Set(localPosts.map((p) => p.title.toLowerCase().trim()))
+  const dedupedMedium = mediumMapped.filter(
+    (p) => !localTitles.has(p.title.toLowerCase().trim())
+  )
+
   // Merge and sort by date (newest first)
-  const allPosts = [...localPosts, ...mediumMapped].sort(
+  const allPosts = [...localPosts, ...dedupedMedium].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
