@@ -85,10 +85,10 @@ export default function PostLayout({
         "prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-a:decoration-muted-foreground/30 hover:prose-a:decoration-foreground",
         // Strong — foreground weight
         "prose-strong:font-semibold prose-strong:text-foreground",
-        // Code — mono inline, muted bg
-        "prose-code:rounded prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-xs prose-code:font-normal prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none",
-        // Pre — mono block
-        "prose-pre:font-mono prose-pre:bg-zinc-900 prose-pre:text-zinc-100",
+        // Inline code — only target code NOT inside pre (preserves shiki tokens)
+        "[&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-muted [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-xs [&_:not(pre)>code]:font-normal [&_:not(pre)>code]:text-foreground [&_:not(pre)>code]:before:content-none [&_:not(pre)>code]:after:content-none",
+        // Pre block container — let shiki handle colors via Pre.tsx wrapper
+        "prose-pre:!bg-transparent prose-pre:!p-0 prose-pre:!border-0",
         // Images
         "prose-img:rounded-xl",
         // Table — reset prose defaults, our Table components handle styling

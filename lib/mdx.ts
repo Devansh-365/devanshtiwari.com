@@ -16,8 +16,17 @@ import remarkTocHeadings from './remark-toc-headings';
 // Rehype packages
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeKatex from 'rehype-katex';
-import rehypePrismPlus from 'rehype-prism-plus';
+import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
+
+const prettyCodeOptions = {
+  theme: {
+    light: 'github-light',
+    dark: 'github-dark',
+  },
+  keepBackground: false,
+  defaultLang: 'plaintext',
+};
 
 const root = process.cwd();
 
@@ -88,7 +97,7 @@ export async function getFileBySlug<T>(
         rehypeSlug,
         rehypeAutolinkHeadings,
         rehypeKatex,
-        [rehypePrismPlus, { ignoreMissing: true }],
+        [rehypePrettyCode, prettyCodeOptions],
       ];
       return options;
     },
