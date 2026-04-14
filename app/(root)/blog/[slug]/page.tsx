@@ -16,6 +16,9 @@ type BlogPostPageProps = {
   }>
 }
 
+// Revalidate hourly so scheduled posts become reachable when their date passes
+export const revalidate = 3600
+
 // Generate static params for all blog posts
 export async function generateStaticParams() {
   try {
@@ -103,6 +106,11 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
   // Check if post is a draft
   if (frontMatter?.draft === true) {
     return <Draft />
+  }
+
+  // Hide scheduled posts whose publish date is in the future
+  if (frontMatter?.date && new Date(frontMatter.date).getTime() > Date.now()) {
+    notFound()
   }
 
   // Get all posts for prev/next navigation

@@ -129,6 +129,7 @@ export async function getAllFilesFrontMatter(folder: 'blog' | 'courses') {
   const files = getAllFilesRecursively(prefixPaths);
 
   const allFrontMatter: PostFrontMatter[] = [];
+  const now = Date.now();
 
   files.forEach((file: string) => {
     // Replace is needed to work on Windows
@@ -140,16 +141,21 @@ export async function getAllFilesFrontMatter(folder: 'blog' | 'courses') {
     const source = fs.readFileSync(file, 'utf8');
     const matterFile = matter(source);
     const frontmatter = matterFile.data as AuthorFrontMatter | PostFrontMatter;
-    if ('draft' in frontmatter && frontmatter.draft !== true) {
-      allFrontMatter.push({
-        ...frontmatter,
-        slug: formatSlug(fileName),
-        date: frontmatter.date
-          ? new Date(frontmatter.date).toISOString()
-          : null,
-        readingTime: readingTime(matterFile.content),
-      });
-    }
+
+    // Skip drafts
+    if (!('draft' in frontmatter) || frontmatter.draft === true) return;
+
+    // Skip scheduled posts whose publish date is in the future
+    if (frontmatter.date && new Date(frontmatter.date).getTime() > now) return;
+
+    allFrontMatter.push({
+      ...frontmatter,
+      slug: formatSlug(fileName),
+      date: frontmatter.date
+        ? new Date(frontmatter.date).toISOString()
+        : null,
+      readingTime: readingTime(matterFile.content),
+    });
   });
 
   return allFrontMatter.sort((a, b) => dateSortDesc(a.date, b.date));

@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 }
 
+// Revalidate hourly so scheduled posts appear when their publish date passes
+// without requiring a manual rebuild.
+export const revalidate = 3600
+
 export default async function BlogPage() {
   // Fetch local MDX posts
   let localPosts: Array<{
