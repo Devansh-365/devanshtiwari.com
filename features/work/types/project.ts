@@ -1,3 +1,10 @@
+export type ProjectStatus = "shipped" | "beta" | "in-progress" | "archived"
+
+export type ProjectFeature = {
+  title: string
+  description: string
+}
+
 export type WorkProject = {
   slug: string
   title: string
@@ -6,6 +13,9 @@ export type WorkProject = {
   company: string
   period: string
   featured?: boolean
+  status?: ProjectStatus
+  highlights?: string[]
+  features?: ProjectFeature[]
   liveUrl?: string
   githubUrl?: string
   demoUrl?: string

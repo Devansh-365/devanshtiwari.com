@@ -5,7 +5,17 @@ import { Tag } from "@/components/ui/tag"
 import { Separator } from "@/components/ui/separator"
 import { ContactBar } from "@/components/contact-bar"
 import { ProjectThumbnail } from "./project-thumbnail"
+import { HighlightedText } from "./highlighted-text"
+import { StatusBadge } from "./status-badge"
 import type { WorkProject } from "../types/project"
+
+function SectionHeading({ label }: { label: string }) {
+  return (
+    <h2 className="mb-4 font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
+      {label}
+    </h2>
+  )
+}
 
 export function ProjectDetail({ project }: { project: WorkProject }) {
   return (
@@ -64,9 +74,12 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
 
       {/* Header */}
       <div className="px-4">
-        <h1 className="screen-line-bottom text-3xl font-semibold tracking-tight">
-          {project.title}
-        </h1>
+        <div className="screen-line-bottom flex flex-wrap items-center gap-3">
+          <h1 className="text-3xl font-semibold tracking-tight">
+            {project.title}
+          </h1>
+          {project.status && <StatusBadge status={project.status} />}
+        </div>
 
         <div className="flex items-center gap-2 py-2 font-mono text-sm text-muted-foreground">
           <span>{project.role}</span>
@@ -76,7 +89,9 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
           <span>{project.period}</span>
         </div>
 
-        <p className="pb-4 text-muted-foreground">{project.oneLiner}</p>
+        <p className="pb-4 text-muted-foreground">
+          <HighlightedText text={project.oneLiner} />
+        </p>
       </div>
 
       {/* Thumbnail */}
@@ -111,13 +126,38 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
         </div>
       )}
 
+      {/* Highlights */}
+      {project.highlights && project.highlights.length > 0 && (
+        <>
+          <div className="px-4 py-6">
+            <SectionHeading label="Highlights" />
+            <ul className="space-y-2">
+              {project.highlights.map((highlight, i) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground"
+                >
+                  <span className="mt-0.5 font-mono text-xs text-muted-foreground/70">
+                    →
+                  </span>
+                  <span>
+                    <HighlightedText text={highlight} />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mx-4">
+            <Separator />
+          </div>
+        </>
+      )}
+
       {/* Problem */}
       <div className="px-4 py-6">
-        <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          The Problem
-        </h2>
+        <SectionHeading label="The Problem" />
         <p className="text-sm leading-relaxed text-muted-foreground">
-          {project.problem}
+          <HighlightedText text={project.problem} />
         </p>
       </div>
 
@@ -127,12 +167,33 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
 
       {/* What I Built */}
       <div className="px-4 py-6">
-        <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          What I Built
-        </h2>
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          {project.whatIBuilt}
-        </p>
+        <SectionHeading label="What I Built" />
+        {project.features && project.features.length > 0 ? (
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
+            {project.features.map((feature, i) => (
+              <div
+                key={i}
+                className="bg-background p-4 transition-colors hover:bg-card/40"
+              >
+                <div className="mb-2 flex items-baseline gap-2">
+                  <span className="font-mono text-xs text-muted-foreground/60">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-mono text-xs font-medium uppercase tracking-wider text-foreground">
+                    {feature.title}
+                  </h3>
+                </div>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  <HighlightedText text={feature.description} />
+                </p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            <HighlightedText text={project.whatIBuilt} />
+          </p>
+        )}
       </div>
 
       {/* Architecture diagram placeholder */}
@@ -142,9 +203,7 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
             <Separator />
           </div>
           <div className="px-4 py-6">
-            <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Architecture
-            </h2>
+            <SectionHeading label="Architecture" />
             <div className="overflow-hidden rounded-lg border border-line">
               <Image
                 src={project.architectureImage}
@@ -161,9 +220,7 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
 
       {/* Tech stack */}
       <div className="screen-line-top px-4 py-6">
-        <h2 className="mb-3 font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          Tech Stack
-        </h2>
+        <SectionHeading label="Tech Stack" />
         <ul className="flex flex-wrap gap-1.5">
           {project.tech.map((t) => (
             <li key={t} className="flex">

@@ -5,12 +5,51 @@ export const WORK_PROJECTS: WorkProject[] = [
     slug: "unifyhq",
     title: "UnifyHQ",
     featured: true,
+    status: "in-progress",
     oneLiner:
       "Enterprise facility management platform. 471 API endpoints, 194 pages, 8 languages. Built in 26 days.",
     role: "Sole Engineer",
     company: "OSIT",
     period: "Feb 2026 to Present",
     thumbnail: "/work/unifyhq.png",
+    highlights: [
+      "471 API endpoints and 90 Prisma models shipped in 26 days as sole engineer",
+      "8-language i18n with full Arabic RTL support, unlocking MENA and APAC enterprise deals",
+      "Migrated auth from localStorage to httpOnly cookies, unblocking SOC 2 compliance review",
+      "Standardized data-states component library, refactored across 53 files for consistent UX",
+    ],
+    features: [
+      {
+        title: "Multi-Module Full-Stack Platform",
+        description:
+          "24 NestJS controllers, 471 API endpoints, 34 frontend API service classes, 183 pages under Next.js App Router. Multi-tenant isolation, JWT auth with refresh tokens, global RBAC.",
+      },
+      {
+        title: "Workspace & Parking Management",
+        description:
+          "Desk booking and reservations with recurring patterns, floor/zone management, move requests workflow, occupancy statistics. Parking analytics, violation tracking, reservation management with QR scanner.",
+      },
+      {
+        title: "Visitor & Reception System",
+        description:
+          "End-to-end visitor flows with check-in/checkout, badge generation, host assignment, watchlist filtering, gate pass issuance, and package/delivery tracking for the reception module.",
+      },
+      {
+        title: "i18n & RTL (8 Languages)",
+        description:
+          "Full i18n infrastructure with react-i18next across all modules. RTL support for Arabic via dedicated RTLProvider. 500+ translation keys across 8 locales (en, ar, de, es, fr, hi, ja, zh).",
+      },
+      {
+        title: "Security Hardening",
+        description:
+          "Migrated auth from localStorage to httpOnly cookies with Next.js middleware, eliminating XSS token theft and unblocking SOC 2 compliance review required for enterprise procurement.",
+      },
+      {
+        title: "Standardized Design System",
+        description:
+          "Shared data-states component library for Loading/Empty/Error UI, refactored across 53 files. Global error page, not-found page, go-back button component. Consistent UX across 25+ modules.",
+      },
+    ],
     problem:
       "Enterprise facility teams run on 4-5 separate tools for desk booking, parking, visitors, and maintenance. Data lives in silos. Every new office means re-stitching the same integrations. Managers spend more time switching dashboards than managing buildings.",
     whatIBuilt:
@@ -39,6 +78,7 @@ export const WORK_PROJECTS: WorkProject[] = [
     slug: "deliverist-chatbot",
     title: "Deliverist AI Chatbot",
     featured: true,
+    status: "shipped",
     thumbnail: "/work/deliverist-ai.png",
     thumbnailType: "banner",
     oneLiner:
@@ -46,6 +86,12 @@ export const WORK_PROJECTS: WorkProject[] = [
     role: "Sole Product Engineer",
     company: "OSIT / Deliverist",
     period: "Jun to Nov 2025",
+    highlights: [
+      "Cut response latency ~500ms by migrating from two-step intent detection API to native Vercel AI SDK tool calling",
+      "Unblocked product launch with a RAG pricing pipeline (PDF → OpenAI embeddings → PostgreSQL vector retrieval) when the backend pricing API wasn't ready",
+      "13-step shipment wizard embedded in chat turned a support tool into a transaction channel",
+      "Bilingual EN/AR with full RTL, speech-to-text via Whisper, and iframe embedding for distribution",
+    ],
     problem:
       "Deliverist moves luggage between doors and airports across Saudi Arabia. Their customer-facing product was a static form with 13 fields. Nobody wants to fill that out on their phone at an airport. They needed a single conversational interface for quoting, booking, tracking, and complaints in English and Arabic.",
     whatIBuilt:
@@ -73,12 +119,19 @@ export const WORK_PROJECTS: WorkProject[] = [
     slug: "nateeq-ai",
     title: "Nateeq AI",
     featured: true,
+    status: "shipped",
     thumbnail: "/work/nateeqai.png",
     oneLiner:
       "White-label platform for deploying branded AI voice assistants. Multi-tenant SaaS with embeddable widgets.",
     role: "Lead Engineer",
     company: "OSIT",
     period: "Nov 2025 to Jan 2026",
+    highlights: [
+      "Took the platform from infrastructure to a shippable product in 6 weeks",
+      "One-line embed code with API key auth reduced tenant time-to-deploy from 'hire a developer' to copy-paste",
+      "Built AI lead extraction module that turned voice conversations from a cost center into a revenue driver",
+      "Schema-per-tenant data isolation with cross-domain CORS for subdomain-per-tenant routing",
+    ],
     problem:
       "ElevenLabs sells a powerful voice AI API. But APIs don't sell to business buyers. A Saudi IT company needed to resell AI voice assistants to GCC enterprises. ElevenLabs gives you agent creation and conversation endpoints. It does not give you multi-tenant isolation, embed code generation, lead extraction, billing, branding, or Arabic support.",
     whatIBuilt:
@@ -105,6 +158,7 @@ export const WORK_PROJECTS: WorkProject[] = [
     slug: "metis",
     title: "Metis",
     featured: true,
+    status: "beta",
     thumbnail: "/work/metis.png",
     oneLiner:
       "AI stock analysis for Indian swing traders. 70+ traders surveyed, 2,100+ stocks covered, 25 beta users on WhatsApp. From concept to daily-use product in 48 days.",
@@ -112,6 +166,44 @@ export const WORK_PROJECTS: WorkProject[] = [
     company: "Metis",
     period: "Feb 2026 to Present",
     liveUrl: "https://trymetis.app",
+    highlights: [
+      "Cut per-session API cost from $0.25 to $0.06 (76% savings) via multi-provider LLM routing with zero quality regression",
+      "70+ user interviews validated the problem before writing a line of code; 25 active beta users on WhatsApp generating daily analyses",
+      "Reduced Market Pulse heatmap load from 117 HTTP calls to 16 via batch quote chunking, render time 3-5s to under 1s",
+      "Config-driven provider registry with Gemini → Groq → Anthropic fallback chain absorbs outages without user impact",
+    ],
+    features: [
+      {
+        title: "Core Analysis Engine",
+        description:
+          "Real-time NSE/BSE data + 7 technical indicators (RSI, MACD, Bollinger, ATR, SMA, EMA, pivots) + FII/DII flows + option chain (PCR, max pain, OI) feeding a structured verdict with 0-10 confidence score, interest zones, and capital-aware position sizing.",
+      },
+      {
+        title: "Market Pulse (Daily Habit Loop)",
+        description:
+          "Sector heatmap, AI morning briefs, 8:30 AM IST push notifications, weekly streaks (Duolingo-style with freeze mechanic). Reduced heatmap load from 117 HTTP calls to 16, render time 3-5s to under 1s.",
+      },
+      {
+        title: "Stock Discovery",
+        description:
+          "Natural language screener over a 2,132-stock NSE universe plus BSE. Quick-Ask inline analysis cards. Market movers by sector drill-down with leaders and laggards.",
+      },
+      {
+        title: "Cost-Optimized AI Infrastructure",
+        description:
+          "Config-driven provider registry with Gemini → Groq → Anthropic fallback chain. Three cost-optimization passes (model routing, prompt caching, context slicing, Gemini-first utility routing) dropped per-session cost from $0.25 to $0.06-0.08.",
+      },
+      {
+        title: "Shareable Analysis Pages",
+        description:
+          "SEO-optimized analysis pages with Article JSON-LD and dynamic sitemap that double as organic landing pages. Interactive widget with candlestick charts, technical panels, and flow data.",
+      },
+      {
+        title: "Platform & Growth",
+        description:
+          "Email OTP + Google SSO, 6-layer security model (input, data, auth, file, infrastructure, ops), dual-layer analytics (PostHog AARRR + in-DB columns), admin panel for beta ops. 7 free SEO tools (Position Size, Risk-Reward, Swing Profit, Capital Gains, Pivot Point, F&O Turnover) targeting 650K+ monthly searches.",
+      },
+    ],
     problem:
       "91% of Indian retail traders lose money (SEBI 2024 study). I surveyed 70+ traders to find out why. 68% said wrong entry/exit timing is their biggest pain. The tools that exist (Screener.in, TradingView, Chartink) give raw data but not analysis. They show you RSI is 58. They don't tell you what that means for your trade, where to enter, where to place a stop loss, or how many shares to buy given your capital. And no tool solves the deeper problem: traders don't know what to look at on any given morning.",
     whatIBuilt:
@@ -147,6 +239,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "hisaab",
     title: "Hisaab",
+    status: "shipped",
     oneLiner:
       "Open-source trading journal for Indian traders. Zero backend, zero signup. Built as acquisition funnel for Metis.",
     role: "Solo Builder",
@@ -178,6 +271,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "freellm",
     title: "FreeLLM",
+    status: "shipped",
     oneLiner:
       "OpenAI-compatible gateway that pools 6 free LLM tiers into one endpoint. Multi-key rotation, circuit breakers, response cache.",
     role: "Solo Builder",
@@ -212,6 +306,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "buzzwav",
     title: "BuzzWav",
+    status: "archived",
     oneLiner:
       "AI-powered Reddit analytics that turns subreddit discussions into content ideas. Real-time dashboard, vector search, trend detection.",
     role: "Frontend Lead",
@@ -244,6 +339,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "competitorfinder",
     title: "CompetitorFinder",
+    status: "shipped",
     oneLiner:
       "Find competitors for any business across JustDial, IndiaMART, and Google Maps. AI-generated search queries, parallel scraping, export to Excel.",
     role: "Solo Builder",
@@ -273,6 +369,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "llmstext-generator",
     title: "llms.txt Generator",
+    status: "shipped",
     oneLiner:
       "Generate structured llms.txt files from any website. Enter a URL, get LLM-ready content. Open source.",
     role: "Solo Builder",
@@ -302,6 +399,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "masari-portal",
     title: "Masari Employee Portal",
+    status: "shipped",
     thumbnail: "/work/masari.png",
     oneLiner:
       "Bilingual intranet for a Saudi government entity. 33 pages, 1,800+ translation keys, sole frontend dev.",
@@ -334,6 +432,7 @@ export const WORK_PROJECTS: WorkProject[] = [
   {
     slug: "deliverist-mobile",
     title: "Deliverist Mobile App",
+    status: "shipped",
     // thumbnail:
     //   "https://placehold.co/1200x630/0a0a0a/333333?text=Deliverist+App&font=mono",
     oneLiner:
