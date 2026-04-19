@@ -19,7 +19,7 @@ export default function GlobalError({
         style={{
           margin: 0,
           fontFamily:
-            'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            'Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
           backgroundColor: "hsl(0 0% 4%)",
           color: "hsl(0 0% 91%)",
         }}
