@@ -1,17 +1,17 @@
 # Devansh Tiwari
 
-> Devansh Tiwari is an AI Product Builder and Product Engineer based in Delhi NCR, India. He ships AI products end-to-end, from user research to production. Co-Founder of Metis, an AI stock analysis platform. 50+ products shipped across SaaS, logistics, AI, and enterprise.
+> Product engineer at Metis, building AI stock analysis for Indian swing traders. Writes about cost-optimized LLM infrastructure, multi-provider routing, and shipping AI products end-to-end. Based in Delhi NCR, India.
 
 ## Identity
 
 - Full Name: Devansh Tiwari
 - Location: Delhi NCR, India
-- Role: AI Product Builder, Product Engineer, Co-Founder
+- Role: Product Engineer, Co-Founder @ Metis
 - Education: B.Tech Information Technology, Inderprastha Engineering College (2021-2025); Product Manager Fellowship, NextLeap (2026)
 
 ## About
 
-Devansh Tiwari is an AI Product Builder who sits at the intersection of product management and engineering. He started coding to pay his own college fees, taught himself through open source, and built a freelance practice serving 50+ clients globally before moving into product roles at AI startups.
+Devansh Tiwari is a product engineer who sits at the intersection of product thinking and AI infrastructure. He started coding to pay his own college fees, taught himself through open source, and built a freelance practice before moving into product roles at AI startups.
 
 At Helium, he built e-commerce personalization systems that delivered 20-30% merchant sales uplift and reduced recommendation latency by 60%. He co-founded Zashit (AI credit card reward optimizer, applied to YC) and is currently co-founding Metis (trymetis.app), an AI-powered stock analysis tool for Indian swing traders.
 

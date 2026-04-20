@@ -13,6 +13,10 @@ export function ProfileHeader() {
         <div className="flex min-w-0 flex-1 flex-col gap-5 md:gap-6">
           <h1 className="text-4xl font-semibold leading-[0.95] tracking-tighter md:text-6xl">
             <TextReveal text={USER.displayName} delay={0.2} />
+            <span className="sr-only">
+              {" "}
+              — Product Engineer at Metis, AI infrastructure
+            </span>
           </h1>
 
           <div className="h-6 md:h-7">

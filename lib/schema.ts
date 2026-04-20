@@ -125,6 +125,87 @@ export function generateWorkProjectSchemas(project: WorkProject) {
   return [breadcrumbs, projectSchema]
 }
 
+// ── Work Collection ──
+
+/**
+ * Generates CollectionPage + ItemList schema for the /work index page.
+ * Lets Google understand it as a portfolio of projects.
+ */
+export function generateWorkCollectionSchemas(projects: WorkProject[]) {
+  const breadcrumbs = generateBreadcrumbs([
+    { name: "Home", href: "/" },
+    { name: "Work" },
+  ])
+
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${siteConfig.siteUrl}/work`,
+    url: `${siteConfig.siteUrl}/work`,
+    name: "Work",
+    description:
+      "Real products shipped for real clients. Not case studies. Actual systems running in production.",
+    isPartOf: { "@id": `${siteConfig.siteUrl}/#website` },
+    about: authorRef(),
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: projects.length,
+      itemListElement: projects.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${siteConfig.siteUrl}/work/${p.slug}`,
+        name: p.title,
+      })),
+    },
+  }
+
+  return [breadcrumbs, itemList]
+}
+
+// ── Blog Collection ──
+
+/**
+ * Generates Blog + ItemList schema for the /blog index page.
+ */
+export function generateBlogCollectionSchemas(
+  posts: { slug: string; title: string; date: string; summary?: string; href: string }[]
+) {
+  const breadcrumbs = generateBreadcrumbs([
+    { name: "Home", href: "/" },
+    { name: "Blog" },
+  ])
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${siteConfig.siteUrl}/blog`,
+    url: `${siteConfig.siteUrl}/blog`,
+    name: `${siteConfig.author} — Blog`,
+    description:
+      "Writing on cost-optimized LLM infrastructure, multi-provider AI routing, product engineering, and shipping AI products end-to-end.",
+    isPartOf: { "@id": `${siteConfig.siteUrl}/#website` },
+    author: authorRef(),
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.author,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.siteUrl}${siteConfig.siteLogo}`,
+      },
+    },
+    blogPost: posts.slice(0, 20).map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      url: p.href.startsWith("http") ? p.href : `${siteConfig.siteUrl}${p.href}`,
+      datePublished: p.date ? new Date(p.date).toISOString() : undefined,
+      description: p.summary,
+      author: authorRef(),
+    })),
+  }
+
+  return [breadcrumbs, blogSchema]
+}
+
 // ── Blog Posts ──
 
 /**

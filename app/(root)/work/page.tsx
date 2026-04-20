@@ -3,6 +3,7 @@ import { WORK_PROJECTS } from "@/features/work/data/projects"
 import { ProjectCard } from "@/features/work/components/project-card"
 import { ProjectCardCompact } from "@/features/work/components/project-card-compact"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { generateWorkCollectionSchemas } from "@/lib/schema"
 
 export const metadata: Metadata = {
   title: "Work",
@@ -14,9 +15,17 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   const featured = WORK_PROJECTS.filter((p) => p.featured)
   const other = WORK_PROJECTS.filter((p) => !p.featured)
+  const schemas = generateWorkCollectionSchemas(WORK_PROJECTS)
 
   return (
     <div className="min-h-[60vh]">
+      {schemas.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <div className="screen-line-bottom px-4">
         <h1 className="text-3xl font-semibold leading-none tracking-tight">
           Work

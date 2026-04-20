@@ -2,9 +2,9 @@ export const siteConfig = {
   // Site Info
   siteUrl: "https://www.devanshtiwari.com",
   name: "Devansh Tiwari",
-  title: "Devansh Tiwari",
+  title: "Devansh Tiwari — Product Engineer at Metis",
   description:
-    "Devansh Tiwari is an AI Product Builder and Product Engineer. Co-Founder of Metis. Ships AI products end-to-end. 50+ products shipped across SaaS, logistics, AI, and enterprise.",
+    "Product engineer at Metis, building AI stock analysis for Indian swing traders. Writing about cost-optimized LLM infrastructure, multi-provider routing, and shipping AI products end-to-end.",
   language: "en-US",
   locale: "en_US",
 
