@@ -11,12 +11,12 @@ import { ContactActions } from "@/components/contact-actions"
 export const metadata: Metadata = {
   title: "About Devansh Tiwari",
   description:
-    "Devansh Tiwari is an AI Product Builder and Product Engineer based in Delhi NCR, India. Co-Founder of Metis. 50+ products shipped. From freelancing to founding.",
+    "Product engineer at Metis, building AI stock analysis for Indian swing traders. Previously shipped enterprise AI products for Saudi Arabia and drove e-commerce personalization at Helium.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Devansh Tiwari",
     description:
-      "AI Product Builder and Product Engineer. Co-Founder of Metis. 50+ products shipped across SaaS, AI, and enterprise.",
+      "Product engineer at Metis. Writes about cost-optimized LLM infrastructure, multi-provider routing, and shipping AI products end-to-end.",
     type: "profile",
     url: `${siteConfig.siteUrl}/about`,
   },
@@ -84,7 +84,7 @@ export default function AboutPage() {
     name: "About Devansh Tiwari",
     url: "https://www.devanshtiwari.com/about",
     description:
-      "Devansh Tiwari is an AI Product Builder and Product Engineer based in Delhi NCR, India.",
+      "Product engineer at Metis based in Delhi NCR, India. Builds AI products end-to-end, from user research to cost-optimized production.",
   }
 
   return (

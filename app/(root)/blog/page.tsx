@@ -1,11 +1,13 @@
 import { Metadata } from "next"
 import { getAllFilesFrontMatter } from "@/lib/mdx"
 import { getMediumPosts } from "@/lib/medium"
+import { generateBlogCollectionSchemas } from "@/lib/schema"
 import { BlogPageClient } from "./blog-page-client"
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "A collection of articles on development, design, and ideas.",
+  description:
+    "Writing on cost-optimized LLM infrastructure, multi-provider AI routing, product engineering, and shipping AI products end-to-end.",
   alternates: { canonical: "/blog" },
 }
 
@@ -67,5 +69,18 @@ export default async function BlogPage() {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
-  return <BlogPageClient posts={allPosts} />
+  const schemas = generateBlogCollectionSchemas(allPosts)
+
+  return (
+    <>
+      {schemas.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      <BlogPageClient posts={allPosts} />
+    </>
+  )
 }

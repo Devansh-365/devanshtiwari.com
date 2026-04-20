@@ -16,21 +16,21 @@ import { Spotlight } from "@/components/spotlight"
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: siteConfig.name,
+    default: siteConfig.title,
     template: `%s | ${siteConfig.name}`,
   },
-  description: "Devansh Tiwari is an AI Product Builder and Product Engineer based in India. Co-Founder of Metis. Ships AI products end-to-end, from user research to production. 50+ products shipped.",
+  description: siteConfig.description,
   keywords: [
-    "Devansh Tiwari",
-    "AI Product Builder",
-    "Product Engineer",
-    "Founding Engineer",
-    "Full Stack Developer",
-    "AI Engineer India",
-    "React Next.js Developer",
-    "SaaS Product Builder",
+    "Product Engineer India",
+    "AI Infrastructure Engineer",
+    "LLM Gateway",
+    "Multi-Provider AI Routing",
+    "AI Cost Optimization",
     "Metis AI",
-    "TypeScript Developer",
+    "trymetis",
+    "FreeLLM",
+    "Product Engineer India",
+    "AI Engineer India",
   ],
   authors: [{ name: siteConfig.author, url: siteConfig.siteUrl }],
   creator: siteConfig.author,
@@ -95,6 +95,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": "https://www.devanshtiwari.com/#website",
+                url: "https://www.devanshtiwari.com",
+                name: "Devansh Tiwari",
+                description: siteConfig.description,
+                publisher: { "@id": "https://www.devanshtiwari.com/#person" },
+                inLanguage: "en-US",
+              }),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
                 "@type": "Person",
                 "@id": "https://www.devanshtiwari.com/#person",
                 name: "Devansh Tiwari",
@@ -103,8 +118,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 url: "https://www.devanshtiwari.com",
                 mainEntityOfPage: "https://www.devanshtiwari.com/about",
                 image: "https://www.devanshtiwari.com/profile.png",
-                jobTitle: "AI Product Builder",
-                description: "AI Product Builder and Product Engineer based in Delhi NCR, India. Ships AI products end-to-end, from user research to production. Co-Founder of Metis, an AI stock analysis platform for Indian traders.",
+                jobTitle: "Product Engineer",
+                description: "Product engineer at Metis, building AI stock analysis for Indian swing traders. Focused on cost-optimized LLM infrastructure and multi-provider routing. Previously shipped AI products for Saudi logistics and e-commerce personalization at Helium.",
                 email: "mailto:devanshtiwari365@gmail.com",
                 telephone: "+919560879697",
                 address: {
@@ -166,8 +181,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   },
                   {
                     "@type": "Occupation",
-                    name: "AI Product Builder",
-                    description: "Building AI products from user research to production deployment",
+                    name: "Product Engineer",
+                    description: "Building AI infrastructure and end-to-end products at Metis, with a focus on cost-optimized LLM routing and Indian market distribution.",
                   },
                 ],
               }),
