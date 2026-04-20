@@ -219,11 +219,6 @@ figure[data-rehype-pretty-code-figure] code {
   }
 }
 
-/* Hide default cursor only when custom cursor JS is active */
-.custom-cursor-active * {
-  cursor: none !important;
-}
-
 /* Global focus-visible ring for keyboard navigation */
 a:focus-visible,
 button:focus-visible,
