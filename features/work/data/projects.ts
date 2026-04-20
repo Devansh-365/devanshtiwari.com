@@ -386,10 +386,15 @@ export const WORK_PROJECTS: WorkProject[] = [
     company: "Side Project",
     period: "2025",
     githubUrl: "https://github.com/Devansh-365/competitorfinder",
+    highlights: [
+      "AI generates targeted search queries per platform so scraping starts from relevant category pages, not a generic keyword dump",
+      "Puppeteer and Playwright run against all 3 platforms in parallel with anti-detection headers, pulling 10+ fields per listing automatically",
+      "Bulk Excel import lets you queue an entire lead list at once; results export back to Excel or push directly to Google Sheets",
+    ],
     problem:
-      "Sales teams and founders waste hours manually searching JustDial, IndiaMART, and Google Maps to find competitors. Copy-pasting business names, phone numbers, and addresses into spreadsheets. Three platforms, three different UIs, zero automation.",
+      "Sales teams and founders waste hours manually searching JustDial, IndiaMART, and Google Maps to find competitors. Copy-pasting business names, phone numbers, and addresses into spreadsheets takes a full afternoon for one market segment. Three platforms, three different UIs, zero automation, and the data ages out before the sheet is finished.",
     whatIBuilt:
-      "Add a company, AI generates targeted search queries, and all 3 platforms get scraped in parallel. Business name, phone, email, address, GST number, products, ratings pulled automatically. Bulk import from Excel. Export results to Excel or Google Sheets. Puppeteer and Playwright handle the scraping with anti-detection measures.",
+      "A competitor research tool that takes a company name and business category, uses OpenAI to generate platform-specific search queries for each of the three directories, then fans out Puppeteer and Playwright scrapers in parallel. Each scraper handles session management, scrolling, and anti-detection headers independently. For every listing it finds, the tool extracts business name, phone number, email, address, GST number, product categories, and ratings. Ten fields per result, automatically. Supabase persists the results so you can revisit past searches without re-scraping. Bulk import from Excel lets you queue an entire list of target businesses at once. Results export to Excel or push to Google Sheets via the Sheets API. The AI query layer is the part that makes the scraping actually useful: instead of searching the same keyword across every platform, it generates queries tuned to how each directory categorizes businesses, which meaningfully improves match quality.",
     stats: [
       { label: "Data Sources", value: "3" },
       { label: "Fields Extracted", value: "10+" },
@@ -416,10 +421,15 @@ export const WORK_PROJECTS: WorkProject[] = [
     company: "Side Project",
     period: "2025",
     githubUrl: "https://github.com/Devansh-365/llmstext",
+    highlights: [
+      "Crawls up to 20 pages via Firecrawl and produces both llms.txt (concise index) and llms-full.txt (full markdown content) in a single run",
+      "Real-time crawl progress streams to the browser via Server-Sent Events, rendered in a terminal-style UI so you can watch pages arrive as they are processed",
+      "Zero server-side storage: the API key never leaves the request, output files are generated in memory and delivered directly as downloads",
+    ],
     problem:
-      "The llms.txt standard helps AI models understand your site. But creating one manually means reading every page, writing summaries, and formatting it correctly. Nobody does it because it takes hours.",
+      "The llms.txt standard gives AI crawlers a structured entry point into your site, but creating one manually means reading every page, writing summaries, and formatting them to spec. For a 20-page site that is two to three hours of work most developers skip entirely. Existing generators either cover only the homepage or produce unstructured dumps that defeat the purpose of the standard.",
     whatIBuilt:
-      "Enter a URL. The tool crawls up to 20 pages via Firecrawl, extracts content, and produces two downloadable files: llms.txt (concise index with titles and descriptions) and llms-full.txt (complete text content in clean markdown). Real-time streaming progress via Server-Sent Events in a terminal-style UI. Bring your own Firecrawl API key. Nothing stored server-side.",
+      "A single-page tool built on React and Hono where you paste a URL and get two standards-compliant files back. The Hono backend accepts the URL and a Firecrawl API key, then walks up to 20 pages of the site, respecting internal link structure. As each page is processed, a progress event streams back over SSE and renders in a terminal-style log in the UI so you can see exactly which pages were crawled and which were skipped. The first output file, llms.txt, is a concise index: one entry per page with the title, URL, and a short description extracted from the page content. The second, llms-full.txt, contains the complete cleaned markdown body of every crawled page, formatted so an LLM can ingest the entire site in a single context window. Nothing is stored server-side. The Firecrawl key is passed per-request and never persisted. Both files download immediately after crawling completes. The frontend is Vite with shadcn/ui components and Tailwind. MIT licensed.",
     stats: [
       { label: "Pages Crawled", value: "20" },
       { label: "Output Files", value: "2" },
@@ -480,15 +490,20 @@ export const WORK_PROJECTS: WorkProject[] = [
     role: "Sole Developer",
     company: "OSIT / Deliverist",
     period: "2025",
+    highlights: [
+      "ZATCA-compliant invoice PDF generation built from scratch: bilingual content, QR code, 15% VAT line item, and Air Waybill with COD labeling all handled client-side",
+      "4-step booking wizard with 3 address input methods (Google Maps pin drop, manual text entry, Saudi Short Address Code) covering the full range of how Saudi users share locations",
+      "Public shipment tracking API with visual timeline so recipients can follow their delivery without an account, removing the support burden from the Deliverist team",
+    ],
     problem:
-      "Saudi logistics is crowded. Aramex, SMSA, J&T all compete. Most apps treat Arabic as an afterthought, and COD (60-70% of Saudi e-commerce) gets bolted on last. Deliverist needed a mobile app that worked Arabic-first, handled the full booking-to-delivery loop, and generated ZATCA-compliant invoices from day one.",
+      "Saudi logistics is crowded. Aramex, SMSA, and J&T all compete for the same customers. Most apps treat Arabic as an afterthought and bolt on COD support last, even though COD accounts for 60 to 70 percent of Saudi e-commerce transactions. Deliverist needed a mobile app that worked Arabic-first from day one, covered the full booking-to-delivery loop in a single interface, and generated invoices that satisfied ZATCA requirements without a separate billing tool.",
     whatIBuilt:
-      "Full customer-facing app from booking to delivery. 4-step booking wizard with 3 address input methods (Google Maps pin, manual entry, Saudi Short Code). Real-time tracking with visual timeline on a public API so recipients can track too. Invoice PDF generation with bilingual content, QR codes, and 15% VAT calculation. Air Waybill generation with barcodes and COD labeling. 10+ payment methods. Phone OTP auth. Push notifications. Full Arabic/RTL across every screen.",
+      "Built the entire customer-facing React Native app as sole developer, covering every screen from onboarding to delivery confirmation. The booking flow is a 4-step wizard that supports three address input methods: dropping a pin on Google Maps, typing a full address manually, or entering a Saudi Short Address Code, which is the format printed on most Saudi utility bills. Real-time shipment tracking renders a visual status timeline via a public API endpoint, so recipients can check progress without logging in. Invoice PDF generation runs on-device: bilingual Arabic/English content, a ZATCA-required QR code, 15% VAT calculation, and an Air Waybill with barcode and COD label when applicable. Over 10 payment methods integrated, including local Saudi options. Phone OTP authentication with push notifications for status updates. Every screen ships with full Arabic RTL layout via NativeWind and i18next, with no English-only fallback screens. Zustand manages booking and tracking state across the wizard steps. React Query handles cache invalidation for live shipment status without manual polling logic.",
     stats: [
       { label: "Tax Compliance", value: "ZATCA" },
       { label: "Payment Methods", value: "10+" },
       { label: "Address Methods", value: "3" },
-      { label: "Duration", value: "6 months" },
+      { label: "App Screens", value: "20+" },
     ],
     tech: [
       "React Native",

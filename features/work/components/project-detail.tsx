@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeftIcon, ExternalLinkIcon, GithubIcon, PlayIcon } from "lucide-react"
+import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon, GithubIcon, PlayIcon } from "lucide-react"
 import { Tag } from "@/components/ui/tag"
 import { Separator } from "@/components/ui/separator"
 import { ContactBar } from "@/components/contact-bar"
@@ -8,6 +8,26 @@ import { ProjectThumbnail } from "./project-thumbnail"
 import { HighlightedText } from "./highlighted-text"
 import { StatusBadge } from "./status-badge"
 import type { WorkProject } from "../types/project"
+import { WORK_PROJECTS } from "../data/projects"
+
+const PROJECT_BLOG_LINKS: Record<string, string> = {
+  freellm: "/blog/freellm-one-endpoint-five-providers",
+  metis: "/blog/how-i-validated-metis-before-writing-code",
+}
+
+function getRelatedProjects(current: WorkProject, count = 3): WorkProject[] {
+  const currentTech = new Set(current.tech)
+  const scored = WORK_PROJECTS.filter((p) => p.slug !== current.slug).map((p) => {
+    const overlap = p.tech.filter((t) => currentTech.has(t)).length
+    return { project: p, overlap }
+  })
+  scored.sort((a, b) => {
+    if (b.overlap !== a.overlap) return b.overlap - a.overlap
+    const featuredDiff = (b.project.featured ? 1 : 0) - (a.project.featured ? 1 : 0)
+    return featuredDiff
+  })
+  return scored.slice(0, count).map((s) => s.project)
+}
 
 function SectionHeading({ label }: { label: string }) {
   return (
@@ -220,7 +240,18 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
 
       {/* Tech stack */}
       <div className="screen-line-top px-4 py-6">
-        <SectionHeading label="Tech Stack" />
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Tech Stack
+          </h2>
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            All projects
+            <ArrowRightIcon className="h-3 w-3" />
+          </Link>
+        </div>
         <ul className="flex flex-wrap gap-1.5">
           {project.tech.map((t) => (
             <li key={t} className="flex">
@@ -228,7 +259,53 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
             </li>
           ))}
         </ul>
+        {PROJECT_BLOG_LINKS[project.slug] && (
+          <p className="mt-4 font-mono text-xs text-muted-foreground">
+            Read the writeup:{" "}
+            <Link
+              href={PROJECT_BLOG_LINKS[project.slug]}
+              className="text-foreground underline underline-offset-2 transition-opacity hover:opacity-70"
+            >
+              {project.title} on the blog
+            </Link>
+          </p>
+        )}
       </div>
+
+      {/* Related projects */}
+      {(() => {
+        const related = getRelatedProjects(project)
+        if (related.length === 0) return null
+        return (
+          <>
+            <div className="mx-4">
+              <Separator />
+            </div>
+            <div className="px-4 py-6">
+              <SectionHeading label="Related Projects" />
+              <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-3">
+                {related.map((rel) => (
+                  <Link
+                    key={rel.slug}
+                    href={`/work/${rel.slug}`}
+                    className="group flex flex-col gap-1.5 bg-background p-4 transition-colors hover:bg-card/40"
+                  >
+                    <span className="font-mono text-sm font-medium text-foreground transition-colors group-hover:text-primary">
+                      {rel.title}
+                    </span>
+                    <span className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                      {rel.oneLiner}
+                    </span>
+                    <span className="mt-auto font-mono text-xs text-muted-foreground/60 transition-colors group-hover:text-muted-foreground">
+                      View project
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </>
+        )
+      })()}
 
       {/* Contact */}
       <ContactBar />
