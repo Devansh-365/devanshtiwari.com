@@ -9,9 +9,9 @@ import { USER } from "@/features/portfolio/data/user"
 import { ContactActions } from "@/components/contact-actions"
 
 export const metadata: Metadata = {
-  title: "About Devansh Tiwari",
+  title: "About",
   description:
-    "Product engineer at Metis, building AI stock analysis for Indian swing traders. Previously shipped enterprise AI products for Saudi Arabia and drove e-commerce personalization at Helium.",
+    "Building AI at Metis. Previously shipped enterprise products for Saudi Arabia and drove e-commerce personalization at Helium.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Devansh Tiwari",
