@@ -5,7 +5,7 @@ import { ResumeClient } from "./resume-client"
 
 export const metadata: Metadata = {
   title: "Resume",
-  description: `${siteConfig.name}'s resume — AI product builder with 50+ shipped products, founding experience, and end-to-end delivery across engineering and product.`,
+  description: `${siteConfig.name}'s resume — product engineer at Metis. 50+ shipped products, end-to-end delivery across engineering and product, and a focus on cost-optimized LLM infrastructure.`,
   alternates: {
     canonical: "/resume",
   },

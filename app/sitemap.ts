@@ -36,9 +36,13 @@ export default async function sitemap() {
     const posts = await getAllFilesFrontMatter("blog")
     blogMap = posts.map((post) => ({
       url: url(`/blog/${post.slug}`).href,
-      lastModified: post.date ? new Date(post.date) : new Date(),
+      lastModified: post.lastmod
+        ? new Date(post.lastmod)
+        : post.date
+          ? new Date(post.date)
+          : new Date(),
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: 0.7,
     }))
   } catch {
     blogMap = []
