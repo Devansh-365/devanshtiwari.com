@@ -8,6 +8,10 @@ export const siteConfig = {
   language: "en-US",
   locale: "en_US",
 
+  // Timezone used to interpret bare YYYY-MM-DD publish dates in blog frontmatter.
+  // A post with date: '2026-04-21' goes live at 00:00 in this zone, not 00:00 UTC.
+  publishTimezone: "Asia/Kolkata",
+
   // Author Info
   author: "Devansh Tiwari",
   email: "devanshtiwari365@gmail.com",

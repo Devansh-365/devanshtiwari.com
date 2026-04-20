@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import { bundleMDX } from 'mdx-bundler';
 import path from 'path';
 import readingTime from 'reading-time';
+import { siteConfig } from '@/config/site';
 import { AuthorFrontMatter } from '@/types/AuthorFrontMatter';
 import { PostFrontMatter } from '@/types/PostFrontMatter';
 import { Toc } from '@/types/Toc';
@@ -47,6 +48,25 @@ export function dateSortDesc(a: string, b: string) {
   if (a > b) return -1;
   if (a < b) return 1;
   return 0;
+}
+
+// Returns the offset of `timeZone` relative to UTC in minutes (positive = east of UTC)
+// at the moment represented by `date`. Uses Intl so DST shifts are handled correctly.
+function getTimezoneOffsetMinutes(timeZone: string, date: Date): number {
+  const utc = new Date(date.toLocaleString('en-US', { timeZone: 'UTC' }));
+  const local = new Date(date.toLocaleString('en-US', { timeZone }));
+  return (local.getTime() - utc.getTime()) / 60000;
+}
+
+// Parses a frontmatter `date` string. A bare 'YYYY-MM-DD' is interpreted as
+// midnight in `siteConfig.publishTimezone`. A full ISO string (with a 'T' and
+// explicit time/zone) is passed through to the native Date parser.
+export function parsePublishDate(dateStr: string): Date {
+  if (/T\d/.test(dateStr)) return new Date(dateStr);
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const asUtc = new Date(Date.UTC(y, m - 1, d));
+  const offsetMin = getTimezoneOffsetMinutes(siteConfig.publishTimezone, asUtc);
+  return new Date(asUtc.getTime() - offsetMin * 60_000);
 }
 
 export async function getFileBySlug<T>(
@@ -118,12 +138,16 @@ export async function getFileBySlug<T>(
       slug: slug || null,
       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
       ...frontmatter,
-      date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
+      date: frontmatter.date ? parsePublishDate(frontmatter.date).toISOString() : null,
     },
   };
 }
 
-export async function getAllFilesFrontMatter(folder: 'blog' | 'courses') {
+export async function getAllFilesFrontMatter(
+  folder: 'blog' | 'courses',
+  options: { includeScheduled?: boolean } = {},
+) {
+  const { includeScheduled = false } = options;
   const prefixPaths = path.join(root, 'data', folder);
 
   const files = getAllFilesRecursively(prefixPaths);
@@ -145,14 +169,22 @@ export async function getAllFilesFrontMatter(folder: 'blog' | 'courses') {
     // Skip drafts
     if (!('draft' in frontmatter) || frontmatter.draft === true) return;
 
-    // Skip scheduled posts whose publish date is in the future
-    if (frontmatter.date && new Date(frontmatter.date).getTime() > now) return;
+    // Skip scheduled posts whose publish date is in the future.
+    // Callers can opt in to including them (e.g. generateStaticParams needs
+    // the slug pre-built so on-demand revalidation can render it later).
+    if (
+      !includeScheduled &&
+      frontmatter.date &&
+      parsePublishDate(frontmatter.date).getTime() > now
+    ) {
+      return;
+    }
 
     allFrontMatter.push({
       ...frontmatter,
       slug: formatSlug(fileName),
       date: frontmatter.date
-        ? new Date(frontmatter.date).toISOString()
+        ? parsePublishDate(frontmatter.date).toISOString()
         : null,
       readingTime: readingTime(matterFile.content),
     });

@@ -16,13 +16,18 @@ type BlogPostPageProps = {
   }>
 }
 
-// Revalidate hourly so scheduled posts become reachable when their date passes
-export const revalidate = 3600
+// Revalidate every minute so scheduled posts become reachable promptly after
+// their publish time — on-demand ISR only runs when a request arrives, so a
+// shorter window keeps low-traffic pages fresher.
+export const revalidate = 60
 
-// Generate static params for all blog posts
+// Generate static params for ALL non-draft posts, including scheduled ones.
+// The runtime gate below calls notFound() until the publish date passes, so
+// readers can't see future posts — but the route is pre-built, which means
+// the index page can link to it reliably as soon as the date arrives.
 export async function generateStaticParams() {
   try {
-    const posts = await getAllFilesFrontMatter("blog")
+    const posts = await getAllFilesFrontMatter("blog", { includeScheduled: true })
     return posts.map((post) => ({
       slug: post.slug,
     }))
@@ -108,7 +113,9 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
     return <Draft />
   }
 
-  // Hide scheduled posts whose publish date is in the future
+  // Hide scheduled posts whose publish date is in the future.
+  // frontMatter.date is already ISO (set via parsePublishDate in getFileBySlug),
+  // so a plain Date comparison reflects the configured publishTimezone.
   if (frontMatter?.date && new Date(frontMatter.date).getTime() > Date.now()) {
     notFound()
   }
