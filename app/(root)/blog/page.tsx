@@ -9,9 +9,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 }
 
-// Revalidate hourly so scheduled posts appear when their publish date passes
-// without requiring a manual rebuild.
-export const revalidate = 3600
+// Revalidate every minute so scheduled posts appear promptly after their
+// publish time. ISR only regenerates on request, so this tightens the window
+// between publish-time and first-visitor-sees-it on a low-traffic site.
+export const revalidate = 60
 
 export default async function BlogPage() {
   // Fetch local MDX posts
