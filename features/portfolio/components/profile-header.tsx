@@ -12,7 +12,7 @@ export function ProfileHeader() {
       <div className="flex items-start justify-between gap-4 px-4 py-8 sm:px-6 sm:py-10 md:py-12">
         <div className="flex min-w-0 flex-1 flex-col gap-5 md:gap-6">
           <h1 className="text-4xl font-semibold leading-[0.95] tracking-tighter md:text-6xl">
-            <TextReveal text={USER.displayName} delay={0.2} />
+            <TextReveal text={USER.displayName} delay={0.2} instant />
             <span className="sr-only">
               {" "}
               — Product Engineer at Metis, AI infrastructure
