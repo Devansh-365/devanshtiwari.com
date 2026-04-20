@@ -1,6 +1,6 @@
 ---
 title: 'Gemini 2.5 Flash Was Returning 37 Tokens. Here''s Why.'
-date: '2026-04-21'
+date: '2026-04-20'
 tags: ['AI', 'Debugging', 'Gemini', 'LLM', 'Developer Tools']
 draft: false
 summary: 'I set max_tokens=1000 on a Gemini 2.5 Flash call. Got back 37 tokens. No error, no warning. The real cause was reasoning tokens eating the output budget, a bug documented in 15+ open GitHub issues but missing from every tutorial. Here is the full debugging trail, the three-tier fix with tradeoffs, and a diagnostic script.'
