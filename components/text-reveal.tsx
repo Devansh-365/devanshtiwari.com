@@ -7,13 +7,20 @@ type TextRevealProps = {
   className?: string
   /** Delay before animation starts */
   delay?: number
+  /**
+   * When true the text is painted immediately at first paint (opacity 1, no
+   * translate) so it counts toward LCP without waiting for JS / framer-motion
+   * to hydrate. The reveal animation is skipped entirely.  Use this for
+   * above-the-fold headings where LCP matters (e.g. H1 in the hero).
+   */
+  instant?: boolean
 }
 
-export function TextReveal({ text, className, delay = 0 }: TextRevealProps) {
+export function TextReveal({ text, className, delay = 0, instant = false }: TextRevealProps) {
   const shouldReduceMotion = useReducedMotion()
   const words = text.split(" ")
 
-  if (shouldReduceMotion) {
+  if (shouldReduceMotion || instant) {
     return <span className={className}>{text}</span>
   }
 
