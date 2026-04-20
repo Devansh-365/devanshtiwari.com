@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { ProfileHeader } from "@/features/portfolio/components/profile-header"
+import { NowTicker } from "@/features/portfolio/components/now-ticker"
 import { Overview } from "@/features/portfolio/components/overview"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
 import { About } from "@/features/portfolio/components/about"
@@ -22,63 +23,63 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-full overflow-x-hidden md:max-w-3xl">
       <ProfileHeader />
-      <Separator />
+      <NowTicker />
 
       <ScrollReveal>
         <Overview />
         <SocialLinks />
       </ScrollReveal>
-      <Separator />
+      <Line />
 
       <ScrollReveal delay={0.05}>
         <About />
       </ScrollReveal>
-      <div className="flex h-2 w-full border-x border-line" />
+      <Line />
 
       <ScrollReveal delay={0.05}>
         <Testimonials />
       </ScrollReveal>
-      <div className="flex h-2 w-full border-x border-line" />
+      <Line />
 
       <ScrollReveal delay={0.1}>
         <GitHubContributions />
       </ScrollReveal>
-      <Separator />
+      <Line />
 
       <ScrollReveal delay={0.05}>
         <TechStack />
       </ScrollReveal>
-      <Separator />
+      <Stripe />
 
       <ScrollReveal delay={0.05}>
         <WorkPreview />
       </ScrollReveal>
-      <Separator />
+      <Line />
 
       <ScrollReveal delay={0.05}>
         <HowIWork />
       </ScrollReveal>
-      <Separator />
+      <Line />
 
       <ScrollReveal delay={0.05}>
         <BlogPreview />
       </ScrollReveal>
-      <Separator />
+      <Line />
 
       <ScrollReveal delay={0.05}>
         <Experiences />
       </ScrollReveal>
-      <Separator />
+      <Stripe />
 
       <ScrollReveal delay={0.05}>
         <CTA />
       </ScrollReveal>
-      <Separator />
+      <Stripe />
     </div>
   )
 }
 
-function Separator({ className }: { className?: string }) {
+function Stripe({ className }: { className?: string }) {
   return (
     <div
       className={cn(
@@ -89,4 +90,8 @@ function Separator({ className }: { className?: string }) {
       )}
     />
   )
+}
+
+function Line() {
+  return <div className="h-3 w-full border-x border-b border-line" />
 }

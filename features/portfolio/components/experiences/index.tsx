@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { ChevronDownIcon } from "lucide-react"
 import { EXPERIENCES } from "../../data/experiences"
-import { Panel, PanelHeader, PanelTitle } from "../panel"
+import { Panel, PanelHeader, PanelNumber, PanelTitle } from "../panel"
 import { ExperienceItem } from "./experience-item"
 
 const MAX_VISIBLE = 4
@@ -16,7 +16,10 @@ export function Experiences() {
   return (
     <Panel id="experience">
       <PanelHeader>
-        <PanelTitle>Experience</PanelTitle>
+        <div className="flex items-baseline gap-3">
+          <PanelNumber>03</PanelNumber>
+          <PanelTitle>Experience</PanelTitle>
+        </div>
       </PanelHeader>
       <div className="pr-2 pl-4">
         {visible.map((experience) => (

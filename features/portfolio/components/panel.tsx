@@ -39,6 +39,16 @@ function PanelTitleSup({ className, ...props }: React.ComponentProps<"sup">) {
   )
 }
 
+function PanelNumber({ className, ...props }: React.ComponentProps<"span">) {
+  return (
+    <span
+      data-slot="panel-number"
+      className={cn("font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground", className)}
+      {...props}
+    />
+  )
+}
+
 function PanelDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -53,4 +63,4 @@ function PanelContent({ className, ...props }: React.ComponentProps<"div">) {
   return <div data-slot="panel-body" className={cn("p-4", className)} {...props} />
 }
 
-export { Panel, PanelContent, PanelDescription, PanelHeader, PanelTitle, PanelTitleSup }
+export { Panel, PanelContent, PanelDescription, PanelHeader, PanelNumber, PanelTitle, PanelTitleSup }
