@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react"
 import { WORK_PROJECTS } from "@/features/work/data/projects"
-import { Panel, PanelHeader, PanelTitle, PanelTitleSup } from "./panel"
+import { Panel, PanelHeader, PanelNumber, PanelTitle, PanelTitleSup } from "./panel"
 
 export function WorkPreview() {
   const featured = WORK_PROJECTS.filter((p) => p.featured).slice(0, 3)
@@ -9,10 +9,13 @@ export function WorkPreview() {
   return (
     <Panel id="work">
       <PanelHeader>
-        <PanelTitle>
-          Work
-          <PanelTitleSup>({WORK_PROJECTS.length})</PanelTitleSup>
-        </PanelTitle>
+        <div className="flex items-baseline gap-3">
+          <PanelNumber>02</PanelNumber>
+          <PanelTitle>
+            Work
+            <PanelTitleSup>({WORK_PROJECTS.length})</PanelTitleSup>
+          </PanelTitle>
+        </div>
       </PanelHeader>
 
       <div>
