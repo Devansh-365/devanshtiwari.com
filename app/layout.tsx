@@ -9,9 +9,9 @@ import { Toaster } from "@/components/ui/sonner"
 import { PageWrapper } from "@/components/page-wrapper"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { Spotlight } from "@/components/spotlight"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Spotlight } from "@/components/spotlight"
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -81,10 +81,23 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <>
       <html lang="en" suppressHydrationWarning>
         <head>
-          <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context" />
-          <link rel="alternate" type="application/rss+xml" href="/rss" title="Devansh Tiwari — RSS Feed" />
+          <link
+            rel="alternate"
+            type="text/plain"
+            href="/llms.txt"
+            title="LLM Context"
+          />
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            href="/rss"
+            title="Devansh Tiwari — RSS Feed"
+          />
           {/* Plausible Analytics */}
-          <script async src="https://plausible.io/js/pa-O0dfp6Ujr5y3-Y7HnFkzv.js" />
+          <script
+            async
+            src="https://plausible.io/js/pa-O0dfp6Ujr5y3-Y7HnFkzv.js"
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`,
@@ -119,7 +132,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 mainEntityOfPage: "https://www.devanshtiwari.com/about",
                 image: "https://www.devanshtiwari.com/profile.png",
                 jobTitle: "Product Engineer",
-                description: "Product engineer at Metis, building AI stock analysis for Indian swing traders. Focused on cost-optimized LLM infrastructure and multi-provider routing. Previously shipped AI products for Saudi logistics and e-commerce personalization at Helium.",
+                description:
+                  "Product engineer at Metis, building AI stock analysis for Indian swing traders. Focused on cost-optimized LLM infrastructure and multi-provider routing. Previously shipped AI products for Saudi logistics and e-commerce personalization at Helium.",
                 email: "mailto:devanshtiwari365@gmail.com",
                 telephone: "+919560879697",
                 address: {
@@ -136,7 +150,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   "@type": "Organization",
                   name: "Metis",
                   url: "https://trymetis.app",
-                  description: "AI-powered stock analysis for Indian swing traders",
+                  description:
+                    "AI-powered stock analysis for Indian swing traders",
                 },
                 founder: {
                   "@type": "Organization",
@@ -153,6 +168,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   "https://www.indiehackers.com/devansh365",
                   "https://www.producthunt.com/@devanshtiwari",
                   "https://peerlist.io/devansh",
+                  "https://apify.com/devanshlive",
                   "https://www.devanshtiwari.com",
                 ],
                 knowsAbout: [
@@ -177,12 +193,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
                     "@type": "Occupation",
                     name: "Product Engineer",
                     occupationalCategory: "15-1252.00",
-                    skills: "TypeScript, React, Next.js, Node.js, Python, AI/LLM Systems, RAG, PostgreSQL",
+                    skills:
+                      "TypeScript, React, Next.js, Node.js, Python, AI/LLM Systems, RAG, PostgreSQL",
                   },
                   {
                     "@type": "Occupation",
                     name: "Product Engineer",
-                    description: "Building AI infrastructure and end-to-end products at Metis, with a focus on cost-optimized LLM routing and Indian market distribution.",
+                    description:
+                      "Building AI infrastructure and end-to-end products at Metis, with a focus on cost-optimized LLM routing and Indian market distribution.",
                   },
                 ],
               }),
