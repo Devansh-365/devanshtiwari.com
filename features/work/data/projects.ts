@@ -242,6 +242,7 @@ export const WORK_PROJECTS: WorkProject[] = [
     featured: false,
     status: "shipped",
     thumbnail: "/work/nyasa.png",
+    architectureImage: "nyasa-architecture.png",
     oneLiner:
       "Browser SDK that classifies sessions as human, authorized AI agent, or unauthorized bot. 24 signals, 6 detection rules, published to npm.",
     role: "Sole Engineer",
