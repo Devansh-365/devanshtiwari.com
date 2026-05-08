@@ -23,7 +23,7 @@ export type WorkProject = {
   thumbnailType?: "browser" | "banner"
   problem: string
   whatIBuilt: string
-  stats?: { label: string; value: string }[]
+  stats?: { label: string; value: string; url?: string }[]
   tech: string[]
   architectureImage?: string
 }

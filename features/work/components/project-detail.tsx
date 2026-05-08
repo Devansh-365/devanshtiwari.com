@@ -129,15 +129,27 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
 
       {/* Stats */}
       {project.stats && (
-        <div className="screen-line-top screen-line-bottom grid grid-cols-2 sm:grid-cols-4">
-          {project.stats.map((stat, i) => (
+        <div className="screen-line-top screen-line-bottom grid grid-cols-2 gap-px overflow-hidden bg-line sm:grid-cols-4">
+          {project.stats.map((stat) => (
             <div
               key={stat.label}
-              className={`p-4 ${i > 0 ? "border-l border-line" : ""}`}
+              className="min-w-0 overflow-hidden bg-background p-4"
             >
-              <p className="font-mono text-2xl font-semibold tracking-tight">
-                {stat.value}
-              </p>
+              {stat.url ? (
+                <a
+                  href={stat.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block truncate font-mono text-2xl font-semibold tracking-tight transition-opacity hover:opacity-70"
+                  title={stat.value}
+                >
+                  {stat.value}
+                </a>
+              ) : (
+                <p className="truncate font-mono text-2xl font-semibold tracking-tight">
+                  {stat.value}
+                </p>
+              )}
               <p className="font-mono text-xs text-muted-foreground">
                 {stat.label}
               </p>

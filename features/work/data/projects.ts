@@ -240,7 +240,8 @@ export const WORK_PROJECTS: WorkProject[] = [
     slug: "nyasa",
     title: "nyasa",
     featured: false,
-    status: "beta",
+    status: "shipped",
+    thumbnail: "/work/nyasa.png",
     oneLiner:
       "Browser SDK that classifies sessions as human, authorized AI agent, or unauthorized bot. 24 signals, 6 detection rules, published to npm.",
     role: "Sole Engineer",
@@ -294,9 +295,11 @@ export const WORK_PROJECTS: WorkProject[] = [
       { label: "Behavioral Signals", value: "13" },
       { label: "Fingerprint Signals", value: "8" },
       { label: "Detection Rules", value: "6" },
-      { label: "Actor Types", value: "3" },
-      { label: "npm", value: "@devanshhq/nyasa" },
-      { label: "Bundle", value: "ESM + IIFE" },
+      {
+        label: "npm",
+        value: "@devanshhq/nyasa",
+        url: "https://www.npmjs.com/package/@devanshhq/nyasa",
+      },
     ],
     tech: [
       "TypeScript",

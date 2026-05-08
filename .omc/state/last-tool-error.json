@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"node -e \\\"\\nconst { chromium } = require('playwright');\\n(async () => {\\n  const browser = await chromium.launch();\\n  const page = await browser.newPage();\\n  await page.setViewportSize({...",
+  "error": "Exit code 1\nnode:internal/modules/cjs/loader:1215\n  throw err;\n  ^\n\nError: Cannot find module 'playwright'\nRequire stack:\n- /Users/devanshtiwari/github/portolio-v2/[eval]\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1212:15)\n    at Module._load (node:internal/modules/cjs/loader:1043:27)\n    at Module.require (node:internal/modules/cjs/loader:1298:19)\n    at require (node:internal/modules/helpers:182:18)\n    at [eval]:2:22\n    at runScriptInThisContext (node:internal/vm:209:10...",
+  "timestamp": "2026-05-08T22:54:54.258Z",
+  "retry_count": 1
+}
