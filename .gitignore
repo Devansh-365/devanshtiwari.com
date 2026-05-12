@@ -34,3 +34,5 @@ yarn-error.log*
 
 .contentlayer
 .env
+# Blog drafts — personal notes, not for the repo
+docs/blog-drafts/
