@@ -76,7 +76,6 @@ export default function HomePage() {
       <ScrollReveal delay={0.05}>
         <CurrentlyReading />
       </ScrollReveal>
-      <Line />
 
       <NowPlaying />
 

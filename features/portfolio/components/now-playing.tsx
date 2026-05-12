@@ -44,7 +44,9 @@ export function NowPlaying() {
   const progress = Math.round((data.progressMs / data.durationMs) * 100)
 
   return (
-    <Panel id="now-playing">
+    <>
+      <div className="h-3 w-full border-x border-b border-line" />
+      <Panel id="now-playing">
       <PanelHeader>
         <PanelTitle>Now Playing</PanelTitle>
       </PanelHeader>
@@ -93,5 +95,6 @@ export function NowPlaying() {
         </a>
       </PanelContent>
     </Panel>
+    </>
   )
 }
