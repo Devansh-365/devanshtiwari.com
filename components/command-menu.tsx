@@ -19,6 +19,7 @@ import {
   SunMediumIcon,
   TwitterIcon,
   UserIcon,
+  WrenchIcon,
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { trackCommandMenuOpen } from "@/lib/analytics"
@@ -50,6 +51,7 @@ const MENU_LINKS: CommandLinkItem[] = [
   { title: "Home", href: "/", icon: HomeIcon },
   { title: "Work", href: "/work", icon: FolderOpenIcon },
   { title: "Blog", href: "/blog", icon: FileTextIcon },
+  { title: "Uses", href: "/uses", icon: WrenchIcon },
   { title: "Resume", href: "/resume", icon: FileCodeIcon },
 ]
 
