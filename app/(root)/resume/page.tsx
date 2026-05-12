@@ -2,6 +2,8 @@ import { Metadata } from "next"
 import { siteConfig } from "@/config/site"
 import { ContactBar } from "@/components/contact-bar"
 import { ResumeClient } from "./resume-client"
+import { generateBreadcrumbs } from "@/lib/schema"
+import Script from "next/script"
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -12,8 +14,19 @@ export const metadata: Metadata = {
 }
 
 export default function ResumePage() {
+  const breadcrumbs = generateBreadcrumbs([
+    { name: "Home", href: "/" },
+    { name: "Resume" },
+  ])
+
   return (
-    <div className="mx-auto border-x border-line md:max-w-3xl">
+    <>
+      <Script
+        id="resume-breadcrumbs"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <div className="mx-auto border-x border-line md:max-w-3xl">
       {/* Top stripe separator */}
       <div className="screen-line-bottom relative h-8 overflow-hidden">
         <div className="absolute inset-0 bg-[repeating-linear-gradient(315deg,hsl(var(--line))_0,hsl(var(--line))_1px,transparent_0,transparent_50%)] [background-size:10px_10px]" />
@@ -41,5 +54,6 @@ export default function ResumePage() {
       {/* Footer spacer */}
       <div className="screen-line-top h-4 w-full" />
     </div>
+    </>
   )
 }

@@ -7,6 +7,7 @@ import { ArrowRightIcon } from "lucide-react"
 import { siteConfig } from "@/config/site"
 import { USER } from "@/features/portfolio/data/user"
 import { ContactActions } from "@/components/contact-actions"
+import { generateBreadcrumbs } from "@/lib/schema"
 
 export const metadata: Metadata = {
   title: "About",
@@ -87,12 +88,22 @@ export default function AboutPage() {
       "Product engineer at Metis based in Delhi NCR, India. Builds AI products end-to-end, from user research to cost-optimized production.",
   }
 
+  const breadcrumbs = generateBreadcrumbs([
+    { name: "Home", href: "/" },
+    { name: "About" },
+  ])
+
   return (
     <>
       <Script
         id="about-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id="about-breadcrumbs"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
 
       <div className="mx-auto max-w-full md:max-w-3xl">

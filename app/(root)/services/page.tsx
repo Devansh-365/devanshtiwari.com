@@ -30,6 +30,7 @@ import {
   TESTIMONIALS_2,
 } from "@/features/portfolio/data/testimonials"
 import { cn } from "@/lib/utils"
+import { generateBreadcrumbs } from "@/lib/schema"
 
 export const metadata: Metadata = {
   title: "AI Automation Audits for SaaS | Devansh Tiwari",
@@ -239,6 +240,11 @@ const FEATURED_TESTIMONIAL = TESTIMONIALS_1[0]
 const SECONDARY_TESTIMONIALS = [TESTIMONIALS_1[1], TESTIMONIALS_2[0]].filter(Boolean)
 
 export default function ServicesPage() {
+  const breadcrumbs = generateBreadcrumbs([
+    { name: "Home", href: "/" },
+    { name: "Services" },
+  ])
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -263,6 +269,11 @@ export default function ServicesPage() {
         id="services-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id="services-breadcrumbs"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
 
       <div className="mx-auto max-w-full overflow-x-hidden md:max-w-3xl">

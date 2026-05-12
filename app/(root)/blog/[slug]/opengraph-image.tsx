@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og"
+import { getFileBySlug } from "@/lib/mdx"
+import { PostFrontMatter } from "@/types/PostFrontMatter"
 
 export const alt = "Blog Post"
 export const size = { width: 1200, height: 630 }
@@ -10,9 +12,15 @@ export default async function Image({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const title = slug
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase())
+  
+  let title = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  
+  try {
+    const post = await getFileBySlug<PostFrontMatter>("blog", slug)
+    if (post.frontMatter?.title) {
+      title = post.frontMatter.title
+    }
+  } catch {}
 
   return new ImageResponse(
     (

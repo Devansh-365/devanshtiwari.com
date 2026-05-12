@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Github, Linkedin, Mail, RssIcon, Twitter } from "lucide-react"
 
 import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site"
@@ -36,14 +37,15 @@ export function SiteFooter() {
 
         <div className="screen-line-top screen-line-bottom flex w-full">
           <div className="mx-auto flex items-center justify-center gap-3 border-x border-line bg-background px-4">
-            <a
+            <Link
               className="flex font-mono text-xs font-medium text-muted-foreground transition-colors hover:text-foreground max-sm:hidden"
               href="/llms.txt"
               target="_blank"
               rel="noopener"
+              prefetch
             >
               llms.txt
-            </a>
+            </Link>
 
             <Separator className="max-sm:hidden" />
 
@@ -83,12 +85,14 @@ export function SiteFooter() {
 
             <Separator />
 
-            <SocialLink
-              href={`${SITE_INFO.url}/rss`}
-              label="RSS"
+            <Link
+              className="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+              href="/rss"
+              prefetch
             >
               <RssIcon className="h-4 w-4" />
-            </SocialLink>
+              <span className="sr-only">RSS</span>
+            </Link>
           </div>
         </div>
       </div>
