@@ -29,13 +29,21 @@ A serverless view counter for blog posts using Next.js API routes + DynamoDB. No
 - Blog post pages (`/blog/[slug]`) fetch a single count via `GetItem` during ISR revalidation (60s)
 - Blog list page fetches all counts in one `BatchGetItem` call, chunked at 100 keys, with `UnprocessedKeys` retry
 
+### Optimistic UI update (client-side)
+
+- After `ViewTracker` fires, it checks the response status
+- `200` → calls `onTracked()` callback, triggering an immediate `+1` in the UI
+- `204` → dedup hit (already viewed today), no UI change
+- The `PostViewWrapper` client component owns `views` in `useState(initialViews)` and increments on `onTracked`
+- The server-rendered initial count is always the source of truth on page load
+
 ---
 
 ## API surface
 
 | Route | Method | Auth | Purpose |
 |-------|--------|------|---------|
-| `/api/track` | POST | none | Record a view |
+| `/api/track` | POST | none | Record a view — `200` new view, `204` dedup hit, `400` invalid slug, `500` error |
 | `/api/views` | GET | none | Batch-fetch counts for up to 50 slugs |
 | `/api/admin/views` | GET | `x-admin-secret` header | Full scan, sorted by most-viewed |
 
@@ -143,5 +151,6 @@ Create a dedicated IAM user scoped to the table ARN output by the CDK stack:
 | `app/api/track/route.ts` | POST — dedup + atomic increment |
 | `app/api/views/route.ts` | GET — public batch-fetch (max 50 slugs) |
 | `app/api/admin/views/route.ts` | GET — full scan, secret-protected |
-| `features/blog/components/view-tracker.tsx` | Client component, 5s delay |
+| `features/blog/components/view-tracker.tsx` | Client component, 5s delay, calls `onTracked` on `200` |
+| `features/blog/components/post-view-wrapper.tsx` | Client wrapper owning view count state, wires optimistic update |
 | `cdk/` | CDK infrastructure |
