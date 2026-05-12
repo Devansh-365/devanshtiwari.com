@@ -1,9 +1,16 @@
+"use client"
+
 import Image from "next/image"
+import { useRef } from "react"
+import { motion, useInView, useReducedMotion } from "framer-motion"
 import { currentlyReading } from "../data/currently-reading"
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "./panel"
 
 export function CurrentlyReading() {
   const { title, author, cover, progress } = currentlyReading
+  const barRef = useRef(null)
+  const isInView = useInView(barRef, { once: true, margin: "-40px" })
+  const shouldReduceMotion = useReducedMotion()
 
   return (
     <Panel id="reading">
@@ -31,11 +38,17 @@ export function CurrentlyReading() {
               <p className="font-mono text-xs text-muted-foreground">{author}</p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div ref={barRef} className="flex items-center gap-2">
               <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
-                <div
-                  className="h-full rounded-full bg-foreground transition-all"
-                  style={{ width: `${progress}%` }}
+                <motion.div
+                  className="h-full rounded-full bg-foreground"
+                  initial={{ width: 0 }}
+                  animate={isInView ? { width: `${progress}%` } : { width: 0 }}
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0 }
+                      : { duration: 0.8, ease: "easeOut", delay: 0.2 }
+                  }
                 />
               </div>
               <span className="font-mono text-xs tabular-nums text-muted-foreground">
