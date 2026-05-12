@@ -1,0 +1,344 @@
+---
+title: 'Adding a view counter to your portfolio for free'
+date: '2026-05-12'
+tags: ['Next.js', 'Tutorial', 'AWS', 'DynamoDB', 'Open Source']
+draft: false
+summary: 'How to track blog post views in a Next.js portfolio without paying anything. AWS DynamoDB, two API routes, and a five-second delay so bounces do not count.'
+---
+
+I kept seeing view counts on other developers' blogs and wanted one too. Seemed simple enough. Then I spent an afternoon going down the AWS rabbit hole — Lambda, API Gateway, CDK bootstrap, IAM policies, CloudFormation stacks — before stepping back and realizing I was overcomplicating this badly.
+
+You do not need Lambda. You do not need CDK. You need two API routes and a DynamoDB table, called directly from your Next.js backend using the AWS SDK. That is it.
+
+Here is what I ended up with.
+
+## What this uses
+
+- Next.js (App Router)
+- [AWS DynamoDB](https://aws.amazon.com/dynamodb/) — serverless NoSQL with a free tier of 25 GB storage and 200 million requests per month
+- Any hosting that runs Node.js — Vercel, Railway, a VPS, whatever you already have
+
+No Lambda. No CDK. No separate deployment step. It ships with your portfolio.
+
+## How it works
+
+When someone reads a blog post, a client-side script waits five seconds and then pings an API route. That route checks if we have seen this visitor's IP today. If not, it increments a view counter and stores a dedup record that expires after 24 hours.
+
+The five-second delay matters. Without it, you are counting every accidental click and every crawler that renders and immediately leaves. Five seconds is enough time to assume someone is actually reading.
+
+View counts are fetched server-side at render time. No loading spinner on the page — the count is there when the HTML arrives.
+
+## Setup
+
+### 1. Create a DynamoDB table
+
+Go to the [AWS Console](https://console.aws.amazon.com/dynamodb), open DynamoDB, and create a new table.
+
+- **Table name:** `blog-views`
+- **Partition key:** `pk` (String)
+- **Billing mode:** On-demand (pay per request, stays in free tier for a portfolio)
+
+You will use this single table for both view counts and dedup records, separated by key prefix.
+
+### 2. Create an IAM user
+
+Go to IAM → Users → Create user. Attach a policy with these permissions on your table:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:BatchGetItem"
+      ],
+      "Resource": "arn:aws:dynamodb:YOUR_REGION:YOUR_ACCOUNT_ID:table/blog-views"
+    }
+  ]
+}
+```
+
+Create access keys for this user and copy the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+
+Add them to your `.env.local`:
+
+```bash
+AWS_ACCESS_KEY_ID=your-key-id
+AWS_SECRET_ACCESS_KEY=your-secret
+AWS_REGION=us-east-1
+NEXT_PUBLIC_COUNTER_API_URL=https://yourdomain.com
+```
+
+### 3. Install the AWS SDK
+
+```bash
+npm install @aws-sdk/client-dynamodb @aws-sdk/util-dynamodb
+```
+
+### 4. Create a shared DynamoDB client
+
+```ts
+// lib/dynamodb.ts
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
+
+export const dynamo = new DynamoDBClient({
+  region: process.env.AWS_REGION!,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+  },
+})
+```
+
+### 5. The track route
+
+This route increments the view count. It runs server-side even though it is called from the browser.
+
+```ts
+// app/api/track/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import { createHash } from 'node:crypto'
+import { PutItemCommand, UpdateItemCommand } from '@aws-sdk/client-dynamodb'
+import { dynamo } from '@/lib/dynamodb'
+
+const VALID_SLUG = /^[\w\-]{1,100}$/
+
+export async function POST(req: NextRequest) {
+  const { slug } = await req.json()
+
+  if (!slug || !VALID_SLUG.test(slug)) {
+    return new NextResponse(null, { status: 400 })
+  }
+
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown'
+  const hash = createHash('sha256').update(ip).digest('hex').slice(0, 16)
+  const dedupKey = `dedup:${slug}:${hash}`
+  const ttl = Math.floor(Date.now() / 1000) + 86400 // 24 hours from now
+
+  // Conditional write — only succeeds if dedupKey does not exist yet
+  try {
+    await dynamo.send(new PutItemCommand({
+      TableName: 'blog-views',
+      Item: {
+        pk: { S: dedupKey },
+        ttl: { N: String(ttl) },
+      },
+      ConditionExpression: 'attribute_not_exists(pk)',
+    }))
+  } catch (e: any) {
+    if (e.name === 'ConditionalCheckFailedException') {
+      // Already seen this visitor today
+      return new NextResponse(null, { status: 204 })
+    }
+    throw e
+  }
+
+  // New visitor — increment the counter
+  await dynamo.send(new UpdateItemCommand({
+    TableName: 'blog-views',
+    Key: { pk: { S: `views:${slug}` } },
+    UpdateExpression: 'ADD #count :inc',
+    ExpressionAttributeNames: { '#count': 'count' },
+    ExpressionAttributeValues: { ':inc': { N: '1' } },
+  }))
+
+  return new NextResponse(null, { status: 204 })
+}
+```
+
+The IP gets hashed with SHA-256 before storage — you are not keeping raw IPs, which matters for GDPR. The `ConditionExpression: 'attribute_not_exists(pk)'` makes the write fail if the key already exists, giving you an atomic dedup check with no race condition. DynamoDB TTL handles cleanup — enable it on the `ttl` attribute in the table settings and expired dedup records delete themselves automatically.
+
+### 6. The views route
+
+This one reads counts. You will call it server-side to populate counts before the page renders.
+
+```ts
+// app/api/views/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import { BatchGetItemCommand } from '@aws-sdk/client-dynamodb'
+import { dynamo } from '@/lib/dynamodb'
+
+export async function GET(req: NextRequest) {
+  const slugs = req.nextUrl.searchParams.get('slugs')?.split(',') ?? []
+
+  if (slugs.length === 0) {
+    return NextResponse.json({})
+  }
+
+  const keys = slugs.map((s) => ({ pk: { S: `views:${s}` } }))
+
+  const res = await dynamo.send(new BatchGetItemCommand({
+    RequestItems: {
+      'blog-views': { Keys: keys },
+    },
+  }))
+
+  const items = res.Responses?.['blog-views'] ?? []
+  const countMap: Record<string, number> = {}
+
+  for (const item of items) {
+    const pk = item.pk.S!
+    const slug = pk.replace('views:', '')
+    countMap[slug] = parseInt(item.count?.N ?? '0', 10)
+  }
+
+  const result: Record<string, number> = {}
+  slugs.forEach((slug) => {
+    result[slug] = countMap[slug] ?? 0
+  })
+
+  return NextResponse.json(result)
+}
+```
+
+### 7. A server-side helper
+
+```ts
+// lib/views.ts
+export async function getViewCounts(slugs: string[]): Promise<Record<string, number>> {
+  if (slugs.length === 0) return {}
+
+  const baseUrl = process.env.NEXT_PUBLIC_COUNTER_API_URL ?? 'http://localhost:3000'
+  const params = slugs.join(',')
+
+  try {
+    const res = await fetch(`${baseUrl}/api/views?slugs=${params}`, {
+      next: { revalidate: 60 },
+    })
+    return res.ok ? res.json() : {}
+  } catch {
+    return {}
+  }
+}
+
+export async function getViewCount(slug: string): Promise<number> {
+  const counts = await getViewCounts([slug])
+  return counts[slug] ?? 0
+}
+```
+
+The `next: { revalidate: 60 }` tells Next.js to cache this fetch for 60 seconds. Your page's own revalidation handles the rest.
+
+### 8. Display on the blog post page
+
+In your blog post server component, fetch the count and pass it down:
+
+```tsx
+// app/(root)/blog/[slug]/page.tsx
+import { getViewCount } from '@/lib/views'
+
+const BlogPostPage = async ({ params }) => {
+  const { slug } = await params
+  const views = await getViewCount(`/blog/${slug}`)
+
+  return (
+    <PostLayout frontMatter={frontMatter} views={views} ...>
+      ...
+    </PostLayout>
+  )
+}
+```
+
+Then in your post layout, add the count next to date and reading time:
+
+```tsx
+// components/blog/post-layout.tsx
+interface Props {
+  frontMatter: PostFrontMatter
+  views?: number
+  ...
+}
+
+function formatViews(n: number): string {
+  if (n >= 1000) return `${(n / 1000).toFixed(1)}k`
+  return String(n)
+}
+
+// In the render, next to your date and reading time:
+{views !== undefined && views > 0 && (
+  <span>{formatViews(views)} views</span>
+)}
+```
+
+### 9. The client-side tracker
+
+This is a client component that fires after five seconds. You add it to your post page and it runs invisibly in the background.
+
+```tsx
+// components/blog/view-tracker.tsx
+'use client'
+
+import { useEffect } from 'react'
+
+export function ViewTracker({ slug }: { slug: string }) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug }),
+      })
+    }, 5000)
+
+    return () => clearTimeout(timer)
+  }, [slug])
+
+  return null
+}
+```
+
+Add it to your blog post page alongside the rest of the content:
+
+```tsx
+import { ViewTracker } from '@/components/blog/view-tracker'
+
+// In BlogPostPage render:
+<ViewTracker slug={`/blog/${slug}`} />
+```
+
+### 10. Enable TTL on the table
+
+Go to your DynamoDB table in the AWS Console → Additional settings → Time to Live. Set the TTL attribute name to `ttl`. This tells DynamoDB to automatically delete expired dedup records — no cron job, no manual cleanup.
+
+### 11. Display on the blog list
+
+In your blog list page, fetch all counts at once:
+
+```tsx
+// app/(root)/blog/page.tsx
+import { getViewCounts } from '@/lib/views'
+
+export default async function BlogPage() {
+  const localPosts = await getAllFilesFrontMatter('blog')
+  const slugs = localPosts.map((p) => `/blog/${p.slug}`)
+  const viewCounts = await getViewCounts(slugs)
+
+  return <BlogPageClient posts={localPosts} viewCounts={viewCounts} />
+}
+```
+
+Then in `BlogPageClient`, add the count to each card using `viewCounts[post.href]`.
+
+## Free tier math
+
+DynamoDB free tier gives you 25 GB of storage and 200 million requests per month — permanently, not just the first year. Each page view costs two writes — one conditional `PutItem` for dedup, one `UpdateItem` for the counter. Each page load costs one `BatchGetItem` for reading counts.
+
+For a personal portfolio, you would need millions of monthly readers to get close to any limit. The free tier is effectively unlimited for this use case.
+
+## What this does not cover
+
+It does not filter bots. Googlebot and Bing will inflate your numbers. For a portfolio counter it does not matter much — the number is more motivational than statistical — but if you want accurate analytics, reach for something like Plausible or Fathom instead.
+
+It also does not handle Medium posts or any external content. Those links take the reader off your site, so there is nothing to track.
+
+## The full data flow
+
+A reader opens `/blog/your-post`. The server fetches the current count from DynamoDB during render. The page arrives with the count already in the HTML — no waiting. Five seconds later, the client fires a POST to `/api/track`. The server hashes their IP, writes a dedup record with a TTL, and increments the counter. Next request after 60 seconds picks up the new count.
+
+That is it.
+
+The whole thing is about 100 lines of code. No Lambda, no CDK, no separate deployment. If you have a Next.js app, you can have this running in an afternoon.
