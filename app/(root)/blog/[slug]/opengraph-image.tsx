@@ -17,8 +17,9 @@ export default async function Image({
   
   try {
     const post = await getFileBySlug<PostFrontMatter>("blog", slug)
-    if (post.frontMatter?.title) {
-      title = post.frontMatter.title
+    const frontMatter = post.frontMatter as PostFrontMatter
+    if (frontMatter?.title) {
+      title = frontMatter.title
     }
   } catch {}
 
