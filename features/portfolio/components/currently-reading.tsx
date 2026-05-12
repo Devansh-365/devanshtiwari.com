@@ -1,13 +1,14 @@
 "use client"
 
 import Image from "next/image"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { motion, useInView, useReducedMotion } from "framer-motion"
 import { currentlyReading } from "../data/currently-reading"
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "./panel"
 
 export function CurrentlyReading() {
   const { title, author, cover, progress } = currentlyReading
+  const [coverError, setCoverError] = useState(false)
   const barRef = useRef(null)
   const isInView = useInView(barRef, { once: true, margin: "-40px" })
   const shouldReduceMotion = useReducedMotion()
@@ -20,14 +21,23 @@ export function CurrentlyReading() {
 
       <PanelContent>
         <div className="flex items-start gap-4">
-          <div className="relative h-24 w-16 shrink-0 overflow-hidden rounded shadow-md">
-            <Image
-              src={cover}
-              alt={`Cover of ${title}`}
-              fill
-              sizes="64px"
-              className="object-cover"
-            />
+          <div className="relative h-24 w-16 shrink-0 overflow-hidden rounded bg-muted shadow-md">
+            {coverError ? (
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="font-mono text-[10px] leading-tight text-muted-foreground text-center px-1">
+                  {title.split(" ").slice(0, 2).join(" ")}
+                </span>
+              </div>
+            ) : (
+              <Image
+                src={cover}
+                alt={`Cover of ${title}`}
+                fill
+                sizes="64px"
+                className="object-cover"
+                onError={() => setCoverError(true)}
+              />
+            )}
           </div>
 
           <div className="flex min-w-0 flex-1 flex-col gap-2 pt-1">
