@@ -1,6 +1,6 @@
 # View Counter Infrastructure
 
-AWS CDK stack that provisions the DynamoDB table used by the blog view counter.
+AWS CDK stack that provisions the DynamoDB table and IAM deploy user used by the blog view counter.
 
 ## Table Design
 
@@ -25,37 +25,31 @@ npx cdk bootstrap   # first time only
 npx cdk deploy
 ```
 
+The stack creates:
+- `portfolio-views` DynamoDB table
+- `portfolio-views-deploy` IAM user with scoped permissions
+
+## Generate access keys
+
+CDK cannot provision long-lived credentials (AWS security guardrail).
+After deploying, run once:
+
+```bash
+aws iam create-access-key --user-name portfolio-views-deploy
+```
+
+Copy the `AccessKeyId` and `SecretAccessKey` from the output.
+
 ## Environment variables (Next.js)
 
-After deploying, add to `.env.local` / Vercel env:
+Add to `.env.local` / Vercel project settings:
 
 ```
 AWS_REGION=ap-south-1
-AWS_ACCESS_KEY_ID=...
-AWS_SECRET_ACCESS_KEY=...
+AWS_ACCESS_KEY_ID=<AccessKeyId from above>
+AWS_SECRET_ACCESS_KEY=<SecretAccessKey from above>
 DYNAMODB_TABLE_NAME=portfolio-views
-ADMIN_SECRET=<random-secret-for-admin-api>
-```
-
-Create an IAM user with the following policy scoped to the table ARN output by the stack:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "dynamodb:GetItem",
-        "dynamodb:BatchGetItem",
-        "dynamodb:PutItem",
-        "dynamodb:UpdateItem",
-        "dynamodb:Scan"
-      ],
-      "Resource": "<PortolioViewsTableArn>"
-    }
-  ]
-}
+ADMIN_SECRET=<any random string>
 ```
 
 ## Admin endpoint
