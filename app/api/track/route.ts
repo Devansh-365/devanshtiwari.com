@@ -31,8 +31,8 @@ export async function POST(req: NextRequest) {
           ConditionExpression: 'attribute_not_exists(pk)',
         })
       )
-    } catch (e: any) {
-      if (e.name === 'ConditionalCheckFailedException') {
+    } catch (e: unknown) {
+      if (e instanceof Error && e.name === 'ConditionalCheckFailedException') {
         return new NextResponse(null, { status: 204 })
       }
       throw e

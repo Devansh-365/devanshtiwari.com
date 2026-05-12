@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ScanCommand } from '@aws-sdk/client-dynamodb'
+import { ScanCommand, AttributeValue } from '@aws-sdk/client-dynamodb'
 import { dynamo } from '@/lib/dynamodb'
 
 const TABLE = process.env.DYNAMODB_TABLE_NAME!
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
 
   // --- scan all counter rows (pk starts with "views:") ---
   const items: { slug: string; views: number }[] = []
-  let lastKey: Record<string, { S?: string; N?: string }> | undefined
+  let lastKey: Record<string, AttributeValue> | undefined
 
   do {
     const res = await dynamo.send(
@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
       items.push({ slug, views })
     }
 
-    lastKey = res.LastEvaluatedKey as typeof lastKey
+    lastKey = res.LastEvaluatedKey
   } while (lastKey)
 
   // sort most-viewed first
