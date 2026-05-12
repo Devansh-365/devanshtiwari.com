@@ -1,4 +1,4 @@
-import { GetItemCommand, BatchGetItemCommand } from '@aws-sdk/client-dynamodb'
+import { GetItemCommand, BatchGetItemCommand, AttributeValue } from '@aws-sdk/client-dynamodb'
 import { dynamo } from './dynamodb'
 
 const TABLE = process.env.DYNAMODB_TABLE_NAME!
@@ -41,7 +41,7 @@ async function fetchBatch(
   slugs: string[],
   counts: Record<string, number>
 ): Promise<void> {
-  let keys = slugs.map((slug) => ({ pk: { S: `views:${slug}` } }))
+  let keys: Record<string, AttributeValue>[] = slugs.map((slug) => ({ pk: { S: `views:${slug}` } }))
 
   // Retry loop handles UnprocessedKeys returned under load
   while (keys.length > 0) {
