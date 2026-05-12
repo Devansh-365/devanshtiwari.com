@@ -10,7 +10,7 @@ import Draft from "@/components/mdx/Draft"
 import { MDXLayoutRenderer } from "@/components/mdx/MDXComponents"
 import PostLayout from "@/components/blog/post-layout"
 import { getViewCount } from "@/lib/views"
-import { ViewTracker } from "@/components/blog/view-tracker"
+import { ViewTracker } from "@/features/blog/components/view-tracker"
 
 type BlogPostPageProps = {
   params: Promise<{
