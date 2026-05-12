@@ -31,14 +31,18 @@ export function ProfileHeader() {
             <span>{USER.address}</span>
             <Divider />
             <LiveClock />
-            <Divider />
-            <span className="inline-flex items-center gap-1.5 text-foreground/80">
-              <span className="relative inline-flex h-1.5 w-1.5">
-                <span className="absolute inset-0 animate-ping rounded-full bg-foreground/40" />
-                <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-foreground" />
-              </span>
-              Open to work
-            </span>
+            {USER.openToWork && (
+              <>
+                <Divider />
+                <span className="inline-flex items-center gap-1.5 text-foreground/80">
+                  <span className="relative inline-flex h-1.5 w-1.5">
+                    <span className="absolute inset-0 animate-ping rounded-full bg-foreground/40" />
+                    <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-foreground" />
+                  </span>
+                  Open to work
+                </span>
+              </>
+            )}
           </div>
         </div>
 

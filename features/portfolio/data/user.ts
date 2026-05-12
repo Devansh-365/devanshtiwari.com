@@ -13,6 +13,7 @@ export const USER = {
     "Building AI products end-to-end.",
   ],
   address: "Delhi NCR, India",
+  openToWork: true, // flip to false when not job hunting
   phoneNumber: "",
   email: "devanshtiwari365@gmail.com",
   website: "https://www.devanshtiwari.com",
