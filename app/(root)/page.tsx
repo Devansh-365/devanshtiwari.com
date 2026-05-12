@@ -12,6 +12,7 @@ import { BlogPreview } from "@/features/portfolio/components/blog-preview"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { CTA } from "@/features/portfolio/components/cta"
 import { CurrentlyReading } from "@/features/portfolio/components/currently-reading"
+import { NowPlaying } from "@/features/portfolio/components/now-playing"
 import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { cn } from "@/lib/utils"
@@ -76,6 +77,8 @@ export default function HomePage() {
         <CurrentlyReading />
       </ScrollReveal>
       <Line />
+
+      <NowPlaying />
 
       <ScrollReveal delay={0.05}>
         <CTA />
