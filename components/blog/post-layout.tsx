@@ -15,6 +15,7 @@ interface Props {
   prev?: { slug: string; title: string }
   toc?: Toc
   children: ReactNode
+  views?: number
 }
 
 export default function PostLayout({
@@ -23,8 +24,14 @@ export default function PostLayout({
   prev,
   toc,
   children,
+  views,
 }: Props) {
   const { title, summary, date, readingTime } = frontMatter
+
+  function formatViews(n: number): string {
+    if (n >= 1000) return `${(n / 1000).toFixed(1)}k`
+    return String(n)
+  }
 
   return (
     <>
@@ -98,7 +105,7 @@ export default function PostLayout({
           {title}
         </h1>
 
-        {(date || readingTime?.text) && (
+        {(date || readingTime?.text || (views !== undefined && views > 0)) && (
           <div className="not-prose flex items-center gap-2 font-mono text-xs text-muted-foreground">
             {date && (
               <time dateTime={date}>
@@ -111,6 +118,12 @@ export default function PostLayout({
             )}
             {date && readingTime?.text && <span>·</span>}
             {readingTime?.text && <span>{readingTime.text}</span>}
+            {(date || readingTime?.text) && views !== undefined && views > 0 && (
+              <span>·</span>
+            )}
+            {views !== undefined && views > 0 && (
+              <span>{formatViews(views)} views</span>
+            )}
           </div>
         )}
 

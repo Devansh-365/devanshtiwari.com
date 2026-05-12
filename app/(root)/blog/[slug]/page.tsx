@@ -9,6 +9,8 @@ import { PostFrontMatter } from "@/types/PostFrontMatter"
 import Draft from "@/components/mdx/Draft"
 import { MDXLayoutRenderer } from "@/components/mdx/MDXComponents"
 import PostLayout from "@/components/blog/post-layout"
+import { getViewCount } from "@/lib/views"
+import { ViewTracker } from "@/components/blog/view-tracker"
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -107,6 +109,7 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
   }
 
   const { mdxSource, toc, frontMatter } = post
+  const views = await getViewCount(`/blog/${slug}`)
 
   // Check if post is a draft
   if (frontMatter?.draft === true) {
@@ -156,6 +159,7 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
 
   return (
     <>
+      <ViewTracker slug={`/blog/${slug}`} />
       {schemas.map((schema, i) => (
         <Script
           key={i}
@@ -164,7 +168,7 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      <PostLayout frontMatter={frontMatter} toc={toc} prev={prev} next={next}>
+      <PostLayout frontMatter={frontMatter} toc={toc} prev={prev} next={next} views={views}>
         <MDXLayoutRenderer mdxSource={mdxSource} />
       </PostLayout>
     </>
