@@ -16,8 +16,8 @@ export function ViewTracker({ slug, onTracked }: Props) {
         body: JSON.stringify({ slug }),
       })
         .then((res) => {
-          // 204 = new unique view counted; call back to trigger optimistic +1
-          if (res.status === 204 && onTracked) onTracked()
+          // 200 = new unique view counted; 204 = dedup hit (already seen today)
+          if (res.status === 200 && onTracked) onTracked()
         })
         .catch(() => {})
     }, 5000)

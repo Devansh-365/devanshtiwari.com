@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       })
     )
 
-    return new NextResponse(null, { status: 204 })
+    return new NextResponse(null, { status: 200 })
   } catch {
     return new NextResponse(null, { status: 500 })
   }
