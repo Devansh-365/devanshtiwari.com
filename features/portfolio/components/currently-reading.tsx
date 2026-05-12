@@ -36,6 +36,10 @@ export function CurrentlyReading() {
                 sizes="64px"
                 className="object-cover"
                 onError={() => setCoverError(true)}
+                onLoad={(e) => {
+                  const img = e.currentTarget
+                  if (img.naturalWidth <= 1) setCoverError(true)
+                }}
               />
             )}
           </div>
