@@ -7,6 +7,8 @@ summary: 'OpenCode Go limits are dollar-denominated, not request-based. That cha
 images: ['/blog/opencode-go-model-routing-guide/cover.png']
 ---
 
+![OpenCode Go model routing: one input path branching into weighted streams — thick for V4 Flash, thin for premium models. Line weight equals request volume.](/blog/opencode-go-model-routing-guide/cover.png)
+
 Most guides on OpenCode Go start with the models. I want to start with the thing most guides get wrong: the limits are denominated in dollars, not requests.
 
 That sounds like a minor distinction. It isn't.
@@ -110,6 +112,8 @@ Route through V4 Flash first for any task that will exceed 100 requests. Escalat
 This works because V4 Flash at 79.0% SWE-Bench Verified handles the majority of real-world coding tasks correctly. The one-point gap to V4 Pro is real but rarely shows up unless you are hitting genuinely hard tickets. When it does, the fallback chain handles it.
 
 Do not escalate preemptively. Let the model fail first, then escalate. Preemptive escalation is how you burn through your window in an hour.
+
+![Same $12 window: 17,000 requests on DeepSeek V4 Flash vs 480 on Claude Opus 4.7. Same budget, 35x the volume.](/blog/opencode-go-model-routing-guide/budget-comparison.png)
 
 ## What $10/month actually buys
 
