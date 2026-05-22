@@ -92,8 +92,9 @@ export default function PostLayout({
         "prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-a:decoration-muted-foreground/30 hover:prose-a:decoration-foreground",
         // Strong — foreground weight
         "prose-strong:font-semibold prose-strong:text-foreground",
-        // Inline code — only target code NOT inside pre (preserves shiki tokens)
-        "[&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-muted [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-xs [&_:not(pre)>code]:font-normal [&_:not(pre)>code]:text-foreground [&_:not(pre)>code]:before:content-none [&_:not(pre)>code]:after:content-none",
+        // Inline code — only target code NOT inside pre (preserves shiki tokens).
+        // Theme-aware subtle pill: foreground tint at 6-8% works in both modes.
+        "[&_:not(pre)>code]:inline [&_:not(pre)>code]:rounded-md [&_:not(pre)>code]:bg-foreground/[0.06] [&_:not(pre)>code]:px-[0.4em] [&_:not(pre)>code]:py-[0.1em] [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-[0.875em] [&_:not(pre)>code]:font-medium [&_:not(pre)>code]:tracking-tight [&_:not(pre)>code]:text-foreground [&_:not(pre)>code]:break-words [&_:not(pre)>code]:before:content-none [&_:not(pre)>code]:after:content-none",
         // Pre block container — let shiki handle colors via Pre.tsx wrapper
         "prose-pre:!bg-transparent prose-pre:!p-0 prose-pre:!border-0",
         // Images

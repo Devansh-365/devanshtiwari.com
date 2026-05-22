@@ -110,7 +110,9 @@ export async function getFileBySlug<T>(
         [remarkTocHeadings, { exportRef: toc }],
         remarkGfm,
         remarkCodeTitles,
-        remarkMath,
+        // singleDollarTextMath: false → plain `$12` stays as text instead of
+        // being parsed as inline LaTeX. Use `$$ ... $$` for real math.
+        [remarkMath, { singleDollarTextMath: false }],
       ];
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
