@@ -3,11 +3,13 @@ import { getAllFilesFrontMatter } from "@/lib/mdx"
 import { getMediumPosts } from "@/lib/medium"
 import type { Post } from "../types"
 
+const isDev = process.env.NODE_ENV !== "production"
+
 async function fetchAllPosts(): Promise<Post[]> {
   // Local MDX posts
   let localPosts: Post[] = []
   try {
-    const all = await getAllFilesFrontMatter("blog")
+    const all = await getAllFilesFrontMatter("blog", { includeScheduled: isDev })
     localPosts = all.map((p) => ({
       slug: p.slug,
       title: p.title,
@@ -54,8 +56,13 @@ async function fetchAllPosts(): Promise<Post[]> {
 /**
  * Cached across requests (60s revalidation — matches the blog page's ISR interval).
  * Use this in all server components — both the homepage preview and the /blog page.
+ * In dev, skip the cache so newly edited / newly scheduled posts show up instantly.
  */
-export const getAllPosts = unstable_cache(fetchAllPosts, ["blog-posts"], {
+const cachedFetch = unstable_cache(fetchAllPosts, ["blog-posts"], {
   revalidate: 60,
   tags: ["blog"],
 })
+
+export const getAllPosts: () => Promise<Post[]> = isDev
+  ? fetchAllPosts
+  : cachedFetch

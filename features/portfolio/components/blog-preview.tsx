@@ -15,7 +15,9 @@ type BlogPost = {
 export async function BlogPreview() {
   let localPosts: BlogPost[] = []
   try {
-    const allPosts = await getAllFilesFrontMatter("blog")
+    const allPosts = await getAllFilesFrontMatter("blog", {
+      includeScheduled: process.env.NODE_ENV !== "production",
+    })
     localPosts = allPosts.map((p) => ({
       title: p.title,
       date: p.date,
@@ -67,10 +69,17 @@ export async function BlogPreview() {
         <div className={`grid grid-cols-1 gap-4 ${allPosts.length >= 2 ? "sm:grid-cols-2" : ""}`}>
           {allPosts.slice(0, 4).map((post) => {
             const isMedium = post.source === "medium"
+            const isScheduled =
+              !isMedium && new Date(post.date).getTime() > Date.now()
 
             const content = (
               <>
-                <div className="flex items-center gap-1.5">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {isScheduled && (
+                    <span className="shrink-0 rounded-md border border-line bg-foreground/5 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-foreground">
+                      Scheduled
+                    </span>
+                  )}
                   <h3 className="text-[15px] font-medium leading-snug group-hover:text-primary sm:text-base">{post.title}</h3>
                   {isMedium && (
                     <ExternalLinkIcon className="h-3 w-3 shrink-0 text-muted-foreground" />

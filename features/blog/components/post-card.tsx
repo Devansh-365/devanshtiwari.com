@@ -18,10 +18,17 @@ function formatViews(n: number): string {
 
 export function PostCard({ post, variant = "full" }: PostCardProps) {
   const isMedium = post.source === "medium"
+  const isScheduled =
+    !isMedium && new Date(post.date).getTime() > Date.now()
 
   const inner = (
     <div className="flex flex-col gap-1 p-2">
-      <div className="flex items-center gap-1.5">
+      <div className="flex flex-wrap items-center gap-1.5">
+        {isScheduled && (
+          <span className="shrink-0 rounded-md border border-line bg-foreground/5 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-foreground">
+            Scheduled
+          </span>
+        )}
         <h3 className="text-[15px] font-medium leading-snug text-balance group-hover:text-primary sm:text-base">
           {post.title}
         </h3>

@@ -119,7 +119,12 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
   // Hide scheduled posts whose publish date is in the future.
   // frontMatter.date is already ISO (set via parsePublishDate in getFileBySlug),
   // so a plain Date comparison reflects the configured publishTimezone.
-  if (frontMatter?.date && new Date(frontMatter.date).getTime() > Date.now()) {
+  // In dev, render them anyway so they can be previewed before going live.
+  if (
+    process.env.NODE_ENV === "production" &&
+    frontMatter?.date &&
+    new Date(frontMatter.date).getTime() > Date.now()
+  ) {
     notFound()
   }
 
@@ -128,7 +133,9 @@ const BlogPostPage = async (props: BlogPostPageProps) => {
   let next: { slug: string; title: string } | undefined = undefined
 
   try {
-    const allPosts = await getAllFilesFrontMatter("blog")
+    const allPosts = await getAllFilesFrontMatter("blog", {
+      includeScheduled: process.env.NODE_ENV !== "production",
+    })
     const postIndex = allPosts.findIndex((p) => p.slug === slug)
 
     if (postIndex !== -1) {
