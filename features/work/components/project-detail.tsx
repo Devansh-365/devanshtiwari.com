@@ -7,6 +7,7 @@ import { ContactBar } from "@/components/contact-bar"
 import { ProjectThumbnail } from "./project-thumbnail"
 import { HighlightedText } from "./highlighted-text"
 import { StatusBadge } from "./status-badge"
+import { ProjectCanvasProbe } from "./project-canvas-probe"
 import type { WorkProject } from "../types/project"
 import { WORK_PROJECTS } from "../data/projects"
 import { getTechIconUrl } from "../data/tech-icons"
@@ -228,6 +229,16 @@ export function ProjectDetail({ project }: { project: WorkProject }) {
           </p>
         )}
       </div>
+
+      <div className="mx-4">
+        <Separator />
+      </div>
+
+      <ProjectCanvasProbe
+        canvasUrl={project.canvasUrl}
+        canvasScreenshotUrl={project.canvasScreenshotUrl}
+        projectTitle={project.title}
+      />
 
       {/* Architecture diagram placeholder */}
       {project.architectureImage && (

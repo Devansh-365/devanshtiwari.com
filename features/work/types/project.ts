@@ -26,4 +26,6 @@ export type WorkProject = {
   stats?: { label: string; value: string; url?: string }[]
   tech: string[]
   architectureImage?: string
+  canvasUrl?: string
+  canvasScreenshotUrl?: string
 }
