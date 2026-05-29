@@ -35,5 +35,5 @@ yarn-error.log*
 .contentlayer
 .env
 
-# local skills (keep private)
-.claude/skills/linkedin-founder-outreach
+# local claude files (settings, skills, etc)
+.claude/*
