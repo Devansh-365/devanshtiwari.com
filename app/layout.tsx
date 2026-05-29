@@ -5,6 +5,8 @@ import { Metadata } from "next"
 import { siteConfig } from "@/config/site"
 import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import { generateTestimonialReviews } from "@/lib/schema"
+import { TESTIMONIALS_1, TESTIMONIALS_2 } from "@/features/portfolio/data/testimonials"
 import { Toaster } from "@/components/ui/sonner"
 import { PageWrapper } from "@/components/page-wrapper"
 import { SiteFooter } from "@/components/site-footer"
@@ -114,6 +116,29 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 description: siteConfig.description,
                 publisher: { "@id": "https://www.devanshtiwari.com/#person" },
                 inLanguage: "en-US",
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: {
+                    "@type": "EntryPoint",
+                    urlTemplate: "https://www.devanshtiwari.com/?q={search_term_string}",
+                  },
+                  "query-input": "required name=search_term_string",
+                },
+              }),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "@id": "https://www.devanshtiwari.com/#organization",
+                name: "Devansh Tiwari",
+                url: "https://www.devanshtiwari.com",
+                logo: "https://www.devanshtiwari.com/profile.png",
+                sameAs: siteConfig.sameAs,
+                founder: { "@id": "https://www.devanshtiwari.com/#person" },
               }),
             }}
           />
@@ -145,19 +170,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   name: "Inderprastha Engineering College",
                   sameAs: "https://www.ipec.org.in/",
                 },
-                sameAs: [
-                  "https://github.com/Devansh-365",
-                  "https://www.linkedin.com/in/devansh-tiwari-3342611a6/",
-                  "https://twitter.com/devansh_0718",
-                  "https://medium.com/@devanshtiwari365",
-                  "https://dev.to/devansh365",
-                  "https://hashnode.com/@devansh365",
-                  "https://www.indiehackers.com/devansh365",
-                  "https://www.producthunt.com/@devanshtiwari",
-                  "https://peerlist.io/devansh",
-                  "https://apify.com/devanshlive",
-                  "https://www.devanshtiwari.com",
-                ],
+                sameAs: siteConfig.sameAs,
                 knowsAbout: [
                   "AI Product Development",
                   "Product Management",
@@ -175,6 +188,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   "Voice AI",
                   "Conversational AI",
                 ],
+                worksFor: { "@id": "https://www.devanshtiwari.com/#organization" },
                 hasOccupation: [
                   {
                     "@type": "Occupation",
@@ -190,6 +204,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                       "Building AI infrastructure and end-to-end products, with a focus on cost-optimized LLM routing and multi-provider orchestration.",
                   },
                 ],
+                review: generateTestimonialReviews([...TESTIMONIALS_1, ...TESTIMONIALS_2]),
               }),
             }}
           />

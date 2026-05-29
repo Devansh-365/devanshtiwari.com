@@ -47,6 +47,20 @@ export const siteConfig = {
     twitter: "https://twitter.com/devansh_0718",
     github: "https://github.com/Devansh-365/devanshtiwari.com",
   },
+
+  sameAs: [
+    "https://github.com/Devansh-365",
+    "https://www.linkedin.com/in/devansh-tiwari-3342611a6/",
+    "https://twitter.com/devansh_0718",
+    "https://medium.com/@devanshtiwari365",
+    "https://dev.to/devansh365",
+    "https://hashnode.com/@devansh365",
+    "https://www.indiehackers.com/devansh365",
+    "https://www.producthunt.com/@devanshtiwari",
+    "https://peerlist.io/devansh",
+    "https://apify.com/devanshlive",
+    "https://www.devanshtiwari.com",
+  ],
 }
 
 export type SiteConfig = typeof siteConfig

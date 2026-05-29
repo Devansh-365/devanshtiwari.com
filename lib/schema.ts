@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site"
 import type { Toc } from "@/types/Toc"
 import type { WorkProject } from "@/features/work/types/project"
+import type { Testimonial } from "@/features/portfolio/types/testimonials"
 
 // ── Shared helpers ──
 
@@ -21,6 +22,28 @@ function authorRef() {
     name: siteConfig.author,
     url: siteConfig.siteUrl,
   }
+}
+
+/**
+ * Generates Review JSON-LD schema from testimonials data.
+ * Embeds into the Person entity so AI engines can extract trust signals.
+ */
+export function generateTestimonialReviews(testimonials: Testimonial[]) {
+  return testimonials.map((t) => ({
+    "@type": "Review" as const,
+    author: {
+      "@type": "Person" as const,
+      name: t.authorName,
+      ...(t.authorTagline && { jobTitle: t.authorTagline }),
+    },
+    reviewBody: t.quote,
+    datePublished: t.date,
+    reviewRating: {
+      "@type": "Rating" as const,
+      ratingValue: "5",
+      bestRating: "5",
+    },
+  }))
 }
 
 // ── Breadcrumbs ──
