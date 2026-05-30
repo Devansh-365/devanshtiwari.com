@@ -197,7 +197,7 @@ export default function ArchitecturePage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2 rounded-lg border border-line bg-muted/30 p-4">
-              <FlowNode>data/blog/*.mdx</FlowNode>
+              <FlowNode>features/blog/data/posts/*.mdx</FlowNode>
               <FlowArrow />
               <FlowNode>mdx-bundler</FlowNode>
               <FlowArrow />
@@ -212,7 +212,7 @@ export default function ArchitecturePage() {
               <p>
                 Posts live as flat MDX files in{" "}
                 <code className="rounded border border-line bg-background px-1 py-0.5 text-[11px]">
-                  data/blog/
+                  features/blog/data/posts/
                 </code>
                 . At build time, mdx-bundler parses frontmatter, compiles JSX, and generates static
                 params for every slug. Syntax highlighting via Shiki. Math rendering via KaTeX.
