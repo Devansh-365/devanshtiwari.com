@@ -86,9 +86,17 @@ export async function getFileBySlug<T>(
   const typeDir = getTypePath(type);
   const mdxPath = path.join(typeDir, `${slug}.mdx`);
   const mdPath = path.join(typeDir, `${slug}.md`);
-  const source = fs.existsSync(mdxPath)
-    ? fs.readFileSync(mdxPath, 'utf8')
-    : fs.readFileSync(mdPath, 'utf8');
+  
+  let source: string;
+  if (fs.existsSync(mdxPath)) {
+    source = fs.readFileSync(mdxPath, 'utf8');
+  } else if (fs.existsSync(mdPath)) {
+    source = fs.readFileSync(mdPath, 'utf8');
+  } else {
+    // Debugging: list directory contents
+    const files = fs.existsSync(typeDir) ? fs.readdirSync(typeDir) : 'Directory not found';
+    throw new Error(`File not found: ${slug}.mdx or ${slug}.md in ${typeDir}. Directory contains: ${JSON.stringify(files)}`);
+  }
 
   // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
   if (process.platform === 'win32') {
