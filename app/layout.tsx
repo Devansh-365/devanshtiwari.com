@@ -204,7 +204,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
                       "Building AI infrastructure and end-to-end products, with a focus on cost-optimized LLM routing and multi-provider orchestration.",
                   },
                 ],
-                review: generateTestimonialReviews([...TESTIMONIALS_1, ...TESTIMONIALS_2]),
               }),
             }}
           />
