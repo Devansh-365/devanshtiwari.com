@@ -3,7 +3,7 @@ import type { WorkProject } from "../../types/project"
 export const nateeqAi: WorkProject = {
   slug: "nateeq-ai",
   title: "Nateeq AI",
-  featured: true,
+  featured: false,
   status: "shipped",
   thumbnail: "/work/nateeqai.png",
   oneLiner:
