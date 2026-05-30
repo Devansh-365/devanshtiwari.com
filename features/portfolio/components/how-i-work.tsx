@@ -14,9 +14,9 @@ const STEPS = [
     icon: RocketIcon,
     number: "02",
     title: "Ship in weeks, not months",
-    proof: "UnifyHQ: 471 endpoints in 26 days. Nateeq AI: infra to product in 6 weeks. Metis: concept to beta in 27 days.",
-    metric: "26",
-    metricLabel: "days avg",
+    proof: "Nateeq AI: infrastructure to production platform in 6 weeks. Metis: concept to beta in 27 days.",
+    metric: "27",
+    metricLabel: "days to beta",
   },
   {
     icon: LayersIcon,
