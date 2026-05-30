@@ -2,9 +2,9 @@
 
 import Image from "next/image"
 import { USER } from "@/features/portfolio/data/user"
-import { TextFlip } from "@/components/text-flip"
-import { TextReveal } from "@/components/text-reveal"
-import { LiveClock } from "@/components/live-clock"
+import { TextFlip } from "@/components/effects/text-flip"
+import { TextReveal } from "@/components/effects/text-reveal"
+import { LiveClock } from "@/components/effects/live-clock"
 
 export function ProfileHeader() {
   return (

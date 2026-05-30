@@ -5,7 +5,7 @@ import { NowTicker } from "@/features/portfolio/components/now-ticker"
 import { Overview } from "@/features/portfolio/components/overview"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
 import { About } from "@/features/portfolio/components/about"
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ScrollReveal } from "@/components/effects/scroll-reveal"
 import { cn } from "@/lib/utils"
 
 // Below-the-fold sections — code-split so framer-motion and other heavy deps

@@ -3,7 +3,7 @@
 import { CalendarIcon, MailIcon } from "lucide-react"
 import { siteConfig } from "@/lib/config"
 import { trackBookCall, trackEmailClick } from "@/lib/analytics"
-import { MagneticButton } from "@/components/magnetic-button"
+import { MagneticButton } from "@/components/effects/magnetic-button"
 import { cn } from "@/lib/utils"
 
 type ContactActionsProps = {

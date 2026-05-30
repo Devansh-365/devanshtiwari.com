@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation"
 
 import type { NavItem } from "@/types/nav"
-import { Nav } from "@/components/nav"
+import { Nav } from "@/components/navigation/nav"
 
 export function DesktopNav({ items }: { items: NavItem[] }) {
   const pathname = usePathname()

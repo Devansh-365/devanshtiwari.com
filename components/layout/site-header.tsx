@@ -4,21 +4,21 @@ import Link from "next/link"
 import { MAIN_NAV } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
-import { DesktopNav } from "@/components/desktop-nav"
-import { NavItemGitHub } from "@/components/nav-item-github"
-import { SiteHeaderMark } from "@/components/site-header-mark"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { DesktopNav } from "@/components/navigation/desktop-nav"
+import { NavItemGitHub } from "@/components/navigation/nav-item-github"
+import { SiteHeaderMark } from "@/components/branding/site-header-mark"
+import { ThemeToggle } from "@/components/theme/theme-toggle"
 
 const BrandContextMenu = dynamic(() =>
-  import("@/components/brand-context-menu").then((mod) => mod.BrandContextMenu)
+  import("@/components/branding/brand-context-menu").then((mod) => mod.BrandContextMenu)
 )
 
 const CommandMenu = dynamic(() =>
-  import("@/components/command-menu").then((mod) => mod.CommandMenu)
+  import("@/components/navigation/command-menu").then((mod) => mod.CommandMenu)
 )
 
 const MobileNav = dynamic(() =>
-  import("@/components/mobile-nav").then((mod) => mod.MobileNav)
+  import("@/components/navigation/mobile-nav").then((mod) => mod.MobileNav)
 )
 
 export function SiteHeader() {

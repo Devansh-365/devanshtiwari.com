@@ -3,11 +3,11 @@
 import Link from "next/link"
 import { ReactNode } from "react"
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
-import { ContactBar } from "@/components/contact-bar"
+import { ContactBar } from "@/components/contact/contact-bar"
 
 import { PostFrontMatter } from "@/types/PostFrontMatter"
 import { Toc } from "@/types/Toc"
-import TOCInline from "@/components/mdx/TOCInline"
+import TOCInline from "@/components/content/mdx/TOCInline"
 
 interface Props {
   frontMatter: PostFrontMatter

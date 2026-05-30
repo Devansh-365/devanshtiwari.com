@@ -6,7 +6,7 @@ import { ArrowRightIcon } from "lucide-react"
 
 import { siteConfig } from "@/lib/config"
 import { USER } from "@/features/portfolio/data/user"
-import { ContactActions } from "@/components/contact-actions"
+import { ContactActions } from "@/components/contact/contact-actions"
 import { generateBreadcrumbs } from "@/lib/schema"
 
 export const metadata: Metadata = {

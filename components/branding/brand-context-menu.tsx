@@ -5,14 +5,14 @@ import { useTheme } from "next-themes"
 import { toast } from "sonner"
 
 import { copyText } from "@/lib/copy"
-
-import { DTMark, getMarkSVG } from "./dt-mark"
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from "./ui/context-menu"
+} from "@/components/ui/context-menu"
+
+import { DTMark, getMarkSVG } from "./dt-mark"
 
 export function BrandContextMenu({ children }: { children: React.ReactNode }) {
   const { resolvedTheme } = useTheme()

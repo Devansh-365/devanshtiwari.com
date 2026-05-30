@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache"
 
-import { GitHubStars } from "@/components/github-stars"
+import { GitHubStars } from "@/components/effects/github-stars"
 
 const SOURCE_CODE_GITHUB_REPO = "Devansh-365/devanshtiwari.com"
 

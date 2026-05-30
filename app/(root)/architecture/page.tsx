@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 
 import { siteConfig } from "@/lib/config"
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ScrollReveal } from "@/components/effects/scroll-reveal"
 import { Separator } from "@/components/ui/separator"
 import { generateBreadcrumbs } from "@/lib/schema"
 

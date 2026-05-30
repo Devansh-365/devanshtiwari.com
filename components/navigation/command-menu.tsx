@@ -21,9 +21,9 @@ import {
   UserIcon,
 } from "lucide-react"
 import { useTheme } from "next-themes"
-import { trackCommandMenuOpen } from "@/lib/analytics"
 
-import { siteConfig } from "@/lib/config"
+import { trackCommandMenuOpen } from "@/lib/analytics"
+import { Button } from "@/components/ui/button"
 import {
   CommandDialog,
   CommandEmpty,
@@ -35,9 +35,7 @@ import {
 } from "@/components/ui/command"
 import { Kbd } from "@/components/ui/kbd"
 import { Separator } from "@/components/ui/separator"
-import { DTMark } from "@/components/dt-mark"
-
-import { Button } from "./ui/button"
+import { DTMark } from "@/components/branding/dt-mark"
 
 type CommandLinkItem = {
   title: string
@@ -63,14 +61,39 @@ const PORTFOLIO_LINKS: CommandLinkItem[] = [
 ]
 
 const SOCIAL_LINKS: CommandLinkItem[] = [
-  { title: "GitHub", href: "https://github.com/Devansh-365", icon: GithubIcon, openInNewTab: true },
-  { title: "LinkedIn", href: "https://www.linkedin.com/in/devansh-tiwari-3342611a6/", icon: LinkedinIcon, openInNewTab: true },
-  { title: "Twitter / X", href: "https://twitter.com/devansh_0718", icon: TwitterIcon, openInNewTab: true },
-  { title: "Email", href: "mailto:devanshtiwari365@gmail.com", icon: MailIcon, openInNewTab: true },
+  {
+    title: "GitHub",
+    href: "https://github.com/Devansh-365",
+    icon: GithubIcon,
+    openInNewTab: true,
+  },
+  {
+    title: "LinkedIn",
+    href: "https://www.linkedin.com/in/devansh-tiwari-3342611a6/",
+    icon: LinkedinIcon,
+    openInNewTab: true,
+  },
+  {
+    title: "Twitter / X",
+    href: "https://twitter.com/devansh_0718",
+    icon: TwitterIcon,
+    openInNewTab: true,
+  },
+  {
+    title: "Email",
+    href: "mailto:devanshtiwari365@gmail.com",
+    icon: MailIcon,
+    openInNewTab: true,
+  },
 ]
 
 const OTHER_LINKS: CommandLinkItem[] = [
-  { title: "llms.txt", href: "/llms.txt", icon: FileTextIcon, openInNewTab: true },
+  {
+    title: "llms.txt",
+    href: "/llms.txt",
+    icon: FileTextIcon,
+    openInNewTab: true,
+  },
   { title: "RSS Feed", href: "/rss", icon: RssIcon, openInNewTab: true },
 ]
 
@@ -88,7 +111,11 @@ export function CommandMenu() {
         return
       }
       // "/" only works when no input/textarea is focused
-      if (e.key === "/" && !(e.target instanceof HTMLInputElement) && !(e.target instanceof HTMLTextAreaElement)) {
+      if (
+        e.key === "/" &&
+        !(e.target instanceof HTMLInputElement) &&
+        !(e.target instanceof HTMLTextAreaElement)
+      ) {
         e.preventDefault()
         setOpen((prev) => !prev)
       }
@@ -110,7 +137,9 @@ export function CommandMenu() {
       if (isHashLink) {
         const [path, hash] = href.split("#")
         const isCurrentPage =
-          !path || path === "/" ? window.location.pathname === "/" : window.location.pathname === path
+          !path || path === "/"
+            ? window.location.pathname === "/"
+            : window.location.pathname === path
 
         if (isCurrentPage && hash) {
           const el = document.getElementById(hash)
@@ -145,7 +174,10 @@ export function CommandMenu() {
         className="gap-1.5 rounded-full text-muted-foreground shadow-none select-none hover:text-muted-foreground"
         variant="outline"
         size="sm"
-        onClick={() => { setOpen(true); trackCommandMenuOpen() }}
+        onClick={() => {
+          setOpen(true)
+          trackCommandMenuOpen()
+        }}
       >
         <SearchIcon className="h-4 w-4" />
         <span className="text-sm font-medium sm:hidden">Search…</span>
@@ -178,11 +210,21 @@ export function CommandMenu() {
           />
 
           <CommandGroup heading="Theme">
-            <CommandItem onSelect={() => { setTheme("light"); setOpen(false) }}>
+            <CommandItem
+              onSelect={() => {
+                setTheme("light")
+                setOpen(false)
+              }}
+            >
               <SunMediumIcon className="mr-2 h-4 w-4" />
               Light
             </CommandItem>
-            <CommandItem onSelect={() => { setTheme("dark"); setOpen(false) }}>
+            <CommandItem
+              onSelect={() => {
+                setTheme("dark")
+                setOpen(false)
+              }}
+            >
               <MoonStarIcon className="mr-2 h-4 w-4" />
               Dark
             </CommandItem>
@@ -204,7 +246,10 @@ export function CommandMenu() {
             <Kbd>
               <CornerDownLeftIcon className="h-3 w-3" />
             </Kbd>
-            <Separator orientation="vertical" className="mx-1 h-4 self-center" />
+            <Separator
+              orientation="vertical"
+              className="mx-1 h-4 self-center"
+            />
             <span className="text-muted-foreground">Exit</span>
             <Kbd>Esc</Kbd>
           </div>

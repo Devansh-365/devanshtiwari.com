@@ -156,6 +156,17 @@ export async function getFileBySlug<T>(
   };
 }
 
+export interface CompiledPost {
+  mdxSource: string
+  toc: Toc
+  frontMatter: PostFrontMatter & {
+    slug: string | null
+    fileName: string
+    date: string | null
+    readingTime: ReturnType<typeof readingTime>
+  }
+}
+
 export async function getAllFilesFrontMatter(
   folder: 'blog' | 'courses',
   options: { includeScheduled?: boolean } = {},

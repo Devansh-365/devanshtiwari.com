@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ParallaxImage } from "@/components/parallax-image"
+import { ParallaxImage } from "@/components/effects/parallax-image"
 
 type ProjectThumbnailProps = {
   src: string

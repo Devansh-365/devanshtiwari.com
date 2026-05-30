@@ -9,7 +9,7 @@ import {
   LightbulbIcon,
   ChevronDownIcon,
 } from "lucide-react"
-import { Markdown } from "@/components/markdown"
+import { Markdown } from "@/components/content/markdown"
 import { Tag } from "@/components/ui/tag"
 import { ProseMono } from "@/components/ui/typography"
 import { Separator } from "@/components/ui/separator"

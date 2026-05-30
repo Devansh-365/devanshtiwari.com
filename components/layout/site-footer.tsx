@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, RssIcon, Twitter } from "lucide-react"
 
 import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/lib/config"
 import { cn } from "@/lib/utils"
-import { LiveClock } from "@/components/live-clock"
+import { LiveClock } from "@/components/effects/live-clock"
 
 export function SiteFooter() {
   return (

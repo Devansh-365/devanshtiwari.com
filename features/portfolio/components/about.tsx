@@ -1,4 +1,4 @@
-import { Markdown } from "@/components/markdown"
+import { Markdown } from "@/components/content/markdown"
 import { ProseMono } from "@/components/ui/typography"
 import { USER } from "@/features/portfolio/data/user"
 import { Panel, PanelContent, PanelHeader, PanelNumber, PanelTitle } from "./panel"

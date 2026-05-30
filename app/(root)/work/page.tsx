@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import { WORK_PROJECTS } from "@/features/work/data/projects"
 import { ProjectCard } from "@/features/work/components/project-card"
 import { ProjectCardCompact } from "@/features/work/components/project-card-compact"
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ScrollReveal } from "@/components/effects/scroll-reveal"
 import { generateWorkCollectionSchemas } from "@/lib/schema"
 
 export const metadata: Metadata = {

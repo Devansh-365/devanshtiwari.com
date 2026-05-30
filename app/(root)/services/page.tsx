@@ -21,10 +21,10 @@ import {
 
 import { siteConfig } from "@/lib/config"
 import { USER } from "@/features/portfolio/data/user"
-import { ContactActions } from "@/components/contact-actions"
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ContactActions } from "@/components/contact/contact-actions"
+import { ScrollReveal } from "@/components/effects/scroll-reveal"
 import { Panel, PanelHeader, PanelTitle } from "@/features/portfolio/components/panel"
-import { DTMark } from "@/components/dt-mark"
+import { DTMark } from "@/components/branding/dt-mark"
 import {
   TESTIMONIALS_1,
   TESTIMONIALS_2,

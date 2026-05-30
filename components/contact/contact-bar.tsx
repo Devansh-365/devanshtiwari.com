@@ -1,4 +1,4 @@
-import { ContactActions } from "@/components/contact-actions"
+import { ContactActions } from "@/components/contact/contact-actions"
 
 export function ContactBar() {
   return (
