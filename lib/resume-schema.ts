@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import { USER } from "@/features/portfolio/data/user"
 import { EXPERIENCES } from "@/features/portfolio/data/experiences"
 

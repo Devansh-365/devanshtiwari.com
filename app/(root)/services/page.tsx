@@ -19,7 +19,7 @@ import {
   TrendingUpIcon,
 } from "lucide-react"
 
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import { USER } from "@/features/portfolio/data/user"
 import { ContactActions } from "@/components/contact-actions"
 import { ScrollReveal } from "@/components/scroll-reveal"

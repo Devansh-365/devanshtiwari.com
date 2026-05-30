@@ -1,7 +1,7 @@
 "use client"
 
 import { CalendarIcon, MailIcon } from "lucide-react"
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import { trackBookCall, trackEmailClick } from "@/lib/analytics"
 import { MagneticButton } from "@/components/magnetic-button"
 import { cn } from "@/lib/utils"

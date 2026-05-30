@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import { ContactBar } from "@/components/contact-bar"
 import { ResumeClient } from "./resume-client"
 import { generateResumeSchema } from "@/lib/resume-schema"

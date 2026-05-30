@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import type { Toc } from "@/types/Toc"
 import type { WorkProject } from "@/features/work/types/project"
 import type { Testimonial } from "@/features/portfolio/types/testimonials"

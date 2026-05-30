@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Github, Linkedin, Mail, RssIcon, Twitter } from "lucide-react"
 
-import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site"
+import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { LiveClock } from "@/components/live-clock"
 

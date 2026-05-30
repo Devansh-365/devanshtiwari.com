@@ -2,7 +2,7 @@ import "@/styles/globals.css"
 
 import { Metadata } from "next"
 
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { generateTestimonialReviews } from "@/lib/schema"

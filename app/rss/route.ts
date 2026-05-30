@@ -1,4 +1,4 @@
-import { SITE_INFO } from "@/config/site"
+import { SITE_INFO } from "@/lib/config"
 import { getAllFilesFrontMatter } from "@/lib/mdx"
 import { getMediumPosts } from "@/lib/medium"
 

@@ -60,4 +60,6 @@ export const nateeqAi: WorkProject = {
     "RBAC",
   ],
   architectureImage: "nateeq-ai-architecture.jpeg",
+  canvasUrl: "https://excalidraw.com/#json=sample-nateeq-voice-pipeline",
+  canvasScreenshotUrl: "/work/nateeq-canvas.png",
 }

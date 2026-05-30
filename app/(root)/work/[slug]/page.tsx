@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import { WORK_PROJECTS } from "@/features/work/data/projects"
 import { generateWorkProjectSchemas } from "@/lib/schema"
 import { ProjectDetail } from "@/features/work/components/project-detail"

@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { bundleMDX } from 'mdx-bundler';
 import path from 'path';
 import readingTime from 'reading-time';
-import { siteConfig } from '@/config/site';
+import { siteConfig } from '@/lib/config';
 import { AuthorFrontMatter } from '@/types/AuthorFrontMatter';
 import { PostFrontMatter } from '@/types/PostFrontMatter';
 import { Toc } from '@/types/Toc';
@@ -32,7 +32,7 @@ const prettyCodeOptions = {
 const root = process.cwd();
 
 export function getFiles(type: 'blog' | 'authors' | 'courses') {
-  const prefixPaths = path.join(root, 'data', type);
+  const prefixPaths = path.join(root, 'content', type);
   const files = getAllFilesRecursively(prefixPaths);
   // Only want to return blog/path and ignore root, replace is needed to work on Windows
   return files.map(file =>
@@ -73,8 +73,8 @@ export async function getFileBySlug<T>(
   type: 'authors' | 'blog' | 'courses',
   slug: string | string[],
 ) {
-  const mdxPath = path.join(root, 'data', type, `${slug}.mdx`);
-  const mdPath = path.join(root, 'data', type, `${slug}.md`);
+  const mdxPath = path.join(root, 'content', type, `${slug}.mdx`);
+  const mdPath = path.join(root, 'content', type, `${slug}.md`);
   const source = fs.existsSync(mdxPath)
     ? fs.readFileSync(mdxPath, 'utf8')
     : fs.readFileSync(mdPath, 'utf8');
@@ -150,7 +150,7 @@ export async function getAllFilesFrontMatter(
   options: { includeScheduled?: boolean } = {},
 ) {
   const { includeScheduled = false } = options;
-  const prefixPaths = path.join(root, 'data', folder);
+  const prefixPaths = path.join(root, 'content', folder);
 
   const files = getAllFilesRecursively(prefixPaths);
 

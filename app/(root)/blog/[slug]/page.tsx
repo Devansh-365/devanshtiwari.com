@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Script from "next/script"
 
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import { getAllFilesFrontMatter, getFileBySlug } from "@/lib/mdx"
 import { generateBlogPostSchemas } from "@/lib/schema"
 import { PostFrontMatter } from "@/types/PostFrontMatter"

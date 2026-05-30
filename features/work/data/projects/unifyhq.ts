@@ -3,7 +3,7 @@ import type { WorkProject } from "../../types/project"
 export const unifyhq: WorkProject = {
   slug: "unifyhq",
   title: "UnifyHQ",
-  featured: true,
+  featured: false,
   status: "in-progress",
   oneLiner:
     "Enterprise facility management platform. 471 API endpoints, 194 pages, 8 languages. Built in 26 days.",
@@ -72,4 +72,6 @@ export const unifyhq: WorkProject = {
     "i18next",
   ],
   architectureImage: "unifyhq-architecture.jpeg",
+  canvasUrl: "https://excalidraw.com/#json=sample-unifyhq-system-design",
+  canvasScreenshotUrl: "/work/unifyhq-canvas.png",
 }

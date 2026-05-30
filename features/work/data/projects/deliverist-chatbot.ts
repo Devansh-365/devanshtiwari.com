@@ -62,4 +62,6 @@ export const deliveristChatbot: WorkProject = {
     "LangChain",
   ],
   architectureImage: "deliverist-chatbot-architecture.jpeg",
+  canvasUrl: "https://excalidraw.com/#json=sample-deliverist-chat-flow",
+  canvasScreenshotUrl: "/work/deliverist-canvas.png",
 }

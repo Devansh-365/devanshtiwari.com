@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic"
 import Link from "next/link"
 
-import { MAIN_NAV } from "@/config/site"
+import { MAIN_NAV } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
 import { DesktopNav } from "@/components/desktop-nav"

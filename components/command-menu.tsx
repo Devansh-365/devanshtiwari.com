@@ -23,7 +23,7 @@ import {
 import { useTheme } from "next-themes"
 import { trackCommandMenuOpen } from "@/lib/analytics"
 
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/lib/config"
 import {
   CommandDialog,
   CommandEmpty,
