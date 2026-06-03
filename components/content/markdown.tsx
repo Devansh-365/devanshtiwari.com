@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { inlineCodeClassName } from "@/components/content/inline-code"
 
 /** Sanitize a URL to prevent javascript: injection */
 function sanitizeUrl(url: string): string {
@@ -17,8 +18,19 @@ function escapeHtml(text: string): string {
 }
 
 function simpleMarkdown(text: string): string {
-  // Escape HTML first, then apply markdown transforms on the safe string
+  const placeholders: string[] = []
+  const stash = (html: string) => {
+    const key = `\x00CODE${placeholders.length}\x00`
+    placeholders.push(html)
+    return key
+  }
+
   let safe = escapeHtml(text)
+
+  // Inline `code` before emphasis/links so backticks inside other syntax stay literal
+  safe = safe.replace(/`([^`\n]+)`/g, (_, code) =>
+    stash(`<code class="${inlineCodeClassName}">${code}</code>`)
+  )
 
   safe = safe
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -32,6 +44,10 @@ function simpleMarkdown(text: string): string {
     .replace(/(<li>[\s\S]*<\/li>)/, '<ul class="list-disc pl-4 space-y-1">$1</ul>')
     .replace(/\n\n/g, "</p><p>")
     .replace(/\n/g, "<br/>")
+
+  placeholders.forEach((html, i) => {
+    safe = safe.replace(`\x00CODE${i}\x00`, html)
+  })
 
   return safe
 }
