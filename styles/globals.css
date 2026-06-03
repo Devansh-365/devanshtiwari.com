@@ -142,25 +142,29 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 }
 
 /* Code block syntax highlighting (rehype-pretty-code with Shiki) */
-/* Light theme by default, dark theme when .dark class is on html */
-code[data-theme*=" "],
-code[data-theme*=" "] span {
+/* Scoped to fenced blocks only — do not style inline `code` in prose */
+figure[data-rehype-pretty-code-figure] code[data-theme*=" "],
+figure[data-rehype-pretty-code-figure] code[data-theme*=" "] span,
+pre code[data-theme*=" "],
+pre code[data-theme*=" "] span {
   color: var(--shiki-light);
   background-color: var(--shiki-light-bg);
 }
 
-.dark code[data-theme*=" "],
-.dark code[data-theme*=" "] span {
+.dark figure[data-rehype-pretty-code-figure] code[data-theme*=" "],
+.dark figure[data-rehype-pretty-code-figure] code[data-theme*=" "] span,
+.dark pre code[data-theme*=" "],
+.dark pre code[data-theme*=" "] span {
   color: var(--shiki-dark);
   background-color: var(--shiki-dark-bg);
 }
 
 /* Code blocks: line layout for line numbers and highlighting */
-code[data-line-numbers] {
+figure[data-rehype-pretty-code-figure] code[data-line-numbers] {
   counter-reset: line;
 }
 
-code[data-line-numbers] > [data-line]::before {
+figure[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
   display: inline-block;
@@ -170,18 +174,18 @@ code[data-line-numbers] > [data-line]::before {
   color: hsl(var(--muted-foreground) / 0.5);
 }
 
-[data-line] {
+figure[data-rehype-pretty-code-figure] [data-line] {
   display: inline-block;
   width: 100%;
   padding: 0 1rem;
 }
 
-[data-highlighted-line] {
+figure[data-rehype-pretty-code-figure] [data-highlighted-line] {
   background-color: hsl(var(--muted) / 0.5);
   border-left: 2px solid hsl(var(--foreground));
 }
 
-[data-highlighted-chars] {
+figure[data-rehype-pretty-code-figure] [data-highlighted-chars] {
   background-color: hsl(var(--muted) / 0.5);
   border-radius: 0.25rem;
   padding: 0.125rem 0.25rem;

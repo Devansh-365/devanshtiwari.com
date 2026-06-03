@@ -5,6 +5,7 @@ import Image from "next/image"
 import { getMDXComponent } from "mdx-bundler/client"
 
 import CustomLink from "./CustomLink"
+import { Code } from "./Code"
 import Pre from "./Pre"
 import TOCInline from "./TOCInline"
 import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from "./Table"
@@ -14,6 +15,7 @@ export const MDXComponents = {
   Image,
   TOCInline,
   a: CustomLink,
+  code: Code,
   pre: Pre,
   table: Table,
   thead: TableHead,
