@@ -11,6 +11,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { PageWrapper } from "@/components/layout/page-wrapper"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
+import { RightNavbar } from "@/components/navigation/right-nav"
 import { Spotlight } from "@/components/effects/spotlight"
 import { TailwindIndicator } from "@/components/theme/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme/theme-provider"
@@ -218,6 +219,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <ScrollProgress />
             <Spotlight />
+            <RightNavbar />
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <PageWrapper>
