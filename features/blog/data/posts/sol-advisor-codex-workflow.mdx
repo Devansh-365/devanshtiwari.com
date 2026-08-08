@@ -1,0 +1,152 @@
+---
+title: "Model Routing Made My AI Agents Cheaper. It Didn't Make Them Easier to Trust."
+date: '2026-08-08'
+tags: ['AI', 'Developer Tools', 'Codex', 'AI Agents', 'Workflow']
+draft: false
+summary: 'Model routing solved the cost problem. Sol Advisor helped me solve the trust problem with bounded implementation, parent verification, and a fresh review. Here is the complete workflow and the templates I use.'
+images: ['/blog/sol-advisor-codex-workflow/cover.png']
+---
+
+![A fast but uncertain coding-agent path compared with an architect, implementation, and review loop](/blog/sol-advisor-codex-workflow/cover.png)
+
+I spent a while optimizing what my AI agents cost to run.
+
+Cheap models for routine work. Better models when the task actually needed them. That made it practical to run several agents without sending every request to the most expensive model available.
+
+It worked. Then I hit the next bottleneck: trusting what came back.
+
+An agent can say a task is done, show passing tests, and leave a clean-looking diff. None of that tells me whether it understood the product decision, changed the right files, or missed an assumption elsewhere in the codebase.
+
+More agent capacity did not remove that problem. It helped me create it faster.
+
+I now use [Sol Advisor](https://github.com/DannyMac180/sol-advisor) with Codex to separate architecture, implementation, and review. I keep the objective, architecture, verification, and final acceptance. The implementation agent gets a bounded job. A fresh reviewer challenges the result.
+
+## The workflow
+
+```text
+define the change
+  -> choose the implementation lane
+  -> delegate a bounded task
+  -> inspect the diff and rerun checks
+  -> get a fresh review
+  -> ship, fix first, or rethink
+```
+
+![The architect, implementation, verification, and fresh-review workflow](/blog/sol-advisor-codex-workflow/workflow.png)
+
+The implementation report is a claim, not proof. I inspect the actual working tree, confirm the task stayed in scope, and rerun the promised checks before asking for a review.
+
+That procedure is the part I was missing. Model routing answers, "What should this task cost?" Sol Advisor helps answer, "Should this patch ship?"
+
+## Install Sol Advisor
+
+You need Codex and Bun installed. Then add the repository marketplace and install the plugin:
+
+```bash
+codex plugin marketplace add DannyMac180/sol-advisor --ref main
+codex plugin add sol-advisor@sol-advisor
+```
+
+Start a new Codex task and invoke the workflow:
+
+```text
+Use $sol-advisor:orchestration for this task. Verify the implementation and obtain the configured advisor review before reporting done.
+```
+
+The first run walks you through setup. Sol Advisor's [repository](https://github.com/DannyMac180/sol-advisor) contains the current installation notes, while the [orchestration skill](https://github.com/DannyMac180/sol-advisor/blob/main/plugins/sol-advisor/skills/orchestration/SKILL.md) shows the exact routing, verification, and reviewer contract.
+
+Installation gives you the workflow. The quality of the handoff still depends on what you give it.
+
+## Copy my work packet
+
+I do not delegate with, "Make this page better." That is how you get a polished patch that solves a problem nobody asked for.
+
+I paste this into the parent task and fill in every section:
+
+```markdown
+# Objective
+[What observable outcome should exist when this is finished?]
+
+# Scope and ownership
+- May change: [owned files or responsibility]
+- May inspect: [related files]
+- Out of scope: [explicit exclusions]
+- Preserve unrelated edits already in the repository.
+
+# Interfaces and constraints
+- [behavior that must remain unchanged]
+- [types, APIs, design rules, or security limits]
+
+# Verification
+- Run: `[exact command]`
+- Manually confirm: [behavior and edge case]
+
+# Evidence expected
+Report the files changed, checks run, assumptions made, and anything still uncertain.
+```
+
+The packet takes a few minutes to write. It saves me from reviewing a technically valid solution to the wrong problem.
+
+## Choose the lane by risk
+
+| Task | How I run it |
+| --- | --- |
+| Typo, label change, or obvious one-line fix | Handle directly |
+| Bounded UI work, documentation, wiring, or mechanical refactor | Routine implementation |
+| Authentication, concurrency, migration, public API, difficult debugging, or wide refactor | High-complexity implementation, with architecture review before code when needed |
+| Independent tasks with separate files and no shared contract | Run in parallel |
+| Tasks sharing files or changing an interface the next task consumes | Run sequentially |
+
+![Decision tree for choosing direct work, a routine lane, a high-complexity lane, parallel work, or sequential work](/blog/sol-advisor-codex-workflow/routing-decision-tree.png)
+
+Agent count is not a reason to create a merge conflict. If two tasks cannot own separate responsibilities, I keep them in order.
+
+## Verify before asking for review
+
+When the implementation comes back, I check five things:
+
+1. Inspect the complete working-tree status and diff.
+2. Confirm only in-scope files changed.
+3. Read the code instead of trusting the summary.
+4. Search for consumers of changed interfaces.
+5. Rerun the checks from the work packet.
+
+Then I give a fresh reviewer this smaller packet:
+
+```markdown
+Review this implementation without modifying the repository.
+
+Objective: [paste objective]
+Scope: [paste owned responsibility]
+Constraints: [paste relevant constraints]
+Evidence: [paste checks and observed results]
+
+Inspect the actual diff and relevant surrounding files. Check correctness,
+scope, hidden consumers, regressions, missing tests, and whether the evidence
+proves the objective.
+
+Return one verdict:
+- ship: no blocking issue remains;
+- fix-first: list the smallest required corrections;
+- rethink: the implementation or underlying approach is wrong.
+
+Separate blocking findings from optional improvements. Do not implement fixes.
+```
+
+If the verdict is `fix-first`, I send the correction back to the implementation lane, rerun the checks, and request another fresh review. Any changed diff invalidates the old verdict.
+
+## Where this is slower
+
+I do not use this entire loop to rename a variable. The overhead makes sense when a task has ambiguity, hidden consumers, or enough blast radius that rework would be expensive.
+
+It also cannot rescue a vague product decision. If I cannot explain the outcome and constraints, multiple agents will produce a more elaborate version of my confusion.
+
+## The actual productivity gain
+
+The scarce resource is no longer generated code. It is the attention required to decide whether that code belongs in the product.
+
+This workflow lets me spend that attention deliberately. I keep the decisions and acceptance bar. The implementation agent gets a job it can finish. The reviewer gets a clean chance to disagree.
+
+Try the packet above on one medium-sized task. Keep the scope tight, inspect the diff yourself, and ask a fresh reviewer what the implementation missed.
+
+When the agent says it is done, you should have a better answer than, "The summary sounded convincing."
