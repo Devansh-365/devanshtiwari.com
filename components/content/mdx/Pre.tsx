@@ -1,32 +1,30 @@
 "use client"
 
-import { useState, useRef, ReactNode } from 'react';
+import { useRef, useState, type ComponentPropsWithoutRef } from "react"
 
-interface Props {
-  children: ReactNode;
-}
+type Props = ComponentPropsWithoutRef<"pre">
 
-const Pre = ({ children }: Props) => {
-  const textInput = useRef<HTMLDivElement>(null);
-  const [hovered, setHovered] = useState(false);
-  const [copied, setCopied] = useState(false);
+const Pre = ({ children, className, ...props }: Props) => {
+  const textInput = useRef<HTMLDivElement>(null)
+  const [hovered, setHovered] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   const handleEnter = () => {
-    setHovered(true);
-  };
+    setHovered(true)
+  }
 
   const handleExit = () => {
-    setHovered(false);
-    setCopied(false);
-  };
+    setHovered(false)
+    setCopied(false)
+  }
 
   const handleCopy = () => {
-    setCopied(true);
-    navigator.clipboard.writeText(textInput.current?.textContent || '');
+    setCopied(true)
+    navigator.clipboard.writeText(textInput.current?.textContent || "")
     setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  };
+      setCopied(false)
+    }, 2000)
+  }
 
   return (
     <div
@@ -40,8 +38,8 @@ const Pre = ({ children }: Props) => {
         type="button"
         className={`absolute right-3 top-3 z-10 h-8 w-8 rounded border-2 p-1 opacity-0 transition-opacity group-hover:opacity-100 ${
           copied
-            ? 'border-green-400 bg-green-900/50 focus:border-green-400 focus:outline-none'
-            : 'border-gray-500 bg-gray-700 hover:border-gray-400'
+            ? "border-green-400 bg-green-900/50 focus:border-green-400 focus:outline-none"
+            : "border-gray-500 bg-gray-700 hover:border-gray-400"
         }`}
         onClick={handleCopy}
         tabIndex={0}
@@ -51,7 +49,7 @@ const Pre = ({ children }: Props) => {
           viewBox="0 0 24 24"
           stroke="currentColor"
           fill="none"
-          className={copied ? 'text-green-400' : 'text-gray-300'}
+          className={copied ? "text-green-400" : "text-gray-300"}
         >
           {copied ? (
             <path
@@ -71,11 +69,14 @@ const Pre = ({ children }: Props) => {
         </svg>
       </button>
 
-      <pre className="overflow-x-auto rounded-lg border border-line bg-muted/30 py-4 text-sm leading-relaxed dark:bg-zinc-950">
+      <pre
+        {...props}
+        className={`mdx-code-block not-prose overflow-x-auto rounded-lg border border-line bg-muted px-4 py-4 font-mono text-sm leading-relaxed text-foreground dark:bg-zinc-950 dark:text-zinc-100 ${className ?? ""}`}
+      >
         {children}
       </pre>
     </div>
-  );
-};
+  )
+}
 
-export default Pre;
+export default Pre

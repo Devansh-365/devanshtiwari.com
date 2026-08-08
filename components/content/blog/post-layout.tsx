@@ -1,13 +1,13 @@
 "use client"
 
-import Link from "next/link"
 import { ReactNode } from "react"
+import Link from "next/link"
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
-import { ContactBar } from "@/components/contact/contact-bar"
-import { proseInlineCodeSelector } from "@/components/content/inline-code"
 
 import { PostFrontMatter } from "@/types/PostFrontMatter"
 import { Toc } from "@/types/Toc"
+import { ContactBar } from "@/components/contact/contact-bar"
+import { proseInlineCodeSelector } from "@/components/content/inline-code"
 import TOCInline from "@/components/content/mdx/TOCInline"
 
 interface Props {
@@ -76,31 +76,33 @@ export default function PostLayout({
       </div>
 
       {/* Prose content area */}
-      <div className={[
-        "prose prose-sm max-w-2xl mx-auto px-4 font-mono dark:prose-invert",
-        // Base text — mono, muted (matches ProseMono used across portfolio)
-        "text-sm text-muted-foreground",
-        // Headings — sans, foreground, tight tracking
-        "prose-headings:font-sans prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground",
-        "prose-h1:text-3xl prose-h2:text-xl prose-h3:text-lg",
-        // Paragraphs — mono, muted, relaxed
-        "prose-p:font-mono prose-p:text-sm prose-p:leading-relaxed prose-p:text-muted-foreground",
-        // Lists — mono, muted
-        "prose-li:font-mono prose-li:text-sm prose-li:text-muted-foreground prose-li:marker:text-muted-foreground/50",
-        // Blockquote — mono, border accent
-        "prose-blockquote:font-mono prose-blockquote:border-l-2 prose-blockquote:border-primary/30 prose-blockquote:pl-4 prose-blockquote:not-italic prose-blockquote:text-foreground/80",
-        // Links — foreground, underline
-        "prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-a:decoration-muted-foreground/30 hover:prose-a:decoration-foreground",
-        // Strong — foreground weight
-        "prose-strong:font-semibold prose-strong:text-foreground",
-        proseInlineCodeSelector,
-        // Pre block container — let shiki handle colors via Pre.tsx wrapper
-        "prose-pre:!bg-transparent prose-pre:!p-0 prose-pre:!border-0",
-        // Images
-        "prose-img:rounded-xl",
-        // Table — reset prose defaults, our Table components handle styling
-        "[&_table]:!my-0 [&_thead]:!border-none [&_tr]:!border-none [&_th]:!px-4 [&_th]:!py-3 [&_td]:!px-4 [&_td]:!py-3",
-      ].join(" ")}>
+      <div
+        className={[
+          "prose prose-sm max-w-2xl mx-auto px-4 font-mono dark:prose-invert",
+          // Base text — mono, muted (matches ProseMono used across portfolio)
+          "text-sm text-muted-foreground",
+          // Headings — sans, foreground, tight tracking
+          "prose-headings:font-sans prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground",
+          "prose-h1:text-3xl prose-h2:text-xl prose-h3:text-lg",
+          // Paragraphs — mono, muted, relaxed
+          "prose-p:font-mono prose-p:text-sm prose-p:leading-relaxed prose-p:text-muted-foreground",
+          // Lists — mono, muted
+          "prose-li:font-mono prose-li:text-sm prose-li:text-muted-foreground prose-li:marker:text-muted-foreground/50",
+          // Blockquote — mono, border accent
+          "prose-blockquote:font-mono prose-blockquote:border-l-2 prose-blockquote:border-primary/30 prose-blockquote:pl-4 prose-blockquote:not-italic prose-blockquote:text-foreground/80",
+          // Links — foreground, underline
+          "prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-a:decoration-muted-foreground/30 hover:prose-a:decoration-foreground",
+          // Strong — foreground weight
+          "prose-strong:font-semibold prose-strong:text-foreground",
+          proseInlineCodeSelector,
+          // Pre block container — Pre.tsx owns its background and border.
+          "prose-pre:!p-0 prose-pre:!border-0",
+          // Images
+          "prose-img:rounded-xl",
+          // Table — reset prose defaults, our Table components handle styling
+          "[&_table]:!my-0 [&_thead]:!border-none [&_tr]:!border-none [&_th]:!px-4 [&_th]:!py-3 [&_td]:!px-4 [&_td]:!py-3",
+        ].join(" ")}
+      >
         <h1 className="font-sans text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           {title}
         </h1>
@@ -118,9 +120,9 @@ export default function PostLayout({
             )}
             {date && readingTime?.text && <span>·</span>}
             {readingTime?.text && <span>{readingTime.text}</span>}
-            {(date || readingTime?.text) && views !== undefined && views > 0 && (
-              <span>·</span>
-            )}
+            {(date || readingTime?.text) &&
+              views !== undefined &&
+              views > 0 && <span>·</span>}
             {views !== undefined && views > 0 && (
               <span>{formatViews(views)} views</span>
             )}
@@ -128,12 +130,12 @@ export default function PostLayout({
         )}
 
         {summary && (
-          <p className="font-mono text-sm leading-relaxed text-muted-foreground">{summary}</p>
+          <p className="font-mono text-sm leading-relaxed text-muted-foreground">
+            {summary}
+          </p>
         )}
 
-        {toc && toc.length > 0 && (
-          <TOCInline toc={toc} asDisclosure />
-        )}
+        {toc && toc.length > 0 && <TOCInline toc={toc} asDisclosure />}
 
         <div>{children}</div>
       </div>
