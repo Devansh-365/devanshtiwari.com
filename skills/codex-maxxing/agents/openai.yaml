@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Maxxing"
+  short_description: "Route agent work with proof"
+  default_prompt: "Use $codex-maxxing to route this task, verify its result, and leave the repository more legible."
