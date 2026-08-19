@@ -62,6 +62,6 @@ export const getAgentSkills = unstable_cache(
       return []
     }
   },
-  ["agent-skills"],
-  { revalidate: 3600 }
+  ["agent-skills-v2"],
+  { revalidate: 300 }
 )
