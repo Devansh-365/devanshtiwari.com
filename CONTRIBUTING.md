@@ -35,7 +35,7 @@ Open [localhost:3000](http://localhost:3000). You're live.
 
 ```
 app/
-  (root)/              Pages (home, work, blog, resume)
+  (root)/              Pages (home, work, blog)
   layout.tsx           Root layout with providers
   opengraph-image.tsx  Default OG image
   rss/                 RSS feed route
@@ -58,7 +58,7 @@ config/site.ts         Central site configuration
 data/blog/             MDX blog posts
 lib/                   Utilities (MDX processing, Medium RSS, fonts)
 styles/globals.css     Design tokens + custom utilities
-public/                Static assets (images, resume, llms.txt)
+public/                Static assets (images, llms.txt)
 ```
 
 ## What to Contribute

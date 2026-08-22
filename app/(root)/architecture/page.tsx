@@ -128,7 +128,6 @@ export default function ArchitecturePage() {
                 { route: "/blog/[slug]", name: "Blog post (MDX)", type: "Dynamic" },
                 { route: "/about", name: "About page", type: "Page" },
                 { route: "/services", name: "Services page", type: "Page" },
-                { route: "/resume", name: "Resume viewer", type: "Page" },
                 { route: "/architecture", name: "This page", type: "Page" },
                 { route: "/rss", name: "RSS feed", type: "Route" },
                 { route: "/sitemap.xml", name: "Sitemap", type: "Route" },

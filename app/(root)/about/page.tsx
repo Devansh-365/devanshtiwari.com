@@ -284,11 +284,10 @@ export default function AboutPage() {
             <h2 className="font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
               Explore
             </h2>
-            <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3">
+            <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
               {[
                 { label: "Work", href: "/work", desc: "10 projects with case studies" },
                 { label: "Blog", href: "/blog", desc: "Writing about building products" },
-                { label: "Resume", href: "/resume", desc: "Full work history" },
               ].map((link) => (
                 <Link
                   key={link.href}

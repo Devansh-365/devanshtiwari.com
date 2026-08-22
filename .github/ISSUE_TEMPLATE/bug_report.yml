@@ -30,7 +30,6 @@ body:
         - Work detail
         - Blog listing
         - Blog post
-        - Resume
         - Command menu
         - Other
     validations:

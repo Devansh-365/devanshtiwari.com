@@ -17,18 +17,6 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
-      url: url("/resume").href,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: url("/resume.json").href,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
       url: url("/about").href,
       lastModified: new Date(),
       changeFrequency: "monthly",

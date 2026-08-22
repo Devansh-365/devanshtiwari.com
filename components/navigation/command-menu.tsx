@@ -48,7 +48,6 @@ const MENU_LINKS: CommandLinkItem[] = [
   { title: "Home", href: "/", icon: HomeIcon },
   { title: "Work", href: "/work", icon: FolderOpenIcon },
   { title: "Blog", href: "/blog", icon: FileTextIcon },
-  { title: "Resume", href: "/resume", icon: FileCodeIcon },
 ]
 
 const PORTFOLIO_LINKS: CommandLinkItem[] = [

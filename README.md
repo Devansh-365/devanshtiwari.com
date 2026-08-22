@@ -38,7 +38,6 @@
 - **12-Section Homepage** — Profile header, about, work preview, testimonials, how I work, experiences, GitHub contributions, tech stack, blog preview, and CTA
 - **Work / Case Studies** — 10 project pages with problem, solution, and stats structure
 - **MDX Blog** — Local posts with syntax highlighting, math, reading time + Medium RSS integration
-- **Resume Page** — Embedded PDF viewer with download option
 - **Command Menu** — `⌘K` / `Ctrl+K` command palette for instant navigation
 - **Dark Mode Spotlight** — Radial cursor glow effect in dark theme
 - **Dynamic OG Images** — Auto-generated Open Graph images for every page, blog post, and project
@@ -57,7 +56,6 @@
 | `/work/[slug]` | Individual project case study |
 | `/blog` | Blog with search, tag filtering |
 | `/blog/[slug]` | Blog post with MDX rendering |
-| `/resume` | Interactive resume viewer |
 | `/rss` | RSS feed |
 
 ## Quick Start
@@ -92,7 +90,6 @@ All personal data lives in a few files. Edit these and the entire site updates:
 | `features/work/data/projects.ts` | Project case studies |
 | `data/blog/*.mdx` | Blog posts (add new MDX files) |
 | `public/profile.png` | Your avatar |
-| `public/resume.pdf` | Your resume |
 
 ## Deploy
 
@@ -123,7 +120,7 @@ npm run start
 
 ```
 ├── app/
-│   ├── (root)/          # Main pages (home, work, blog, resume)
+│   ├── (root)/          # Main pages (home, work, blog)
 │   ├── layout.tsx       # Root layout with providers
 │   ├── opengraph-image  # Dynamic OG image generation
 │   └── rss/             # RSS feed route

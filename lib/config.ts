@@ -36,10 +36,6 @@ export const siteConfig = {
       title: "Blog",
       href: "/blog",
     },
-    {
-      title: "Resume",
-      href: "/resume",
-    },
   ],
 
   // Social Links
